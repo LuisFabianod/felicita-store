@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.form-cadastro{
+    height: 100%;
+    width: 100%;
+}
+
+.form-cadastro > form{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+    width: 500px;
+    padding: 20px;
+    border: 1px solid black;
+    
+}
+
+.form-cadastro > form > h1{
+    align-self: center;
+}
+
+.form-cadastro > form input{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+}
+
+.nome-sobrenome{
+    display: flex;
+    gap: 10px;
+}
+
+.senha{
+    display: flex;
+    gap: 10px;
+}
+
+.form-cadastro > form button{
+    padding: 10px;
+    background-color: white;
+    color: grey;
+    border: 1px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color .5s;
+    transition: color .5s;
+}
+
+.form-cadastro > form button:hover{
+    background-color: grey;
+    color: white;
+}

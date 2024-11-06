@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home } from './templates/home';
-import { Cadastro } from './templates/cadastro';
+import { Auth } from './templates/auth';
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </Router>
   );

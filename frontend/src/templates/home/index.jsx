@@ -8,7 +8,7 @@ export const Home = () => {
     return(
         <>
         <h1>OI</h1>
-        <Link to="/cadastro">Fazer cadastro</Link>
+        <Link to="/auth">Fazer login</Link>
         </>
     )
 }
