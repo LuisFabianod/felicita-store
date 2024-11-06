@@ -11,9 +11,9 @@ export const FormLogin = () => {
             
             <input type="email" placeholder='*Email' name='email' id='email' ></input>
 
-            <input type='password' placeholder='*Senha' name='nome' id='nome'></input>
+            <input type='password' placeholder='*Senha' name='password' id='password'></input>
 
-            <button type='submit'>Cadastrar</button>
+            <button type='submit'>Fazer login</button>
 
       
         </form>

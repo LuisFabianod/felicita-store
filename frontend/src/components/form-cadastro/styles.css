@@ -4,11 +4,6 @@
     box-sizing: border-box;
 }
 
-.form-cadastro{
-    height: 100%;
-    width: 100%;
-}
-
 .form-cadastro > form{
     display: flex;
     flex-direction: column;

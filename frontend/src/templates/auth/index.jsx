@@ -7,7 +7,7 @@ import { FormLogin } from '../../components/form-login';
 export const Auth = () => {
 
     return(
-        <div className=''>
+        <div className='auth'>
         <FormLogin/>
         <FormCadastro/>
         </div>

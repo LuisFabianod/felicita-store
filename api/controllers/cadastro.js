@@ -1,12 +1,25 @@
+const validator = require('validator')
 
 exports.cadastrarUsuario = (req, res) => {
-    const {username} = req.body;
+    const {nome, sobrenome, email, password, password2} = req.body;
 
-    if(!username){
-        return res.status(400).send('Username é obrigatório')
+    if(!nome || !sobrenome || !email || !password || !password2){
+        return res.status(400).send('Todos os campos são obrigatórios')
     }
 
-    console.log('usuario cadastrado')
+    if(!validator.isEmail(email)){
+        return res.status(400).send('Email inválido!')
+    }
 
-    res.status(200).send(`Usuário ${username} cadastrado com sucesso!`);
+    if(password !== password2){
+        return res.status(400).send('As senhas devem ser iguais')
+    }
+
+    if(password.length < 8){
+        return res.status(400).send('A senha deve ter no mínimo 8 caracteres')
+    }
+
+    return res.status(200).send(`Usuário ${nome} cadastrado com sucesso!`)
+
 }
+

@@ -4,11 +4,6 @@
     box-sizing: border-box;
 }
 
-.form-login{
-    height: 100%;
-    width: 100%;
-}
-
 .form-login > form{
     display: flex;
     flex-direction: column;

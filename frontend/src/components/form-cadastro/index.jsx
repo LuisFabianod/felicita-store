@@ -16,9 +16,9 @@ export const FormCadastro = () => {
             <input type="email" placeholder='*Email' name='email' id='email' ></input>
 
             <div className='senha'>
-              <input type='password' placeholder='*Senha' name='nome' id='nome'></input>
+              <input type='password' placeholder='*Senha' name='password' id='password'></input>
 
-              <input type='password' placeholder='*Confirmar Senha' name='sobrenome' id='sobrenome'></input>
+              <input type='password' placeholder='*Confirmar Senha' name='password2' id='password2'></input>
             </div>
 
             <button type='submit'>Cadastrar</button>
