@@ -15,10 +15,6 @@ exports.cadastrarUsuario = (req, res) => {
         return res.status(400).send('As senhas devem ser iguais')
     }
 
-    if(password.length < 8){
-        return res.status(400).send('A senha deve ter no mínimo 8 caracteres')
-    }
-
     return res.status(200).send(`Usuário ${nome} cadastrado com sucesso!`)
 
 }
