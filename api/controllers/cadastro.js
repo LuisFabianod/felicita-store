@@ -1,4 +1,5 @@
-const validator = require('validator')
+const validator = require('validator');
+const User = require('../models/User');
 
 exports.cadastrarUsuario = (req, res) => {
     const { nome, sobrenome, email, password, password2 } = req.body;
@@ -15,15 +16,15 @@ exports.cadastrarUsuario = (req, res) => {
         return res.status(400).send('As senhas devem ser iguais')
     }
 
-//    criarUsuario();
+    const criarUsuario = async () => {
+        try {
+            const novoUsuario = await User.create({ nome, email, senha: password });
+            res.status(201).send(`Usuário ${novoUsuario.nome} cadastrado com sucesso!`);
+        } catch (erro) {
+            res.status(500).send('Erro ao cadastrar usuário.');
+        }
+    }
 
-//    const criarUsuario = async () => {
-//        try {
-//           const novoUsuario = await User.create({ nome, email, senha });
-//         res.status(201).send(`Usuário ${novoUsuario.nome} cadastrado com sucesso!`);
-//      } catch (erro) {
- //           res.status(500).send('Erro ao cadastrar usuário.');
-   //     }
-    //}
+    criarUsuario();
 }
 
