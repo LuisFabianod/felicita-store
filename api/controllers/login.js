@@ -9,7 +9,7 @@ const checkEqualPasswords = async (password, hashPassword) => {
     return match;
 };
 
-exports.loginUsuario = async (req, res) => {
+exports.userLogin = async (req, res) => {
     const { email, password, rememberSession } = req.body;
 
     // CHECA SE OS CAMPOS FORAM PREENCHIDOS
@@ -27,7 +27,7 @@ exports.loginUsuario = async (req, res) => {
         if (!user) return res.status(400).send('Usuário não encontrado');
         
         // SE AS SENHAS NÃO FOREM IGUAIS, RETORNA BAD REQUEST
-        if (!checkEqualPasswords(password, user.senha)) {
+        if (!await checkEqualPasswords(password, user.senha)) {
             return res.status(400).send('Senha incorreta');
         }
 
@@ -36,13 +36,11 @@ exports.loginUsuario = async (req, res) => {
 
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn });
         
-        res.cookie('token', token, {
-            httpOnly: true,      
-            secure: true, 
+        res.cookie('token', token, {      
             maxAge: rememberSession ? 30 * 24 * 60 * 60 * 1000 : 60 * 60 * 1000, 
         });
 
-        return res.status(200).send('Usuário logado!');
+        return res.status(200).send('Usuário logado!', token);
     } catch (error) {
         return res.status(500).send('Erro no servidor');
     }   

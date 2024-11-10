@@ -13,7 +13,7 @@ const hashPassword = async (password) => {
     }
   };
 
-exports.cadastrarUsuario = (req, res) => {
+exports.userRegister = (req, res) => {
     const { nome, sobrenome, email, password, password2 } = req.body;
 
     // CHECA SE OS CAMPOS FORAM PREENCHIDOS
@@ -35,7 +35,7 @@ exports.cadastrarUsuario = (req, res) => {
         const hashedPassword = await hashPassword(password); 
         try {
             // CRIA NOVA INSTÂNCIA DE USER NA DB
-            const novoUsuario = await User.create({ nome: nome + sobrenome, email, senha: hashedPassword });
+            const novoUsuario = await User.create({ nome: nome + ' ' + sobrenome, email, senha: hashedPassword });
             res.status(201).send(`Usuário ${novoUsuario.nome} cadastrado com sucesso!`);
         } catch (erro) {
             res.status(500).send('Erro ao cadastrar usuário.');
