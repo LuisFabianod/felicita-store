@@ -33,6 +33,10 @@ export const FormLogin = () => {
               <span className='error-message'></span>
             </div>
             <button type='submit'>Fazer login</button>
+            <div className='rememberSession'>
+              <input type="checkbox" name="rememberSession" id="rememberSession" />
+              <label htmlFor="rememberSession">Lembre de mim</label>
+            </div>
 
       
         </form>

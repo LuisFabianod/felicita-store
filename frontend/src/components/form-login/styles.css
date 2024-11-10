@@ -40,3 +40,8 @@ input{
     background-color: grey;
     color: white;
 }
+
+.rememberSession{
+    display: flex;
+    gap: 5px;
+}
