@@ -32,6 +32,34 @@ export const checkEmail = (email) => {
     }
 }
 
+export const checkPassword = (password) => {
+    const passwordValue = password.current.value;
+
+    const hasLowerCase = /[a-z]/.test(passwordValue);
+    const hasUpperCase = /[A-Z]/.test(passwordValue);
+    const hasNumber = /\d/.test(passwordValue);
+    const hasMinDigits = passwordValue.length >= 8;
+
+
+    if(!hasMinDigits){
+        password.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(password, 'A senha deve ter no mínimo 8 dígitos');
+    } 
+    if(!hasNumber){
+        password.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(password, 'A senha deve ter no mínimo 1 número');
+    } 
+    if(!hasUpperCase){
+        password.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(password, 'A senha deve ter letra no mínimo 1 letra maiúscula');
+    } 
+    if(!hasLowerCase){
+        password.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(password, 'A senha deve ter letra no mínimo 1 letra minúscula');
+    } 
+    
+}
+
 // CHECA SE AS SENHAS SÃO IGUAIS, SE FOREM, CHECA SE TEM 8 CARACTERES NO MINIMO
 export const checkEqualPasswords = (password, password2) => {
     if(password.current.value !== password2.current.value){

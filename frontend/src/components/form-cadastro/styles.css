@@ -95,3 +95,27 @@ input.show-error-message{
     font-style: italic;
     display: none;
 }
+
+.password-checks{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.password-checks{
+    list-style-type: none;
+}
+
+.check-icon{
+    width: 15px;
+    height: 15px;
+}
+
+.div-lowercase,
+.div-uppercase,
+.div-number,
+.div-min-digits{
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+}
