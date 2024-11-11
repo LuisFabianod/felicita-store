@@ -1,6 +1,7 @@
 import './styles.css'
 import React, {useRef} from "react";
 import { checkForEmpty, removeErrorClass, checkEmail, checkEqualPasswords, shouldSubmit } from './utils/validation';
+import { nameFormatation } from './utils/nameFormatation';
 
 export const FormCadastro = () => {
   // DECLARAÇÃO DOS FIELDS(INPUTS) 
@@ -19,6 +20,7 @@ export const FormCadastro = () => {
       checkEmail(emailRef);
       checkEqualPasswords(passwordRef, password2Ref);
       if(shouldSubmit(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref)){
+        nameFormatation(nomeRef, sobrenomeRef);
         e.target.submit();
       }
     }

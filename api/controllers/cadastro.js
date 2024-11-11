@@ -32,7 +32,7 @@ exports.userRegister = (req, res) => {
     }
 
     const criarUsuario = async () => {
-        const hashedPassword = await hashPassword(password); 
+        const hashedPassword = await hashPassword(password);
         try {
             // CRIA NOVA INSTÂNCIA DE USER NA DB
             const novoUsuario = await User.create({ nome: nome + ' ' + sobrenome, email, senha: hashedPassword });
