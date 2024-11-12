@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 const port = 5000;
 
-const { sequelize, connectDatabase } = require('./models/sequelize');
+const { sequelize, connectDatabase } = require('./database/sequelize');
 connectDatabase();
 
 const corsOptions = {
