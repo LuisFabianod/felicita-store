@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const validator = require('validator');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { shouldSubmit } = require('../utils/validation');
+const { nameFormatation } = require('../utils/nameFormatation');
 
 // CRIPTOGRAFA A SENHA ENVIADA PELO FORM
 const hashPassword = async (password) => {
@@ -16,21 +18,15 @@ const hashPassword = async (password) => {
 exports.userRegister = (req, res) => {
     const { nome, sobrenome, email, password, password2 } = req.body;
 
-    // CHECA SE OS CAMPOS FORAM PREENCHIDOS
-    if (!nome || !sobrenome || !email || !password || !password2) {
-        return res.status(400).send('Todos os campos são obrigatórios')
-    }
+    const validation = shouldSubmit(nome, sobrenome, email, password, password2);
 
+    if (!validation.isValid) {
+        return res.status(400).json({ errors: validation.errors });
+    }
     
- // CHECA SE O EMAIL É VÁLIDO
-    if (!validator.isEmail(email)) {
-        return res.status(400).send('Email inválido!')
-    }
+    nameFormatation(nome, sobrenome)
 
-    if (password !== password2) {
-        return res.status(400).send('As senhas devem ser iguais')
-    }
-
+    // FAZ O HASH DA SENHA ENVIADA E SOBE USUÁRIO PARA DB 
     const criarUsuario = async () => {
         const hashedPassword = await hashPassword(password);
         try {
