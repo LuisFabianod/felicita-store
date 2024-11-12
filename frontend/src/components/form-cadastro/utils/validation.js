@@ -68,6 +68,26 @@ export const checkEqualPasswords = (password, password2) => {
     }
 }
 
+export const checkIfNameIsString = (nameInput, surnameInput) => {
+    const name = nameInput.current.value;
+    const surname = surnameInput.current.value;
+
+    const lettersRegex = /^[A-Za-z]+$/;
+
+    const isNameString = lettersRegex.test(name);
+    const isSurnameString = lettersRegex.test(surname);
+
+    if(!isNameString){
+        nameInput.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(nameInput, 'Seu nome deve conter apenas letras')
+    }
+
+    if(!isSurnameString){
+        surnameInput.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(surnameInput, 'Seu sobrenome deve conter apenas letras')
+    }
+}
+
 // ADICIONA O TEXTO PARA A SPAN DO CAMPO SOLICITADO
 const showErrorMessage = (input, msg) => {
     const field = input.current.parentElement;

@@ -6,6 +6,8 @@ const formatName = (name) => {
         .join('');
 };
 
+
+
 export const nameFormatation = (nameInput, surnameInput) => {
     const name = nameInput.current.value;
     const surname = surnameInput.current.value;
@@ -13,7 +15,7 @@ export const nameFormatation = (nameInput, surnameInput) => {
     const formattedName = formatName(name);
     const formattedSurname = formatName(surname);
     
-    const fullName = `${formattedName} ${formattedSurname}`;
+    const formattedFullName = `${formattedName} ${formattedSurname}`;
 
-    return fullName;
+    return formattedFullName;
 };

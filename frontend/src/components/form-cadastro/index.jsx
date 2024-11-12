@@ -1,10 +1,8 @@
 import './styles.css'
-import React, { useRef, useState } from "react";
-import { checkForEmpty, removeErrorClass, checkEmail, checkEqualPasswords, shouldSubmit, checkPassword } from './utils/validation';
+import React, { useRef } from "react";
+import { checkForEmpty, removeErrorClass, checkEmail, checkEqualPasswords, shouldSubmit, checkPassword, checkIfNameIsString } from './utils/validation';
 import { nameFormatation } from './utils/nameFormatation';
-import { usePasswordRestrictsEffect } from './hooks/usePasswordRestrictsEffect';
-import circleImage from '../../images/circulo.png'
-
+import { PasswordChecks } from './sub-components/password-check';
 
 export const FormCadastro = () => {
   // DECLARAÇÃO DOS FIELDS(INPUTS) 
@@ -14,28 +12,24 @@ export const FormCadastro = () => {
   const passwordRef = useRef(null);
   const password2Ref = useRef(null);
 
-  // DECLARAÇÃO DO ESTADO DAS IMAGENS DAS RESTRIÇÕES DA SENHA
-  const [lowerCaseSrc, setLowerCaseSrc] = useState(circleImage);
-  const [upperCaseSrc, setUpperCaseSrc] = useState(circleImage);
-  const [numberSrc, setNumberSrc] = useState(circleImage);
-  const [minDigitsSrc, setMinDigitsSrc] = useState(circleImage);
 
   // SUBMIT FORM EVENTLISTENER
   const handleSubmit = (e) => {
     e.preventDefault();
     // CHAMADA DAS FUNÇÕES DE VALIDAÇÃO DO ARQUIVO validation.js
     removeErrorClass(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref);
+
     checkEmail(emailRef);
     checkEqualPasswords(passwordRef, password2Ref);
     checkPassword(passwordRef);
+    checkIfNameIsString(nomeRef, sobrenomeRef);
     checkForEmpty(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref);
+
     if (shouldSubmit(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref)) {
       nameFormatation(nomeRef, sobrenomeRef);
       e.target.submit();
     }
   }
-
-  usePasswordRestrictsEffect(passwordRef, setLowerCaseSrc, setUpperCaseSrc, setNumberSrc, setMinDigitsSrc)
 
   return (
     <div className='form-cadastro'>
@@ -66,29 +60,7 @@ export const FormCadastro = () => {
             <span className='error-message'></span>
           </div>
         </div>
-
-        <p className='password-requests'>Sua senha deve conter:</p>
-        <div className='password-checks'>
-          <div className='div-lowercase'>
-            <img src={lowerCaseSrc} alt="check-icon" className='check-icon' />
-            <p className='lowercase'>Letra minúscula</p>
-          </div>
-
-          <div className='div-uppercase'>
-            <img src={upperCaseSrc} alt="check-icon" className='check-icon' />
-            <p className='uppercase'>Letra maiúscula</p>
-          </div>
-
-          <div className='div-number'>
-            <img src={numberSrc} alt="check-icon" className='check-icon'  />
-            <p className='number'>Número</p>
-          </div>
-
-          <div className='div-min-digits'>
-            <img src={minDigitsSrc} alt="check-icon" className='check-icon' />
-            <p className='min-digits'>8 dígitos</p>
-          </div>
-        </div>
+        <PasswordChecks passwordRef={passwordRef}/>
 
         <button type='submit' >Cadastrar</button>
 
