@@ -40,7 +40,7 @@ exports.userLogin = async (req, res) => {
             maxAge: rememberSession ? 30 * 24 * 60 * 60 * 1000 : 60 * 60 * 1000, 
         });
 
-        return res.status(200).send('Usuário logado!', token);
+        return res.status(200).send('Usuário logado!');
     } catch (error) {
         return res.status(500).send('Erro no servidor');
     }   

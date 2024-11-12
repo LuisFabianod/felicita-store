@@ -1,5 +1,4 @@
 const User = require('../models/User');
-const validator = require('validator');
 const bcrypt = require('bcrypt');
 const { shouldSubmit } = require('../utils/validation');
 const { nameFormatation } = require('../utils/nameFormatation');

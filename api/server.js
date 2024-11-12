@@ -8,8 +8,8 @@ const { sequelize, connectDatabase } = require('./database/sequelize');
 connectDatabase();
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // Substitua pela URL do seu frontend
-    credentials: true,  // Permite o envio de cookies
+    origin: 'http://localhost:3000', 
+    credentials: true, 
   };
 
 app.use(cors(corsOptions));

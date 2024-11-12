@@ -1,7 +1,7 @@
 const validator = require('validator');
 
 // Função para verificar campos vazios
-export const checkForEmpty = (...inputs) => {
+const checkForEmpty = (...inputs) => {
     const errors = [];
     inputs.forEach((input) => {
         if (!input) {
@@ -12,7 +12,7 @@ export const checkForEmpty = (...inputs) => {
 };
 
 // Verifica se o email é válido com o validator
-export const checkEmail = (email) => {
+const checkEmail = (email) => {
     const errors = [];
     if (!validator.isEmail(email)) {
         errors.push('Email é inválido');
@@ -21,7 +21,7 @@ export const checkEmail = (email) => {
 };
 
 // Checa a segurança da senha
-export const checkPassword = (password) => {
+const checkPassword = (password) => {
     const errors = [];
     const hasLowerCase = /[a-z]/.test(password);
     const hasUpperCase = /[A-Z]/.test(password);
@@ -44,7 +44,7 @@ export const checkPassword = (password) => {
 };
 
 // Checa se as senhas são iguais
-export const checkEqualPasswords = (password, password2) => {
+const checkEqualPasswords = (password, password2) => {
     const errors = [];
     if (password !== password2) {
         errors.push('As senhas devem ser iguais');
@@ -53,7 +53,7 @@ export const checkEqualPasswords = (password, password2) => {
 };
 
 // Verifica se nome e sobrenome contêm apenas letras
-export const checkIfNameIsString = (name, surname) => {
+const checkIfNameIsString = (name, surname) => {
     const errors = [];
     const lettersRegex = /^[A-Za-z]+$/;
 
@@ -67,7 +67,7 @@ export const checkIfNameIsString = (name, surname) => {
 };
 
 // Função para executar todas as validações e verificar se deve submeter o formulário
-export const shouldSubmit = (name, surname, email, password, password2) => {
+exports.shouldSubmit = (name, surname, email, password, password2) => {
     const errors = [
         ...checkForEmpty(name, surname, email, password, password2),
         ...checkEmail(email),

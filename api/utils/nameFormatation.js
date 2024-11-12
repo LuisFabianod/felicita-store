@@ -6,7 +6,7 @@ const formatName = (name) => {
         .join('');
 };
 
-export const nameFormatation = (name, surname) => {
+exports.nameFormatation = (name, surname) => {
     const formattedName = formatName(name);
     const formattedSurname = formatName(surname);
     
