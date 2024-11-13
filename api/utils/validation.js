@@ -1,20 +1,22 @@
-const validator = require('validator');
+const validator = require('validator'); // declaração da biblioteca validator
+
+// TODAS AS FUNÇÕES DECLARA O ARRAY ERRORS E O RETORNA
 
 // Função para verificar campos vazios
 const checkForEmpty = (...inputs) => {
     const errors = [];
-    inputs.forEach((input) => {
-        if (!input) {
+    inputs.forEach((input) => { // para cada input que foi recebido, é checado se ele foi preenchido
+        if (!input) { // se não foi preenchido, adiciona uma mensagem de erro ao array errors
             errors.push(`O campo ${input} é obrigatório`);
         }
     });
-    return errors;
+    return errors; 
 };
 
 // Verifica se o email é válido com o validator
 const checkEmail = (email) => {
     const errors = [];
-    if (!validator.isEmail(email)) {
+    if (!validator.isEmail(email)) { // se o email enviado não é válido, adiciona uma mensagem de erro ao array errors
         errors.push('Email é inválido');
     }
     return errors;
@@ -23,22 +25,22 @@ const checkEmail = (email) => {
 // Checa a segurança da senha
 const checkPassword = (password) => {
     const errors = [];
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasNumber = /\d/.test(password);
-    const hasMinDigits = password.length >= 8;
+    const hasLowerCase = /[a-z]/.test(password); // declaração do teste regex para saber se a senha tem letras minúsculas
+    const hasUpperCase = /[A-Z]/.test(password); // declaração do teste regex para saber se a senha tem letras maiúsculas
+    const hasNumber = /\d/.test(password); // declaração do teste regex para saber se a senha tem números
+    const hasMinDigits = password.length >= 8; // declaração do teste regex para saber se a senha tem 8 dígitos
 
     if (!hasMinDigits) {
-        errors.push('A senha deve ter no mínimo 8 caracteres');
+        errors.push('A senha deve ter no mínimo 8 caracteres'); // se a senha não tem 8 dígitos, adiciona uma mensagem de erro ao array errors
     }
     if (!hasNumber) {
-        errors.push('A senha deve ter no mínimo 1 número');
+        errors.push('A senha deve ter no mínimo 1 número'); // se a senha não tem números, adiciona uma mensagem de erro ao array errors
     }
     if (!hasUpperCase) {
-        errors.push('A senha deve conter no mínimo 1 letra maiúscula');
+        errors.push('A senha deve conter no mínimo 1 letra maiúscula'); // se a senha não tem letra maiúscula, adiciona uma mensagem de erro ao array errors
     }
     if (!hasLowerCase) {
-        errors.push('A senha deve conter no mínimo 1 letra minúscula');
+        errors.push('A senha deve conter no mínimo 1 letra minúscula'); // se a senha não tem letra minúscula, adiciona uma mensagem de erro ao array errors
     }
     return errors;
 };
@@ -46,7 +48,7 @@ const checkPassword = (password) => {
 // Checa se as senhas são iguais
 const checkEqualPasswords = (password, password2) => {
     const errors = [];
-    if (password !== password2) {
+    if (password !== password2) { // se as senhas não forem iguais, adiciona uma mensagem de erro ao array errors
         errors.push('As senhas devem ser iguais');
     }
     return errors;
@@ -55,20 +57,20 @@ const checkEqualPasswords = (password, password2) => {
 // Verifica se nome e sobrenome contêm apenas letras
 const checkIfNameIsString = (name, surname) => {
     const errors = [];
-    const lettersRegex = /^[A-Za-z]+$/;
+    const lettersRegex = /^[A-Za-z]+$/; // declaração do regex de apenas letras
 
     if (!lettersRegex.test(name)) {
-        errors.push('Seu nome deve conter apenas letras');
+        errors.push('Seu nome deve conter apenas letras'); // se o nome tem caracteres que não sejam letras ou barra de espaço, adiciona uma mensagem de erro ao array errors
     }
     if (!lettersRegex.test(surname)) {
-        errors.push('Seu sobrenome deve conter apenas letras');
+        errors.push('Seu sobrenome deve conter apenas letras'); // se o sobrenome tem caracteres que não sejam letras ou barra de espaço, adiciona uma mensagem de erro ao array errors
     }
     return errors;
 };
 
 // Função para executar todas as validações e verificar se deve submeter o formulário
 exports.shouldSubmit = (name, surname, email, password, password2) => {
-    const errors = [
+    const errors = [ // declaração dos arrays retornados por todas as validações
         ...checkForEmpty(name, surname, email, password, password2),
         ...checkEmail(email),
         ...checkPassword(password),
@@ -77,5 +79,5 @@ exports.shouldSubmit = (name, surname, email, password, password2) => {
     ];
 
     
-    return { isValid: !errors.length, errors };
+    return { isValid: !errors.length, errors }; // retorna um objeto com a propriedade isValid, que informa se os dados são válidos e o array de errors
 };

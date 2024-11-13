@@ -1,47 +1,51 @@
-const User = require('../models/User');
-const validator = require('validator');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const User = require('../models/User'); // declaração do model user
+const validator = require('validator'); // declaração da biblioteca validator
+const bcrypt = require('bcrypt'); // declaração da biblioteca bcrypt
+const jwt = require('jsonwebtoken'); // declaração da biblioteca jwt
 
-// COMPARA O HASH DA SENHA ENVIADA DO FORM COM O HASH DA DB
+// comapara o hash da senha enviada com a da db
 const checkEqualPasswords = async (password, hashPassword) => {
     const match = await bcrypt.compare(password, hashPassword);
     return match;
 };
 
 exports.userLogin = async (req, res) => {
-    const { email, password, rememberSession } = req.body;
+    const { email, password, rememberSession } = req.body; // declaração dos campos enviados pelo form
 
-    // CHECA SE OS CAMPOS FORAM PREENCHIDOS
+    // checa se os campos foram preenchidos
     if (!email) return res.status(400).send('Email não foi enviado');
     if (!password) return res.status(400).send('Senha não foi enviada');
     
-    // CHECA SE O EMAIL É VÁLIDO
+    // checa se o email enviado é válido
     if (!validator.isEmail(email)) return res.status(400).send('Email inválido');
 
     try {
-        // PROCURA UM USUÁRIO COM O EMAIL (PK) ENVIADO
+        // procura o usuário pelo email enviado
         const user = await User.findOne({ where: { email } });
 
-        // SE O EMAIL NÃO ESTIVER NA DB, RETORNA BAD REQUEST
-        if (!user) return res.status(400).send('Usuário não encontrado');
+        // se não for encontrado nenhum registro com esse email, retorna bad request
+        if (!user) return res.status(400).send('Email ou senha inválidos');
         
-        // SE AS SENHAS NÃO FOREM IGUAIS, RETORNA BAD REQUEST
+        // se a senha enviada não for igual a senha da db, retorna bad request
         if (!await checkEqualPasswords(password, user.senha)) {
-            return res.status(400).send('Senha incorreta');
+            return res.status(400).send('Email ou senha inválidos');
         }
 
-        // SE A CHECKBOX rememberSession ESTIVER MARCADA, A SESSÃO DURA 30 DIAS, SE NÃO, DURA 1 HORA
+        // se a checkbox rememberSession estiver marcada, a sessão dura 30 dias, se não, dura 1 hora
         const expiresIn = rememberSession? '30d' : '1h';
 
+        // declaração do token com a codificação do userId, chave secreta e tempo de expiração
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn });
         
+        // criação de um cookie com o nome token, que vai ter o valor de token, e vai expirar junto com o token
         res.cookie('token', token, {      
             maxAge: rememberSession ? 30 * 24 * 60 * 60 * 1000 : 60 * 60 * 1000, 
         });
 
+        // retorna sucesso
         return res.status(200).send('Usuário logado!');
     } catch (error) {
+        // caso algo de errado retorna o erro
         return res.status(500).send('Erro no servidor');
     }   
 
