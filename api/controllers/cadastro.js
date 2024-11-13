@@ -3,41 +3,52 @@ const bcrypt = require('bcrypt'); // declaração da biblioteca bcrypt (vai esta
 const { shouldSubmit } = require('../utils/validation'); // declaração da função que valida os dados enviados pelo form
 const { nameFormatation } = require('../utils/nameFormatation'); // declaração da função que formata o nome enviado pelo form
 
+const verifyIfUsersAlreadyExists = async (email) => {
+  try {
+    const usuarioExistente = await User.findOne({ email }); // busca por um registro com o email passado no form
+    return !!usuarioExistente // retorna true se o usuário existir, false se ele não existir
+  } catch (err) {
+    throw new Error('Erro ao verificar se o e-mail já está cadastrado.');
+  }
+}
+
 // CRIPTOGRAFA A SENHA ENVIADA PELO FORM
 const hashPassword = async (password) => {
-    const saltRounds = 10; // quantidade de vezes que o algoritmo de hashing será aplicado
-    try {
-      const hashedPassword = await bcrypt.hash(password, saltRounds);  // declara a senha criptografada
-      return hashedPassword; // retorna a senha criptografada
-    } catch (error) {
-      console.error("Erro ao gerar hash:", error); // caso algo dê errado, é lançado um erro
-    }
-  };
+  const saltRounds = 10; // quantidade de vezes que o algoritmo de hashing será aplicado
+  try {
+    const hashedPassword = await bcrypt.hash(password, saltRounds);  // declara a senha criptografada
+    return hashedPassword; // retorna a senha criptografada
+  } catch (error) {
+    console.error("Erro ao gerar hash:", error); // caso algo dê errado, é lançado um erro
+  }
+};
 
 // função para cadastrar usuário 
-exports.userRegister = (req, res) => {
-    const { nome, sobrenome, email, password, password2 } = req.body; // declaração dos valores enviados pelo formulário
+exports.userRegister = async (req, res) => {
+  const { nome, sobrenome, email, password, password2 } = req.body; // declaração dos valores enviados pelo formulário
+  try {
+
+    if (await verifyIfUsersAlreadyExists(res, email)) {
+      return res.status(400).send('Esse e-mail já está cadastrado!'); // caso o email já esteja registrado na db, retorna um erro
+    }
 
     const validation = shouldSubmit(nome, sobrenome, email, password, password2); // declara a chamada da função que valida os valores
 
     if (!validation.isValid) {
-        return res.status(400).json({ errors: validation.errors }); // se no retorno da função for {isValid: false}, a resposta será os erros que foram cometidos
-    }
-    
-    nameFormatation(nome, sobrenome); // caso o retorno da função for {isValid: true}, a função que formata o nome é chamada
-
-    // função que adiciona o usuário na db
-    const criarUsuario = async () => {
-        const hashedPassword = await hashPassword(password); // declaração da chamada da função que criptografa a senha
-        try {
-            // declaração do método create (adiciona o usuário à db) com os campos enviados pelo form
-            const novoUsuario = await User.create({ nome: nome + ' ' + sobrenome, email, senha: hashedPassword }); 
-            res.status(201).send(`Usuário ${novoUsuario.nome} cadastrado com sucesso!`); // responde com sucesso
-        } catch (erro) {
-            res.status(500).send('Erro ao cadastrar usuário.'); // caso algo dê errado, responde com erro
-        }
+      return res.status(400).json({ errors: validation.errors }); // se no retorno da função for {isValid: false}, a resposta será os erros que foram cometidos
     }
 
-    criarUsuario(); // chama a função criar usuário, pois nessa parte do código os campos foram validados
+    const hashedPassword = await hashPassword(password); // declaração da chamada da função que criptografa a senha
+
+    // declaração do método create (adiciona o usuário à db) com os campos enviados pelo form
+    const novoUsuario = await User.create({ nome: nameFormatation(nome, sobrenome), email, senha: hashedPassword });
+    res.status(201).send(`Usuário ${novoUsuario.nome} cadastrado com sucesso!`); // responde com sucesso
+
+  } catch (erro) {
+    console.error("Erro ao cadastrar usuário:", erro.message);
+    res.status(500).send(erro.message || 'Erro ao cadastrar usuário.'); // caso algo dê errado, responde com erro
+  }
+
+  
 }
 

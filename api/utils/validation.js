@@ -54,16 +54,19 @@ const checkEqualPasswords = (password, password2) => {
     return errors;
 };
 
-// Verifica se nome e sobrenome contêm apenas letras
+// Verifica se nome e sobrenome contêm apenas letras e permite espaços e acentos
 const checkIfNameIsString = (name, surname) => {
     const errors = [];
-    const lettersRegex = /^[A-Za-z]+$/; // declaração do regex de apenas letras
+    const lettersRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/; // Aceita letras, acentos e espaços
 
+    // se o nome conter caracteres que não sejam letras ou espaços, adiciona uma mensagem de erro ao array errors
     if (!lettersRegex.test(name)) {
-        errors.push('Seu nome deve conter apenas letras'); // se o nome tem caracteres que não sejam letras ou barra de espaço, adiciona uma mensagem de erro ao array errors
+        errors.push('Seu nome deve conter apenas letras e espaços'); 
     }
+
+    // se o sobrenome conter caracteres que não sejam letras ou espaços, adiciona uma mensagem de erro ao array errors
     if (!lettersRegex.test(surname)) {
-        errors.push('Seu sobrenome deve conter apenas letras'); // se o sobrenome tem caracteres que não sejam letras ou barra de espaço, adiciona uma mensagem de erro ao array errors
+        errors.push('Seu sobrenome deve conter apenas letras e espaços'); 
     }
     return errors;
 };
