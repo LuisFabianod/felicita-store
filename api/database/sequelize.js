@@ -1,23 +1,26 @@
-require('dotenv').config();
-const { Sequelize } = require('sequelize');
+require('dotenv').config(); // habilita o uso das variáveis de ambiente do .env
+const { Sequelize } = require('sequelize'); // declaração do sequelize
 
+// definição da conexão com a db, usando as variáveis do .env
 const sequelize = new Sequelize(    
-    process.env.DATABASE, 
-    process.env.USER_NAME, 
-    process.env.PASSWORD, 
+    process.env.DATABASE, // nome da db
+    process.env.USER_NAME, // usuário que tem acesso à db
+    process.env.PASSWORD, // senha do usuário
     { 
-        host: process.env.HOST_NAME, 
-        dialect: 'mysql' 
+        host: process.env.HOST_NAME, // host da db
+        dialect: 'mysql' // define a sintax dos comandos para mysql
     }
 );
 
+// função para conectar à db
 async function connectDatabase() {
     try {
-        await sequelize.authenticate();
+        await sequelize.authenticate(); // testa a conexão com a db tentando entrar nela com usuário e senha
         console.log('Conexão com o MySQL estabelecida.');
     } catch (err) {
+        // caso a autenticação falhe, é informado o erro
         console.error('Erro ao conectar ao MySQL:', err);
     }
 }
 
-module.exports = { sequelize, connectDatabase };
+module.exports = { sequelize, connectDatabase }; // exporta a conexão e função para conectar
