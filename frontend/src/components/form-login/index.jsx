@@ -22,7 +22,7 @@ export const FormLogin = () => {
 
     return(
       <div className='form-login'>
-        <form method='POST' action="http://localhost:5000/login/login-usuario" className='form' onSubmit={handleSubmit}>
+        <form method='POST' action="http://localhost:5000/login/login-user" className='form' onSubmit={handleSubmit}>
         <h1>Faça seu login</h1>
             <div className='email'>
               <input type="email" placeholder='*Email' name='email' id='login-email' ref={emailRef}></input>

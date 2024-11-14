@@ -1,0 +1,36 @@
+dialog{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 350px;
+    border: none;
+    padding: 20px;
+}
+
+.dialog-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5%;
+    gap: 20px;
+}
+
+.close-modal-icon{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.dialog-section{
+    height: 85%;
+}
+
+.dialog-footer{
+    height: 10%;
+}
+
+.exit-account{
+    height: 48px;
+    width: 80%;
+    margin-bottom: 20px;
+}

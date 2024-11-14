@@ -1,0 +1,7 @@
+.search-bar{
+    width: 40%;
+}
+
+.search-bar > input{
+    width: 100%;
+}
