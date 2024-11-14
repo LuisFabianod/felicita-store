@@ -1,6 +1,6 @@
 import './styles.css'
 import React, { useRef } from "react";
-import { checkForEmpty, removeErrorClass, checkEmail, checkEqualPasswords, shouldSubmit, checkPassword, checkIfNameIsString } from './utils/validation';
+import { shouldSubmit } from './utils/validation';
 import { nameFormatation } from './utils/nameFormatation';
 import { PasswordChecks } from './sub-components/password-check';
 
@@ -15,19 +15,13 @@ export const FormCadastro = () => {
 
   // SUBMIT FORM EVENTLISTENER
   const handleSubmit = (e) => {
-    e.preventDefault();
-    // CHAMADA DAS FUNÇÕES DE VALIDAÇÃO DO ARQUIVO validation.js
-    removeErrorClass(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref);
+    e.preventDefault(); // impede o envio do formulário
 
-    checkEmail(emailRef);
-    checkEqualPasswords(passwordRef, password2Ref);
-    checkPassword(passwordRef);
-    checkIfNameIsString(nomeRef, sobrenomeRef);
-    checkForEmpty(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref);
-
+    // a função shoulSubmit faz todas as validações do arquivo validation.js e retorna boolean
     if (shouldSubmit(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref)) {
-      nameFormatation(nomeRef, sobrenomeRef);
-      e.target.submit();
+      nomeRef.current.value = nameFormatation(nomeRef); // formata o nome (deixa as primeiras letras maiúsculas)
+      sobrenomeRef.current.value = nameFormatation(sobrenomeRef); // formata o sobrenome (deixa as primeiras letras maiúsculas)
+      e.target.submit(); // envia o formulário
     }
   }
 

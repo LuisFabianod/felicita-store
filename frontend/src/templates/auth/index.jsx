@@ -8,8 +8,8 @@ export const Auth = () => {
 
     return(
         <div className='auth'>
-        <FormLogin/>
-        <FormCadastro/>
+            <FormLogin/>
+            <FormCadastro/>
         </div>
 
     )

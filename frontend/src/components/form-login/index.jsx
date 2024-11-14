@@ -1,6 +1,6 @@
 import './styles.css'
 import React, { useRef } from "react";
-import { checkForEmpty, removeErrorClass, checkEmail, shouldSubmit } from './utils/validation';
+import { shouldSubmit } from './utils/validation';
 
 export const FormLogin = () => {
 
@@ -10,13 +10,9 @@ export const FormLogin = () => {
 
    // SUBMIT FORM EVENTLISTENER
    const handleSubmit = (e) => {
-    e.preventDefault();
-    // CHAMADA DAS FUNÇÕES DE VALIDAÇÃO DO ARQUIVO validation.js
-    removeErrorClass( emailRef, passwordRef);
-    checkForEmpty(emailRef, passwordRef);
-    checkEmail(emailRef);
-    if(shouldSubmit(emailRef, passwordRef)){
-      e.target.submit();
+    e.preventDefault(); // impede o envio do formulário
+    if(shouldSubmit(emailRef, passwordRef)){ // a função shoulSubmit faz todas as validações do arquivo validation.js e retorna boolean
+      e.target.submit(); // caso should submit retorne true, envia o formulário
     }
   }
 

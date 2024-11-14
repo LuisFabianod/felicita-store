@@ -1,21 +1,14 @@
+// recebe um nome e o retorna formatado
 const formatName = (name) => {
-    // ITERA SOBRE AS LETRAS E SE FOR A PRIMEIRA, TORNA ELA MAIÚSCULA
     return name
-        .split('')
-        .map((char, index) => index === 0 ? char.toUpperCase() : char.toLowerCase())
-        .join('');
+        .split('') // separa os caracteres do nome
+        .map((char, index) => index === 0 ? char.toUpperCase() : char.toLowerCase()) // itera sobre os caracteres, se for o primeiro, torna ele maiúsculo
+        .join(''); // junta os caracteres do nome
 };
 
+export const nameFormatation = (nameInput) => {
+    const name = nameInput.current.value; // declaração do valor do input
+    const formattedName = formatName(name); // chamada da função de formatação com o valor do input
 
-
-export const nameFormatation = (nameInput, surnameInput) => {
-    const name = nameInput.current.value;
-    const surname = surnameInput.current.value;
-    
-    const formattedName = formatName(name);
-    const formattedSurname = formatName(surname);
-    
-    const formattedFullName = `${formattedName} ${formattedSurname}`;
-
-    return formattedFullName;
+    return formattedName;
 };

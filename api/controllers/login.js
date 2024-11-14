@@ -50,10 +50,10 @@ exports.userLogin = async (req, res) => {
 
 exports.userLogout = async (req, res) => {
     try {
-        res.clearCookie('token');
-        return res.status(200).send('Logout realizado com sucesso');
+        res.clearCookie('token'); // remove o cookie em que o token da sessão está
+        return res.status(200).send('Logout realizado com sucesso'); 
     } catch (error) {
-        console.error('Erro ao realizar logout:', error);
+        console.error('Erro ao realizar logout:', error); // caso algo dê errado retorna o erro
         return res.status(500).send('Erro ao realizar logout');
     }
 
