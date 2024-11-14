@@ -47,3 +47,14 @@ exports.userLogin = async (req, res) => {
     }
 
 };
+
+exports.userLogout = async (req, res) => {
+    try {
+        res.clearCookie('token');
+        return res.status(200).send('Logout realizado com sucesso');
+    } catch (error) {
+        console.error('Erro ao realizar logout:', error);
+        return res.status(500).send('Erro ao realizar logout');
+    }
+
+};

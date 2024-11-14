@@ -3,6 +3,8 @@ const router = express.Router(); // declaração do router (redireciona o códig
 const loginController = require('../controllers/login'); // declaração do controller da home
 
 // cria uma rota de post que utiliza o método userLogin do loginController
-router.post('/login-usuario', loginController.userLogin)
+router.post('/login-user', loginController.userLogin)
+
+router.post('/logout', loginController.userLogout)
 
 module.exports = router; // exporta as rotas do arquivo
