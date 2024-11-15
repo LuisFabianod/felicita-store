@@ -73,7 +73,7 @@ export const checkIfNameIsString = (nameInput, surnameInput) => {
     const name = nameInput.current.value; // declaração do valor do campo nome
     const surname = surnameInput.current.value; // declaração do valor do campo sobrenome
 
-    const lettersRegex = /^[A-Za-z]+$/; // regex de letras + barra de espaço
+    const lettersRegex = /^[A-Za-z\s]+$/; // regex de letras + barra de espaço
 
     const isNameString = lettersRegex.test(name); // faz o teste regex no valor do nome
     const isSurnameString = lettersRegex.test(surname); // faz o teste regex no valor do sobrenome
