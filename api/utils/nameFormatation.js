@@ -1,18 +1,21 @@
 // função que um nome ou sobrenome e retorne ele formatado
 const formatName = (name) => {
+    // Separa o nome em partes (ex: "john doe" -> ["john", "doe"])
+    const names = name.split(' ');
     
-    return name
-        .split('') // separa todos caracteres do nome
-        .map((char, index) => index === 0 ? char.toUpperCase() : char.toLowerCase()) // faz apenas o primeiro caractére ser maiúsculo 
-        .join('');  // junta todos os caracteres
+    // Formata cada parte do nome
+    const formattedNames = names.map(namePart => {
+        // Transforma a primeira letra em maiúscula e o restante em minúscula
+        return namePart.charAt(0).toUpperCase() + namePart.slice(1).toLowerCase();
+    });
+
+    // Junta as partes formatadas em uma única string
+    return formattedNames.join(' ');
 };
 
 // função que recebe nome e sobrenome e retorna o nome completo formatado
-exports.nameFormatation = (name, surname) => {
-    const formattedName = formatName(name); // declaração do nome formatado
-    const formattedSurname = formatName(surname); // declaração do sobrenome formatado
-    
-    const formattedFullName = `${formattedName} ${formattedSurname}`; // junção do nome e sobrenome formatados
+exports.nameFormatation = (name) => {
+    const formattedName = formatName(name); // Chamada da função de formatação com o valor do input
 
-    return formattedFullName; // retorna nome inteiro e formatado
+    return formattedName;
 };

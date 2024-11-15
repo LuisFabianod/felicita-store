@@ -5,8 +5,8 @@ const { nameFormatation } = require('../utils/nameFormatation'); // declaração
 
 const verifyIfUsersAlreadyExists = async (email) => {
   try {
-    const usuarioExistente = await User.findOne({ email }); // busca por um registro com o email passado no form
-    return !!usuarioExistente // retorna true se o usuário existir, false se ele não existir
+    const usuarioExistente = await User.findOne({ where: { email } }); // busca por um registro com o email passado no form
+    return Boolean(usuarioExistente) // retorna true se o usuário existir, false se ele não existir
   } catch (err) {
     throw new Error('Erro ao verificar se o e-mail já está cadastrado.');
   }
@@ -28,8 +28,8 @@ exports.userRegister = async (req, res) => {
   const { nome, sobrenome, email, password, password2 } = req.body; // declaração dos valores enviados pelo formulário
   try {
 
-    if (await verifyIfUsersAlreadyExists(res, email)) {
-      return res.status(400).send('Esse e-mail já está cadastrado!'); // caso o email já esteja registrado na db, retorna um erro
+    if (await verifyIfUsersAlreadyExists(email)) {
+      return res.status(400).json({message: 'Esse e-mail já está cadastrado!'}); // caso o email já esteja registrado na db, retorna um erro
     }
 
     const validation = shouldSubmit(nome, sobrenome, email, password, password2); // declara a chamada da função que valida os valores
@@ -41,12 +41,11 @@ exports.userRegister = async (req, res) => {
     const hashedPassword = await hashPassword(password); // declaração da chamada da função que criptografa a senha
 
     // declaração do método create (adiciona o usuário à db) com os campos enviados pelo form
-    const novoUsuario = await User.create({ nome: nameFormatation(nome, sobrenome), email, senha: hashedPassword });
-    res.status(201).send(`Usuário ${novoUsuario.nome} cadastrado com sucesso!`); // responde com sucesso
+    const novoUsuario = await User.create({ nome: nameFormatation(nome) + ' ' + nameFormatation(sobrenome), email, senha: hashedPassword });
+    res.redirect('http://localhost:3000/'); // responde com sucesso
 
   } catch (erro) {
-    console.error("Erro ao cadastrar usuário:", erro.message);
-    res.status(500).send(erro.message || 'Erro ao cadastrar usuário.'); // caso algo dê errado, responde com erro
+    res.status(500).json({message: erro.message || 'Erro ao cadastrar usuário.'}); // caso algo dê errado, responde com erro
   }
 
   
