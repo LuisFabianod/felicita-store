@@ -6,7 +6,6 @@ import { Auth } from './templates/auth';
 function App() {
 
   return (
-    // Envolver o Router com o Provider para compartilhar o contexto globalmente
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
