@@ -5,8 +5,8 @@ const jwt = require('jsonwebtoken'); // declaração da biblioteca jwt
 
 // comapara o hash da senha enviada com a da db
 const checkEqualPasswords = async (password, hashPassword) => {
-    const match = await bcrypt.compare(password, hashPassword);
-    return match;
+    const match = await bcrypt.compare(password, hashPassword); // compara o hash da senha enviada com o hash da senha na db
+    return match; // retorna um bool que indica se as senhas são iguais ou não
 };
 
 exports.userLogin = async (req, res) => {
@@ -36,13 +36,13 @@ exports.userLogin = async (req, res) => {
         // declaração do token com a codificação do userId, chave secreta e tempo de expiração
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn });
 
-        // criação de um cookie com o nome token, que vai ter o valor de token, e vai expirar junto com o token
-
+        // o frontend espera um json como resposta, aqui são enviadas as informações para criação
+        // do cookie da sessão, e a rota para redirecionar o usuário
         res.status(200).json({ 
-            redirectUrl: 'http://localhost:3000/',
-            cookieName: 'felicitaToken', 
-            cookieValue: token, 
-            cookieAge: rememberSession ? 30 * 24 * 60 * 60 * 1000 : 60 * 60 * 1000, 
+            cookieName: 'felicitaToken', // nome do cookie
+            cookieValue: token, // o cookie armazena o token
+            cookieAge: rememberSession ? 30 * 24 * 60 * 60 * 1000 : 60 * 60 * 1000, // o tempo da sessão é 1 hora ou 30 dias se a checkBox "rememberSession" for marcada
+            redirectUrl: 'http://localhost:3000/', // direciona o usuário para página home após o login
         });
     } catch (error) {
         return res.status(500).send('Erro no servidor'); // caso algo de errado retorna o erro
@@ -52,11 +52,13 @@ exports.userLogin = async (req, res) => {
 
 exports.userLogout = async (req, res) => {
     try {
-        res.clearCookie('token'); // remove o cookie em que o token da sessão está
-        return res.status(200).send('Logout realizado com sucesso'); 
+        return res.status(200).json({
+            // no frontend, quando a resposta do servidor for ok, o cookie será apagado
+            cookieName: 'felicitaToken', // nome do cookie de login, que vai ser retirado
+            redirectUrl: 'http://localhost:3000/', // redireciona o usuário para home
+        }); 
     } catch (error) {
-        console.error('Erro ao realizar logout:', error); // caso algo dê errado retorna o erro
-        return res.status(500).send('Erro ao realizar logout');
+        return res.status(500).json({message: 'Erro ao realizar logout'}); // caso algo dê errado retorna o erro
     }
 
 };

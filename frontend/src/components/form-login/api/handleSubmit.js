@@ -1,4 +1,4 @@
-import { shouldSubmit } from './validation';
+import { shouldSubmit } from '../utils/validation';
 
 // Função para tratar o envio do formulário
 export const handleSubmit = async (e, emailRef, passwordRef, setApiMessage, rememberSession) => {
