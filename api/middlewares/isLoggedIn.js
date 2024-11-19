@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 exports.authMiddleware = (req, res, next) => {
     // Obtém o token JWT do cookie
-    const token = req.cookies.token;
+    const token = req.cookies.felicitaToken;
     
     // Verifica se o token existe
     if (!token) {

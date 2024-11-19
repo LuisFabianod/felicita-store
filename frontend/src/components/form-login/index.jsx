@@ -1,6 +1,6 @@
 import './styles.css'
-import React, { useRef } from "react";
-import { shouldSubmit } from './utils/validation';
+import React, { useRef, useState } from "react";
+import { handleSubmit } from './utils/handleSubmit';
 
 export const FormLogin = () => {
 
@@ -8,17 +8,15 @@ export const FormLogin = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-   // SUBMIT FORM EVENTLISTENER
-   const handleSubmit = (e) => {
-    e.preventDefault(); // impede o envio do formulário
-    if(shouldSubmit(emailRef, passwordRef)){ // a função shoulSubmit faz todas as validações do arquivo validation.js e retorna boolean
-      e.target.submit(); // caso should submit retorne true, envia o formulário
-    }
-  }
+  // Estado para feedback da API (sucesso ou erro)
+  const [apiMessage, setApiMessage] = useState('');
+
+  const [rememberSession, setRememberSession ] = useState(false);
 
     return(
       <div className='form-login'>
-        <form method='POST' action="http://localhost:5000/login/login-user" className='form' onSubmit={handleSubmit}>
+        <form method='POST' className='form' onSubmit={(e) => handleSubmit(e, emailRef, passwordRef, setApiMessage, rememberSession)}>
+        {apiMessage && <div className="api-message">{apiMessage}</div>}
         <h1>Faça seu login</h1>
             <div className='email'>
               <input type="email" placeholder='*Email' name='email' id='login-email' ref={emailRef}></input>
@@ -30,11 +28,9 @@ export const FormLogin = () => {
             </div>
             <button type='submit'>Fazer login</button>
             <div className='rememberSession'>
-              <input type="checkbox" name="rememberSession" id="rememberSession" />
+              <input type="checkbox" name="rememberSession" id="rememberSession" onClick={() => setRememberSession(!rememberSession)}/>
               <label htmlFor="rememberSession">Lembre de mim</label>
             </div>
-
-      
         </form>
       </div>
     )

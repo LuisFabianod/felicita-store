@@ -14,9 +14,9 @@ export const Sidebar = ({display, setDisplay}) => {
                     
                 }
             });
-    
+        
             if (response.ok) {
-                // Redireciona o usuário para a página inicial ou de login
+                window.location.reload();
             } else {
                 console.error('Erro ao sair da conta:', response.statusText);
             }

@@ -11,7 +11,6 @@ export const verifySession = async (setIsLoggedIn) => {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data)
             setIsLoggedIn(data.loggedIn); 
         } else {
             console.error('Erro na verificação de login');

@@ -1,10 +1,10 @@
 import './styles.css'
-import React, { useRef } from "react";
-import { shouldSubmit } from './utils/validation';
-import { nameFormatation } from './utils/nameFormatation';
+import React, { useRef, useState} from "react";
+import { handleSubmit } from './utils/handleSubmit';
 import { PasswordChecks } from './sub-components/password-check';
 
 export const FormCadastro = () => {
+
   // DECLARAÇÃO DOS FIELDS(INPUTS) 
   const nomeRef = useRef(null);
   const sobrenomeRef = useRef(null);
@@ -12,22 +12,16 @@ export const FormCadastro = () => {
   const passwordRef = useRef(null);
   const password2Ref = useRef(null);
 
+  // Estado para feedback da API (sucesso ou erro)
+  const [apiMessage, setApiMessage] = useState('');
 
-  // SUBMIT FORM EVENTLISTENER
-  const handleSubmit = (e) => {
-    e.preventDefault(); // impede o envio do formulário
+  // Função para tratar o envio do formulário
+  ; 
 
-    // a função shoulSubmit faz todas as validações do arquivo validation.js e retorna boolean
-    if (shouldSubmit(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref)) {
-      nomeRef.current.value = nameFormatation(nomeRef); // formata o nome (deixa as primeiras letras maiúsculas)
-      sobrenomeRef.current.value = nameFormatation(sobrenomeRef); // formata o sobrenome (deixa as primeiras letras maiúsculas)
-      e.target.submit(); // envia o formulário
-    }
-  }
-
-  return (
+ return (
     <div className='form-cadastro'>
-      <form method='POST' action="http://localhost:5000/cadastro/cadastrar-usuario" className='form' onSubmit={handleSubmit}>
+      <form method='POST' className='form' onSubmit={(e) => handleSubmit(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage)}>
+        {apiMessage && <div className="api-message">{apiMessage}</div>}
         <h1>Faça seu cadastro</h1>
         <div className='nome-sobrenome'>
           <div className='nome'>
