@@ -30,19 +30,15 @@ export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordR
           credentials: 'include'
         });
 
-        // Processa a resposta da API
-        const data = await response.json();
+        const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {
-          // Sucesso
-          setApiMessage(data.message);
+          setApiMessage(data.message); // define o texto da div api-message 
         } else {
-          // Erro
-          setApiMessage(data.message);
+          setApiMessage(data.message); // define o texto da div api-message 
         }
       } catch (error) {
-        // Caso ocorra um erro na requisição
-        setApiMessage('Erro ao enviar dados. Verifique sua conexão.');
+        setApiMessage('Erro ao enviar dados. Verifique sua conexão.'); // define o texto da div api-message 
       }
     }
   }

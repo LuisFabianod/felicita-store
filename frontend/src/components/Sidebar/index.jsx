@@ -5,15 +5,14 @@ import handleExit from './api/handleExit'
 
 export const Sidebar = ({display, setDisplay}) => {
 
-    // Estado para feedback da API (sucesso ou erro)
-    const [apiMessage, setApiMessage] = useState('');
+    const [apiMessage, setApiMessage] = useState(''); // Estado para mensagem da API (sucesso ou erro)
 
     const handleMenu = () => {
-        setDisplay('none')
+        setDisplay('none'); // muda o display da sideBar para none quando o closeIcon é clicado
     }
 
     return (
-        <dialog style={{display}}>
+        <dialog style={{display}}> 
             
             <header className='dialog-header'>
                 <p>Olá fulano</p>
