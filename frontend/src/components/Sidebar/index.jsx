@@ -1,7 +1,7 @@
 import './styles.css'
 import React, { useState } from 'react'
 import closeIcon from '../../images/x.png'
-import handleExit from './api/handleExit'
+import { handleExit } from './api/handleExit'
 
 export const Sidebar = ({display, setDisplay}) => {
 
@@ -15,7 +15,7 @@ export const Sidebar = ({display, setDisplay}) => {
         <dialog style={{display}}> 
             
             <header className='dialog-header'>
-                <p>Olá fulano</p>
+                <p>Olá, {localStorage.getItem('userName')}</p>
                 <img src={closeIcon} alt="close-modal-icon" className='close-modal-icon' onClick={handleMenu}/>
             </header>
 

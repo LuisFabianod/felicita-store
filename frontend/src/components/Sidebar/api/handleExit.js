@@ -1,4 +1,4 @@
-const handleExit = async (setApiMessage) => {
+export const handleExit = async (setApiMessage) => {
     try {
         // Faz a requisição para a rota de logout no backend
         const response = await fetch('http://localhost:5000/login/logout', {

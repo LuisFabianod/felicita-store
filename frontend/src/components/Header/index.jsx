@@ -21,7 +21,7 @@ export const Header = () => {
     const handleMenu = () => {
         setDisplay('flex')
     }
-
+    
     return (
         <>
         <Sidebar display={display} setDisplay={setDisplay}/>
@@ -29,16 +29,13 @@ export const Header = () => {
             <nav className='nav'>
                 <div className='menu-and-logo'>
                 {
-                isLoggedIn? 
-                <img src={menuIcon} alt="menu-icon" className='menu-icon' onClick={handleMenu}/>
-
-                 : <Link to="/auth">Fazer login</Link>
+                isLoggedIn? <img src={menuIcon} alt="menu-icon" className='menu-icon' onClick={handleMenu}/> : <Link to="/auth">Fazer login</Link>
                  }
                 
                 <img src="" alt="logo-felicita" />
                 </div>
                 <SearchBar/>
-                <div></div>
+                <div>{localStorage.getItem('userEmail')}</div>
             </nav>
         </header>
         </>

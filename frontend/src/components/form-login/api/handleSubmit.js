@@ -23,9 +23,13 @@ export const handleSubmit = async (e, emailRef, passwordRef, setApiMessage, reme
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {
+
+            localStorage.setItem('userName', data.userName);
+            localStorage.setItem('userEmail', data.userEmail);
+            
             // cria um cookie com as informações passadas pelo back-end
             document.cookie = data.cookieName + "=" + data.cookieValue + ";" + data.cookieAge + ";path=/"; 
-            window.location.href = data.redirectUrl; // redireciona o usuário para home logado
+            window.location.href = data.redirectUrl; // redireciona o usuário para home logado;
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
         }

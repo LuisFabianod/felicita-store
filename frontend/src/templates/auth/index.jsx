@@ -11,6 +11,5 @@ export const Auth = () => {
             <FormLogin/>
             <FormCadastro/>
         </div>
-
     )
 }

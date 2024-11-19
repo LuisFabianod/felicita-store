@@ -11,6 +11,7 @@ export const FormLogin = () => {
   // Estado para feedback da API (sucesso ou erro)
   const [apiMessage, setApiMessage] = useState('');
 
+  // Estado para checkBox rememberSession
   const [rememberSession, setRememberSession ] = useState(false);
 
     return(

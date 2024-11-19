@@ -38,11 +38,14 @@ exports.userLogin = async (req, res) => {
 
         // o frontend espera um json como resposta, aqui são enviadas as informações para criação
         // do cookie da sessão, e a rota para redirecionar o usuário
+       
         res.status(200).json({ 
             cookieName: 'felicitaToken', // nome do cookie
             cookieValue: token, // o cookie armazena o token
             cookieAge: rememberSession ? 30 * 24 * 60 * 60 * 1000 : 60 * 60 * 1000, // o tempo da sessão é 1 hora ou 30 dias se a checkBox "rememberSession" for marcada
             redirectUrl: 'http://localhost:3000/', // direciona o usuário para página home após o login
+            userName: user.nome,
+            userEmail: user.email
         });
     } catch (error) {
         return res.status(500).send('Erro no servidor'); // caso algo de errado retorna o erro
