@@ -31,7 +31,7 @@ export const FormCadastro = () => {
 
  return (
     <div className='form-cadastro'>
-      <form method='POST' className='form' onSubmit={(e) => handleSubmit(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
+      <form  className='form' onSubmit={(e) => handleSubmit(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
       {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
         <h1>Faça seu cadastro</h1>
         <div className='nome-sobrenome'>
@@ -44,7 +44,7 @@ export const FormCadastro = () => {
             <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
         </div>
-        <div className='email'>
+        <div className='register-email'>
           <input type="email" placeholder='*Email' name='email' id='email' ref={emailRef}></input>
           <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
         </div>

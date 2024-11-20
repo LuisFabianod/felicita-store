@@ -4,7 +4,6 @@ import { nameFormatation } from '../utils/nameFormatation';
 // Função para tratar o envio do formulário
 export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
-
     // Validação do formulário
     if (shouldSubmit(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref)) {
       nomeRef.current.value = nameFormatation(nomeRef); // Formatar o nome
@@ -21,7 +20,7 @@ export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordR
 
       try {
         // Envia os dados para a API
-        const response = await fetch('http://localhost:5000/cadastro/cadastrar-usuario', {
+        const response = await fetch('http://localhost:5000/account/register-user', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -33,8 +32,9 @@ export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordR
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {
+
           setApiMessage(data.message); // define o texto da div api-message 
-          triggerApiMessageShake();
+          
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
           triggerApiMessageShake();

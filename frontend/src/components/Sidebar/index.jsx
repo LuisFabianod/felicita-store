@@ -1,5 +1,6 @@
 import './styles.css'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import closeIcon from '../../images/x.png'
 import { handleExit } from './api/handleExit'
 
@@ -20,7 +21,7 @@ export const Sidebar = ({display, setDisplay}) => {
             </header>
 
             <section className='dialog-section'>
-
+                <Link to={'/account'}>Minha conta</Link>
             </section>
             
             <footer className='dialog-footer'>

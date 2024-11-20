@@ -30,14 +30,14 @@ export const FormLogin = () => {
 
   return(
       <div className='form-login'>
-        <form method='POST' className='form' onSubmit={(e) => handleSubmit(e, emailRef, passwordRef, setApiMessage, rememberSession, triggerApiMessageShake, triggerErrorMessageShake)}>
+        <form className='form' onSubmit={(e) => handleSubmit(e, emailRef, passwordRef, setApiMessage, rememberSession, triggerApiMessageShake, triggerErrorMessageShake)}>
        {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
         <h1>Faça seu login</h1>
             <div className='email'>
               <input type="email" placeholder='*Email' name='email' id='login-email' ref={emailRef}></input>
               <span   className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
             </div>
-            <div className='email'>
+            <div className='password'>
               <input type='password' placeholder='*Senha' name='password' id='login-password' ref={passwordRef}></input>
               <span   className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
             </div>

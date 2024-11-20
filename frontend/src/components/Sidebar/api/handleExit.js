@@ -1,7 +1,7 @@
 export const handleExit = async (setApiMessage) => {
     try {
         // Faz a requisição para a rota de logout no backend
-        const response = await fetch('http://localhost:5000/login/logout', {
+        const response = await fetch('http://localhost:5000/account/logout', {
             method: 'POST', 
             credentials: 'include', // Inclui cookies na requisição
         });

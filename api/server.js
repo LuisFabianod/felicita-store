@@ -19,8 +19,7 @@ app.use(cors(corsOptions)); // habilita o uso de cors com as configs declaradas
 app.use(cookieParser()); // habilita o uso de cookie-parser
 
 // declaração das rotas definidas na pasta routes
-const controllerRoutes = require('./routes/cadastro'); 
-const loginRoutes = require('./routes/login');
+const accountRoutes = require('./routes/account'); 
 const homeRoutes = require('./routes/home');
 
 app.use(express.json()); // habilita a compreenssão das reqs como json pelo express
@@ -28,8 +27,7 @@ app.use(express.urlencoded({ extended: true })); // receber as informações de 
 
 // atribuição das rotas com base no caminho inicial
 app.use('/', homeRoutes)
-app.use('/cadastro', controllerRoutes);
-app.use('/login', loginRoutes);
+app.use('/account', accountRoutes);
 
 // sincronizar tabelas da db com os modelos do sequelize
 sequelize.sync()

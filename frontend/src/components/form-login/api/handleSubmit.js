@@ -12,7 +12,7 @@ export const handleSubmit = async (e, emailRef, passwordRef, setApiMessage, reme
         rememberSession // valor da checkBox rememberSession (true | false)
       };
 
-        const response = await fetch('http://localhost:5000/login/login-user', { // acessa a rota de login da api, com os dados do form
+        const response = await fetch('http://localhost:5000/account/login-user', { // acessa a rota de login da api, com os dados do form
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
