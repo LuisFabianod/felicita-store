@@ -30,6 +30,7 @@ export const handleSubmit = async (e, emailRef, passwordRef, setApiMessage, reme
             // cria um cookie com as informações passadas pelo back-end
             document.cookie = data.cookieName + "=" + data.cookieValue + ";" + data.cookieAge + ";path=/"; 
             window.location.href = data.redirectUrl; // redireciona o usuário para home logado;
+            
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
           triggerApiMessageShake();

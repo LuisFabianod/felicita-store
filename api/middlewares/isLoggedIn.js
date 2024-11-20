@@ -6,6 +6,7 @@ exports.authMiddleware = (req, res, next) => {
     
     // Verifica se o token existe
     if (!token) {
+        req.isLoggedIn = false
         return res.status(401).json({ message: 'Token não encontrado. Faça login.' });
     }
     
@@ -15,6 +16,7 @@ exports.authMiddleware = (req, res, next) => {
 
         // Verifica se o token tem a estrutura correta (userId)
         if (!decoded || !decoded.userId) {
+            req.isLoggedIn = false
             return res.status(401).json({ message: 'Token inválido. Faça login novamente.' });
         }
         
@@ -28,6 +30,7 @@ exports.authMiddleware = (req, res, next) => {
         next();
     } catch (err) {
         // Token inválido ou expirado
+        req.isLoggedIn = false
         return res.status(401).json({ message: 'Token inválido ou expirado.' });
     }
 }

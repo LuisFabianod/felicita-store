@@ -11,9 +11,12 @@ export const verifySession = async (setIsLoggedIn) => {
 
         if (response.ok) {
             const data = await response.json(); // processa a resposta da api
-            setIsLoggedIn(data.loggedIn); 
+            setIsLoggedIn(data.loggedIn);
+            
         } else {
             console.error('Erro na verificação de login');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userEmail');
         }
     } catch (error) {
         console.error('Erro na requisição:', error);
