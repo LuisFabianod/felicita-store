@@ -2,7 +2,7 @@ import { shouldSubmit } from '../utils/validation';
 import { nameFormatation } from '../utils/nameFormatation';
 
 // Função para tratar o envio do formulário
-export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage) => {
+export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
 
     // Validação do formulário
@@ -34,11 +34,16 @@ export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordR
 
         if (response.ok) {
           setApiMessage(data.message); // define o texto da div api-message 
+          triggerApiMessageShake();
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
+          triggerApiMessageShake();
         }
       } catch (error) {
         setApiMessage('Erro ao enviar dados. Verifique sua conexão.'); // define o texto da div api-message 
+        triggerApiMessageShake();
       }
+    }else{
+      triggerErrorMessageShake();
     }
   }

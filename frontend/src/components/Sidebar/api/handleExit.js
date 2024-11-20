@@ -7,6 +7,10 @@ export const handleExit = async (setApiMessage) => {
         });
     
         if (response.ok) {
+            
+            localStorage.clear('userName');
+            localStorage.clear('userEmail');
+
             const data = await response.json(); // Processa a resposta da API
             document.cookie = data.cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";  // define a data de expiração para o passado, como método de excluir o cookie
             window.location.href = data.redirectUrl;  // redireciona o usuário deslogado

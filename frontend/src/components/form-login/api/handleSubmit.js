@@ -1,7 +1,7 @@
 import { shouldSubmit } from '../utils/validation';
 
 // Função para tratar o envio do formulário
-export const handleSubmit = async (e, emailRef, passwordRef, setApiMessage, rememberSession) => {
+export const handleSubmit = async (e, emailRef, passwordRef, setApiMessage, rememberSession, triggerApiMessageShake, triggerErrorMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
 
     // Validação do formulário
@@ -32,7 +32,10 @@ export const handleSubmit = async (e, emailRef, passwordRef, setApiMessage, reme
             window.location.href = data.redirectUrl; // redireciona o usuário para home logado;
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
+          triggerApiMessageShake();
         }
       
+    }else{
+      triggerErrorMessageShake();
     }
   }
