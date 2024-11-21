@@ -24,6 +24,7 @@ export const handleSubmit = async (e, emailRef, passwordRef, setApiMessage, reme
 
         if (response.ok) {
 
+            // salva dados do usuário que serão usados no frontend no localStorage
             localStorage.setItem('userName', data.userName);
             localStorage.setItem('userEmail', data.userEmail);
             
@@ -33,10 +34,10 @@ export const handleSubmit = async (e, emailRef, passwordRef, setApiMessage, reme
             
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
-          triggerApiMessageShake();
+          triggerApiMessageShake(); // ativação da animação de erro
         }
       
     }else{
-      triggerErrorMessageShake();
+      triggerErrorMessageShake(); // ativação da animação de erro
     }
   }

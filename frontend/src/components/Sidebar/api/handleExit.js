@@ -1,4 +1,4 @@
-export const handleExit = async (setApiMessage) => {
+export const handleExit = async (setApiMessage, triggerApiMessageShake) => {
     try {
         // Faz a requisição para a rota de logout no backend
         const response = await fetch('http://localhost:5000/account/logout', {
@@ -8,7 +8,8 @@ export const handleExit = async (setApiMessage) => {
     
         if (response.ok) {
             
-            localStorage.removeItem('userName');
+            // quando feito o logout, os dados do usuário são retirados do localStorage
+            localStorage.removeItem('userName'); 
             localStorage.removeItem ('userEmail');
 
             const data = await response.json(); // Processa a resposta da API
@@ -16,8 +17,10 @@ export const handleExit = async (setApiMessage) => {
             window.location.href = data.redirectUrl;  // redireciona o usuário deslogado
         } else {
             setApiMessage('Erro ao sair da conta'); // define o texto da div api-message 
+            triggerApiMessageShake(); // ativação da animação de erro
         }
     } catch (error) {
         setApiMessage('Erro ao sair da conta'); // define o texto da div api-message 
+        triggerApiMessageShake(); // ativação da animação de erro
     }
 };

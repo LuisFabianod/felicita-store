@@ -23,14 +23,14 @@ export const handleSubmit = async (e, nomeRef, emailRef, setApiMessage, triggerA
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {
-            setApiMessage(data.message);
+            setApiMessage(data.message); // define o texto da div api-message 
             
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
-          triggerApiMessageShake();
+          triggerApiMessageShake(); // ativação da animação de erro
         }
       
     }else{
-      triggerErrorMessageShake();
+      triggerErrorMessageShake(); // ativação da animação de erro
     }
   }

@@ -8,22 +8,20 @@ export const FormLogin = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  // Estado para feedback da API (sucesso ou erro)
-  const [apiMessage, setApiMessage] = useState('');
+  const [apiMessage, setApiMessage] = useState('');   // Estado para feedback da API (sucesso ou erro)
 
-   // Estado para checkBox rememberSession
-   const [rememberSession, setRememberSession ] = useState(false);
+  const [rememberSession, setRememberSession ] = useState(false); // Estado para checkBox rememberSession
 
-  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false);
+  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // Estado para animação de erro mensagem dos inputs
 
-  const [isApiMessageShaking, setIsApiMessageShaking] = useState(false);
+  const [isApiMessageShaking, setIsApiMessageShaking] = useState(false); // Estado para animação de erro da div api-message
 
-  const triggerErrorMessageShake = () => {
+  const triggerErrorMessageShake = () => { // ativa a animação de erro nos inputs 
     setIsErrorMessageShaking(true);
     setTimeout(() => setIsErrorMessageShaking(false), 1000); // Duração da animação
   };
 
-  const triggerApiMessageShake = () => {
+  const triggerApiMessageShake = () => { // ativa a animação de erro na div api-message 
     setIsApiMessageShaking(true);
     setTimeout(() => setIsApiMessageShaking(false), 1000); // Duração da animação
   };  

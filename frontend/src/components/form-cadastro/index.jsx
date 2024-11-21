@@ -12,19 +12,18 @@ export const FormCadastro = () => {
   const passwordRef = useRef(null);
   const password2Ref = useRef(null);
 
-  // Estado para feedback da API (sucesso ou erro)
-  const [apiMessage, setApiMessage] = useState('');
+  const [apiMessage, setApiMessage] = useState(''); // Estado para feedback da API (sucesso ou erro)
 
-  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false);
+  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // Estado para animação de erro mensagem dos inputs
 
-  const [isApiMessageShaking, setApiMessageIsShaking] = useState(false);
+  const [isApiMessageShaking, setApiMessageIsShaking] = useState(false); // Estado para animação de erro mensagem da API
 
-  const triggerErrorMessageShake = () => {
+  const triggerErrorMessageShake = () => { // ativa a animação de erro nos inputs 
     setIsErrorMessageShaking(true);
     setTimeout(() => setIsErrorMessageShaking(false), 1000); // Duração da animação
   };
 
-  const triggerApiMessageShake = () => {
+  const triggerApiMessageShake = () => { // ativa a animação de erro na div api-message
     setApiMessageIsShaking(true);
     setTimeout(() => setApiMessageIsShaking(false), 1000); // Duração da animação
   };
@@ -32,7 +31,7 @@ export const FormCadastro = () => {
  return (
     <div className='form-cadastro'>
       <form  className='form' onSubmit={(e) => handleSubmit(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
-      {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
+      {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>} 
         <h1>Faça seu cadastro</h1>
         <div className='nome-sobrenome'>
           <div className='nome'>

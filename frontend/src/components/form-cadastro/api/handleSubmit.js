@@ -37,13 +37,13 @@ export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordR
           
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
-          triggerApiMessageShake();
+          triggerApiMessageShake(); // ativação da animação de erro
         }
       } catch (error) {
         setApiMessage('Erro ao enviar dados. Verifique sua conexão.'); // define o texto da div api-message 
-        triggerApiMessageShake();
+        triggerApiMessageShake(); // ativação da animação de erro
       }
     }else{
-      triggerErrorMessageShake();
+      triggerErrorMessageShake(); // ativação da animação de erro
     }
   }

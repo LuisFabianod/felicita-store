@@ -11,6 +11,7 @@ router.post('/login-user', accountController.userLogin)
 // cria uma rota de post que controla o logout do usuário
 router.post('/logout', accountController.userLogout)
 
+// rota de put que controla a edição dos dados do usuário
 router.put('/update', accountController.userUpdate)
 
 module.exports = router; // exporta as rotas do arquivo

@@ -8,6 +8,11 @@ export const Sidebar = ({display, setDisplay}) => {
 
     const [apiMessage, setApiMessage] = useState(''); // Estado para mensagem da API (sucesso ou erro)
 
+    const triggerApiMessageShake = () => { // ativa a animação de erro na div api-message 
+    setIsApiMessageShaking(true);
+    setTimeout(() => setIsApiMessageShaking(false), 1000); // Duração da animação
+    };  
+
     const handleMenu = () => {
         setDisplay('none'); // muda o display da sideBar para none quando o closeIcon é clicado
     }
@@ -26,7 +31,7 @@ export const Sidebar = ({display, setDisplay}) => {
             
             <footer className='dialog-footer'>
             {apiMessage && <div className="api-message">{apiMessage}</div>}
-                <button className='exit-account' onClick={() => handleExit(setApiMessage)}>
+                <button className='exit-account' onClick={() => handleExit(setApiMessage, triggerApiMessageShake)}>
                     SAIR
                 </button>
             </footer>

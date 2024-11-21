@@ -15,12 +15,12 @@ export const AccountSettings = () => {
 
   const [isApiMessageShaking, setApiMessageIsShaking] = useState(false);
 
-  const triggerErrorMessageShake = () => {
+  const triggerErrorMessageShake = () => { // ativa a animação de erro nos inputs 
     setIsErrorMessageShaking(true);
     setTimeout(() => setIsErrorMessageShaking(false), 1000); // Duração da animação
   };
 
-  const triggerApiMessageShake = () => {
+  const triggerApiMessageShake = () => { // ativa a animação de erro na div api-message
     setApiMessageIsShaking(true);
     setTimeout(() => setApiMessageIsShaking(false), 1000); // Duração da animação
   };
