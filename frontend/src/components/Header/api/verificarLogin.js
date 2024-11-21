@@ -17,6 +17,7 @@ export const verifySession = async (setIsLoggedIn) => {
             console.error('Erro na verificação de login');
             localStorage.removeItem('userName'); // remove do localStorage pois o cookie pode ter acabado
             localStorage.removeItem('userEmail'); // remove do localStorage pois o cookie pode ter acabado
+            
         }
     } catch (error) {
         console.error('Erro na requisição:', error);

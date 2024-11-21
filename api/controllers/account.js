@@ -115,18 +115,54 @@ exports.userLogout = async (req, res) => {
 
 // PUT
 exports.userUpdate = async (req, res) => {
-  const { newName, newEmail, actualEmail } = req.body; // declaração dos valores enviados pelo form, e do email salvo no localStorage
+  const { newName, newEmail, newPassword, actualEmail, actualPassword} = req.body; // declaração dos valores enviados pelo form, e do email salvo no localStorage
 
   try {
-    if (!newName || !newEmail ) { // verifica se os valores foram enviados
-      return res.status(400).json({ message: 'O campo não pode ficar vazio' });
-    }
-
-    // Atualiza os dados do usuário
-    const updated = await User.update(
-      { nome: newName, email: newEmail }, // campos recebem valores atualizados
+    if(newName){
+      const updated = await User.update(
+      { nome: newName }, // campos recebem valores atualizados
       { where: { email: actualEmail } }  // condição para encontrar o usuário
     );
+     if (!updated) {
+      return res.status(404).json({ message: 'Usuário não encontrado.' }); // caso usuário não seja encontrado
+   }
+    return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); // caso seja atualizado com sucesso
+    
+  }
+
+  if(newEmail){
+      // procura o usuário pelo email salvo no localStorage
+      const user = await User.findOne({ where: { email: actualEmail } });
+
+      // se a senha enviada não for igual a senha da db, retorna bad request
+      if (!await checkEqualPasswords(actualPassword, user.senha)) {
+        return res.status(400).json({ message: 'Email ou senha inválidos' });
+      }
+    
+      const updated = await User.update(
+      { email: newEmail }, // campos recebem valores atualizados
+      { where: { email: actualEmail } }  // condição para encontrar o usuário
+    );
+     if (!updated) {
+      return res.status(404).json({ message: 'Usuário não encontrado.' }); // caso usuário não seja encontrado
+   }
+    return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); // caso seja atualizado com sucesso
+  }
+
+  if(newPassword){
+      const hashNewPassword = await hashPassword(newPassword);
+      const updated = await User.update(
+      { senha: hashNewPassword }, // campos recebem valores atualizados
+      { where: { email: actualEmail } }  // condição para encontrar o usuário
+    );
+     if (!updated) {
+      return res.status(404).json({ message: 'Usuário não encontrado.' }); // caso usuário não seja encontrado
+   }
+    return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); // caso seja atualizado com sucesso
+  }
+  
+
+    
 
     if (!updated) {
       return res.status(404).json({ message: 'Usuário não encontrado.' }); // caso usuário não seja encontrado

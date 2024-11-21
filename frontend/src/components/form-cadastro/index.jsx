@@ -16,7 +16,7 @@ export const FormCadastro = () => {
 
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // Estado para animação de erro mensagem dos inputs
 
-  const [isApiMessageShaking, setApiMessageIsShaking] = useState(false); // Estado para animação de erro mensagem da API
+  const [isApiMessageShaking, setIsApiMessageShaking] = useState(false); // Estado para animação de erro mensagem da API
 
   const triggerErrorMessageShake = () => { // ativa a animação de erro nos inputs 
     setIsErrorMessageShaking(true);
@@ -24,8 +24,8 @@ export const FormCadastro = () => {
   };
 
   const triggerApiMessageShake = () => { // ativa a animação de erro na div api-message
-    setApiMessageIsShaking(true);
-    setTimeout(() => setApiMessageIsShaking(false), 1000); // Duração da animação
+    setIsApiMessageShaking(true);
+    setTimeout(() => setIsApiMessageShaking(false), 1000); // Duração da animação
   };
 
  return (

@@ -1,4 +1,4 @@
-
+import validator from "validator";
 const SHOW_ERROR_MESSAGE = 'show-error-message' // SPAN CLASSNAME
 
 // REMOVE A CLASSE show-error-message NO COMEÇO DO SCRIPT
@@ -10,6 +10,23 @@ export const removeErrorClass = (...inputs) => {
         field.classList.remove(SHOW_ERROR_MESSAGE); // portanto ela é removida da div pai do campo também
     })
 };
+
+// CHECA SE O EMAIL É VÁLIDO COM O VALIDATOR
+export const checkEmail = (email) => {
+    // usa a biblioteca validator para verificar se a estrutura do email é válida
+    if(!validator.isEmail(email.current.value)){
+        email.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(email, 'Email inválido.'); // se não for válida, adiciona mensagem e classe de erro
+    }
+}
+
+// CHECA SE AS SENHAS SÃO IGUAIS
+export const checkEqualPasswords = (password, password2) => {
+    if(password.current.value !== password2.current.value){ // checa se os valores dos campos senha e repetir senha são iguais
+        password2.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(password2, 'As senhas devem ser iguais.'); // caso não sejam, adiciona mensagem e classe de erro
+    }
+}
 
 // ITERA SOBRE OS CAMPOS E CHECA QUAIS SÃO VAZIOS
  export const checkForEmpty = (...inputs) => {
@@ -31,13 +48,14 @@ const showErrorMessage = (input, msg) => {
 }
 
 // itera sobre os campos, se em algum deles existir a classe show-error-message, a função impede o envio do formulário
-export const shouldSubmit = (nomeRef) => {
+export const shouldSubmit = (newPasswordRef, newPassword2Ref) => {
 
-    const inputs = [nomeRef]; // declaração do array de inputs, para o forEach seja possível
+    const inputs = [newPasswordRef, newPassword2Ref]; // declaração do array de inputs, para o forEach seja possível
 
-    removeErrorClass(nomeRef); // antes das validações, as classes de erro são removidas
+    removeErrorClass(newPasswordRef, newPassword2Ref); // antes das validações, as classes de erro são removidas
 
-    checkForEmpty(nomeRef); // checa se existe algum campo vazio
+    checkEqualPasswords(newPasswordRef, newPassword2Ref); // checa se os campos senha e repetir senha tem valores iguais
+    checkForEmpty(newPasswordRef , newPassword2Ref)
 
     let submit = true; // variável que retornará um boolean que dirá se o form será enviado ou não
     inputs.forEach(input => { // itera sobre os inputs

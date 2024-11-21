@@ -1,7 +1,7 @@
 import './styles.css'
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-import { verifySession } from './utils/verificarLogin';
+import { verifySession } from './api/verificarLogin';
 
 import { SearchBar } from './sub-components/SearchBar';
 import { Sidebar } from '../Sidebar';
@@ -37,7 +37,7 @@ export const Header = () => {
                 <img src="" alt="logo-felicita" />
                 </div>
                 <SearchBar/>
-                <div>{userEmail? userEmail : 'Olá Cliente!'}</div>
+                <div>{isLoggedIn? userEmail : 'Olá Cliente!'}</div>
             </nav>
         </header>
         </>

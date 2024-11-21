@@ -3,11 +3,16 @@ import React, { useRef, useState} from 'react'
 import { handleSubmit } from './api/handleSubmit'
 import { usePutInputValuesEffect } from './hooks/usePutInputValuesEffect'
 
+import { EmailUpdateForm } from './sub-components/EmailUpdateForm'
+import { PasswordUpdateForm } from './sub-components/PasswordUpdateForm'
+
 export const AccountSettings = () => {
 
    // DECLARAÇÃO DOS FIELDS(INPUTS) 
   const nomeRef = useRef(null);
-  const emailRef = useRef(null);
+
+  const [ emailUpdateFormDisplay, setEmailUpdateFormDisplay] = useState('none')
+  const [ passwordUpdateFormDisplay, setPasswordUpdateFormDisplay] = useState('none')
 
   const [apiMessage, setApiMessage] = useState('');
 
@@ -25,29 +30,32 @@ export const AccountSettings = () => {
     setTimeout(() => setApiMessageIsShaking(false), 1000); // Duração da animação
   };
  
-  usePutInputValuesEffect(nomeRef, emailRef);   
+  usePutInputValuesEffect(nomeRef);   
 
  return (
     <>
     <div className='form-update'>
-      <form  className='form' onSubmit={(e) => handleSubmit(e, nomeRef , emailRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
+    
+      <form  className='form' onSubmit={(e) => handleSubmit(e, nomeRef , setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
       {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
         <h1>Meus Dados</h1>
+        <div>
+        <button type='button' onClick={() => setEmailUpdateFormDisplay('flex')}>Alterar e-mail</button> <button type='button' onClick={() => setPasswordUpdateFormDisplay('flex')}>Alterar senha</button>
+        </div>
         <div className='update-nome'>
           <div className='nome'>
             <input type='text' placeholder='*Nome completo' name='nome' id='nome' ref={nomeRef}></input>
             <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
         </div>
-        <div className='update-email'>
-          <input type="email" placeholder='*Email' name='email' id='email' ref={emailRef}></input>
-          <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
-        </div>
 
-        <button type='submit'>Salvar alterações</button>
+        <button onSubmit={handleSubmit}>Salvar alterações</button>
+
       </form>
 
     </div>
+    <EmailUpdateForm emailUpdateFormDisplay={emailUpdateFormDisplay} setEmailUpdateFormDisplay={setEmailUpdateFormDisplay}/>
+    <PasswordUpdateForm passwordUpdateFormDisplay={passwordUpdateFormDisplay} setPasswordUpdateFormDisplay={setPasswordUpdateFormDisplay}/>
     </>
   )
 }

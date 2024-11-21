@@ -1,0 +1,19 @@
+.update-password{
+    width: 100%;
+}
+
+.secure-update-form{
+    margin: auto;
+}
+
+.div-close-icon{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.close-form-icon{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}

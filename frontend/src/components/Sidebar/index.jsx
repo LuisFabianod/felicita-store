@@ -8,6 +8,8 @@ export const Sidebar = ({display, setDisplay}) => {
 
     const [apiMessage, setApiMessage] = useState(''); // Estado para mensagem da API (sucesso ou erro)
 
+    const [isApiMessageShaking, setIsApiMessageShaking] = useState(false); // Estado para animação de erro mensagem da API
+
     const triggerApiMessageShake = () => { // ativa a animação de erro na div api-message 
     setIsApiMessageShaking(true);
     setTimeout(() => setIsApiMessageShaking(false), 1000); // Duração da animação
@@ -18,7 +20,7 @@ export const Sidebar = ({display, setDisplay}) => {
     }
 
     return (
-        <dialog style={{display}}> 
+        <dialog style={{display}} className='sidebar'> 
             
             <header className='dialog-header'>
                 <p>Olá, {localStorage.getItem('userName')}</p>
@@ -30,7 +32,7 @@ export const Sidebar = ({display, setDisplay}) => {
             </section>
             
             <footer className='dialog-footer'>
-            {apiMessage && <div className="api-message">{apiMessage}</div>}
+            {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`}>{apiMessage}</div>}
                 <button className='exit-account' onClick={() => handleExit(setApiMessage, triggerApiMessageShake)}>
                     SAIR
                 </button>
