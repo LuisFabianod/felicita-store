@@ -23,7 +23,7 @@ export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageS
 
         if (response.ok) {
             setApiMessage(data.message); // define o texto da div api-message 
-            
+            localStorage.setItem('userName', nomeRef.current.value)
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
           triggerApiMessageShake(); // ativação da animação de erro

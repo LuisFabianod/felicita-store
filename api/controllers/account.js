@@ -2,7 +2,7 @@ const User = require('../models/User'); // declaração do model User
 const validator = require('validator'); // declaração da biblioteca validator
 const bcrypt = require('bcrypt'); // declaração da biblioteca bcrypt (vai estar presente na criptorafia da senha)
 const jwt = require('jsonwebtoken'); // declaração da biblioteca jwt
-const { shouldSubmit } = require('../utils/validation'); // declaração da função que valida os dados enviados pelo form
+const { shouldSubmit, checkEmail, checkPassword } = require('../utils/validation'); // declaração da função que valida os dados enviados pelo form
 const { nameFormatation } = require('../utils/nameFormatation'); // declaração da função que formata o nome enviado pelo form
 
 // verifica se usuário com email enviado já existe na db
@@ -40,7 +40,9 @@ exports.userRegister = async (req, res) => {
     if (await verifyIfUsersAlreadyExists(email)) {
       return res.status(400).json({ message: 'Esse e-mail já está cadastrado!' }); // caso o email já esteja registrado na db, retorna um erro
     }
+ 
     const validation = shouldSubmit(nome, sobrenome, email, password, password2); // declara a chamada da função que valida os valores
+    
     if (!validation.isValid) {
       return res.status(400).json({ message: validation.errors }); // se no retorno da função for {isValid: false}, a resposta será os erros que foram cometidos
     }
@@ -119,18 +121,21 @@ exports.userUpdate = async (req, res) => {
 
   try {
     if(newName){
+      const newFormattedName = nameFormatation(newName);
       const updated = await User.update(
-      { nome: newName }, // campos recebem valores atualizados
+      { nome: newFormattedName }, // campos recebem valores atualizados
       { where: { email: actualEmail } }  // condição para encontrar o usuário
     );
      if (!updated) {
       return res.status(404).json({ message: 'Usuário não encontrado.' }); // caso usuário não seja encontrado
    }
     return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); // caso seja atualizado com sucesso
-    
   }
 
   if(newEmail){
+      const errors = checkEmail(newEmail) 
+      if(errors.length >= 1) return res.status(400).json({ message: errors});
+
       // procura o usuário pelo email salvo no localStorage
       const user = await User.findOne({ where: { email: actualEmail } });
 
@@ -150,28 +155,41 @@ exports.userUpdate = async (req, res) => {
   }
 
   if(newPassword){
+    const errors = checkPassword(newPassword) 
+    if(errors.length >= 1) return res.status(400).json({ message: errors.join(' ')});
+
       const hashNewPassword = await hashPassword(newPassword);
       const updated = await User.update(
       { senha: hashNewPassword }, // campos recebem valores atualizados
       { where: { email: actualEmail } }  // condição para encontrar o usuário
     );
+
      if (!updated) {
       return res.status(404).json({ message: 'Usuário não encontrado.' }); // caso usuário não seja encontrado
    }
     return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); // caso seja atualizado com sucesso
   }
-  
-
-    
-
-    if (!updated) {
-      return res.status(404).json({ message: 'Usuário não encontrado.' }); // caso usuário não seja encontrado
-   }
-
-   return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); // caso seja atualizado com sucesso
 
   }catch(error){
     res.status(500).json({message: 'Erro ao atualizar dados do usuário'}); // caso dê algum erro na requisição
+  }
+
+}
+
+// DELETE
+exports.userDelete = async (req, res) => {
+  try{
+  const { userEmail } = req.body;
+  const deletedUser = await User.destroy({ where: {email: userEmail}});
+
+  if(!deletedUser) res.status(400).json({message: 'Usuário não encontrado'}); // caso dê algum erro na requisição
+
+  return res.status(200).json({ 
+    message: 'Usuário excluído com sucesso.', 
+    redirectUrl: 'http://localhost:3000/', 
+    cookieName: 'felicitaToken', // nome do cookie que vai ser retirado }); // caso seja atualizado com sucesso
+  })}catch(error){
+    res.status(500).json({message: 'Erro ao excluir usuário'}); // caso dê algum erro na requisição
   }
 
 }

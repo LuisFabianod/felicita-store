@@ -72,7 +72,7 @@ const checkIfNameIsString = (name, surname) => {
 };
 
 // Função para executar todas as validações e verificar se deve submeter o formulário
-exports.shouldSubmit = (name, surname, email, password, password2) => {
+const shouldSubmit = (name, surname, email, password, password2) => {
     const errors = [ // declaração dos arrays retornados por todas as validações
         ...checkForEmpty(name, surname, email, password, password2),
         ...checkEmail(email),
@@ -84,3 +84,5 @@ exports.shouldSubmit = (name, surname, email, password, password2) => {
     
     return { isValid: !errors.length, errors }; // retorna um objeto com a propriedade isValid, que informa se os dados são válidos e o array de errors
 };
+
+module.exports = { shouldSubmit, checkEmail, checkPassword}

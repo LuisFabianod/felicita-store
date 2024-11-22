@@ -24,6 +24,7 @@ export const handleSubmit = async (e, emailRef, email2Ref, passwordRef,setApiMes
 
         if (response.ok) {
             setApiMessage(data.message); // define o texto da div api-message 
+            localStorage.setItem('userEmail', emailRef.current.value);
             
         } else {
           setApiMessage(data.message); // define o texto da div api-message 

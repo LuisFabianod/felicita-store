@@ -20,7 +20,7 @@ export const handleExit = async (setApiMessage, triggerApiMessageShake) => {
             triggerApiMessageShake(); // ativação da animação de erro
         }
     } catch (error) {
-        setApiMessage('Erro ao sair da conta'); // define o texto da div api-message 
+        setApiMessage('Erro no servidor'); // define o texto da div api-message 
         triggerApiMessageShake(); // ativação da animação de erro
     }
 };

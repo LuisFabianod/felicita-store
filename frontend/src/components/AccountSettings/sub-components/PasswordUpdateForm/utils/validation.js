@@ -20,6 +20,34 @@ export const checkEmail = (email) => {
     }
 }
 
+export const checkPassword = (password) => {
+    const passwordValue = password.current.value; // declaração do valor do campo
+
+    const hasLowerCase = /[a-z]/.test(passwordValue); // teste regex para saber se a senha tem letras minúsculas
+    const hasUpperCase = /[A-Z]/.test(passwordValue); // teste regex para saber se a senha tem letras maiúsculas
+    const hasNumber = /\d/.test(passwordValue); // teste regex para saber se a senha tem números
+    const hasMinDigits = passwordValue.length >= 8; // teste para saber se a senha tem 8 dígitos
+
+    // caso algum dos testes regex retorne falso, adiciona mensagem e classe de erro
+    if(!hasMinDigits){
+        password.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(password, 'A senha deve ter no mínimo 8 dígitos');
+    } 
+    if(!hasNumber){
+        password.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(password, 'A senha deve ter no mínimo 1 número');
+    } 
+    if(!hasUpperCase){
+        password.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(password, 'A senha deve ter letra no mínimo 1 letra maiúscula');
+    } 
+    if(!hasLowerCase){
+        password.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(password, 'A senha deve ter letra no mínimo 1 letra minúscula');
+    } 
+    
+}
+
 // CHECA SE AS SENHAS SÃO IGUAIS
 export const checkEqualPasswords = (password, password2) => {
     if(password.current.value !== password2.current.value){ // checa se os valores dos campos senha e repetir senha são iguais
@@ -53,7 +81,7 @@ export const shouldSubmit = (newPasswordRef, newPassword2Ref) => {
     const inputs = [newPasswordRef, newPassword2Ref]; // declaração do array de inputs, para o forEach seja possível
 
     removeErrorClass(newPasswordRef, newPassword2Ref); // antes das validações, as classes de erro são removidas
-
+    checkPassword(newPasswordRef)
     checkEqualPasswords(newPasswordRef, newPassword2Ref); // checa se os campos senha e repetir senha tem valores iguais
     checkForEmpty(newPasswordRef , newPassword2Ref)
 

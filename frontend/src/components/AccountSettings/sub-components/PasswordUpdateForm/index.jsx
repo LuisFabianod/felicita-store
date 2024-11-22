@@ -53,7 +53,7 @@ export const PasswordUpdateForm = ({passwordUpdateFormDisplay, setPasswordUpdate
         <PasswordChecks passwordRef={newPasswordRef}/>
         <div className='update-password'>
           <div className='password-update-input'>
-            <input type='password' placeholder='*Senha atual' name='actualPassword' id='actualPassword' ref={passwordRef}></input>
+            <input type='password' placeholder='*Senha atual' name='actualPassword' ref={passwordRef}></input>
             <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
         </div>

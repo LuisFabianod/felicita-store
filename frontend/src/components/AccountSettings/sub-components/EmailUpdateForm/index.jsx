@@ -51,7 +51,7 @@ export const EmailUpdateForm = ({emailUpdateFormDisplay, setEmailUpdateFormDispl
         </div>
         <div className='update-password'>
           <div className='password'>
-            <input type='password' placeholder='*Sua senha' name='password' id='password' ref={passwordRef}></input>
+            <input type='password' placeholder='*Sua senha' name='password' ref={passwordRef}></input>
             <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
         </div>

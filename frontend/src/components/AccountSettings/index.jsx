@@ -1,6 +1,7 @@
 import './styles.css'
 import React, { useRef, useState} from 'react'
 import { handleSubmit } from './api/handleSubmit'
+import { handleDelete } from './api/handleDelete'
 import { usePutInputValuesEffect } from './hooks/usePutInputValuesEffect'
 
 import { EmailUpdateForm } from './sub-components/EmailUpdateForm'
@@ -32,6 +33,15 @@ export const AccountSettings = () => {
  
   usePutInputValuesEffect(nomeRef);   
 
+  const confirmDelete = () => {
+   const userWantsToDelete = window.confirm('Tem certeza que quer excluir sua conta?');
+   
+   if(!userWantsToDelete) return
+
+   handleDelete(setApiMessage, triggerApiMessageShake);
+
+  }
+
  return (
     <>
     <div className='form-update'>
@@ -50,6 +60,7 @@ export const AccountSettings = () => {
         </div>
 
         <button onSubmit={handleSubmit}>Salvar alterações</button>
+        <button type='button' onClick={confirmDelete}>Excluir minha conta</button>
 
       </form>
 

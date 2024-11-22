@@ -1,0 +1,28 @@
+
+// Função para tratar o envio do formulário
+export const handleDelete = async ( setApiMessage, triggerApiMessageShake) => {
+        const userEmail = localStorage.getItem('userEmail')
+
+        const response = await fetch('http://localhost:5000/account/delete', { // acessa a rota de login da api, com os dados do form
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({userEmail}) 
+        });
+
+        const data = await response.json(); // Processa a resposta da API
+
+        if (response.ok) {
+            setApiMessage(data.message); // define o texto da div api-message 
+            localStorage.clear();
+            document.cookie = data.cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";  // define a data de expiração para o passado, como método de excluir o cookie
+            window.location.href = data.redirectUrl; 
+            
+            
+        } else {
+          setApiMessage(data.message); // define o texto da div api-message 
+          triggerApiMessageShake(); // ativação da animação de erro
+    }
+    }
+  
