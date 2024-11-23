@@ -14,6 +14,7 @@ router.post('/logout', accountController.userLogout)
 // rota de put que controla a edição dos dados do usuário
 router.put('/update', accountController.userUpdate)
 
+// rota de delete que controla a exclusão do usuário
 router.delete('/delete', accountController.userDelete)
 
 module.exports = router; // exporta as rotas do arquivo

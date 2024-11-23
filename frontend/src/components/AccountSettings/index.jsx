@@ -12,14 +12,14 @@ export const AccountSettings = () => {
    // DECLARAÇÃO DOS FIELDS(INPUTS) 
   const nomeRef = useRef(null);
 
-  const [ emailUpdateFormDisplay, setEmailUpdateFormDisplay] = useState('none')
-  const [ passwordUpdateFormDisplay, setPasswordUpdateFormDisplay] = useState('none')
+  const [ emailUpdateFormDisplay, setEmailUpdateFormDisplay] = useState('none') // estado para controle do dialog de update de email
+  const [ passwordUpdateFormDisplay, setPasswordUpdateFormDisplay] = useState('none') // estado para controle do dialog de update de senha
 
-  const [apiMessage, setApiMessage] = useState('');
+  const [apiMessage, setApiMessage] = useState(''); // estado para mensagem de feedback do servidor
 
-  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false);
+  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // estado para controle da animação de erro da span erro
 
-  const [isApiMessageShaking, setApiMessageIsShaking] = useState(false);
+  const [isApiMessageShaking, setApiMessageIsShaking] = useState(false); // estado para controle da animação de erro da api-message
 
   const triggerErrorMessageShake = () => { // ativa a animação de erro nos inputs 
     setIsErrorMessageShaking(true);
@@ -31,8 +31,9 @@ export const AccountSettings = () => {
     setTimeout(() => setApiMessageIsShaking(false), 1000); // Duração da animação
   };
  
-  usePutInputValuesEffect(nomeRef);   
+  usePutInputValuesEffect(nomeRef); // declaração do custom hook que insere os valores atuais do usuário nos inputs do updateForm
 
+  // janela que verifica se o usuário tem certeza que quer deletar a própria conta
   const confirmDelete = () => {
    const userWantsToDelete = window.confirm('Tem certeza que quer excluir sua conta?');
    

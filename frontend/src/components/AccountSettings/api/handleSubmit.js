@@ -3,14 +3,14 @@ import { shouldSubmit } from '../utils/validation';
 // Função para tratar o envio do formulário
 export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
-
+    try{
     // Validação do formulário
     if (shouldSubmit(nomeRef)) {
       const formData = { // objeto que será passado no body da requisição
         actualEmail: localStorage.getItem('userEmail'),
         newName: nomeRef.current.value // nome enviado pelo form
       };
-
+      
         const response = await fetch('http://localhost:5000/account/update', { // acessa a rota de login da api, com os dados do form
           method: 'PUT',
           headers: {
@@ -28,8 +28,13 @@ export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageS
           setApiMessage(data.message); // define o texto da div api-message 
           triggerApiMessageShake(); // ativação da animação de erro
         }
+      }else{
+          triggerErrorMessageShake(); // ativação da animação de erro
+        
+        }
+      }catch(error){
+        res.status(500).json({message: 'Erro no servidor'}) // define o texto da div api-message 
+      }
+      }
       
-    }else{
-      triggerErrorMessageShake(); // ativação da animação de erro
-    }
-  }
+  

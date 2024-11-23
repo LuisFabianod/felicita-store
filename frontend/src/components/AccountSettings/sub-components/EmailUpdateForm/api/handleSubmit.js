@@ -3,7 +3,7 @@ import { shouldSubmit } from '../utils/validation';
 // Função para tratar o envio do formulário
 export const handleSubmit = async (e, emailRef, email2Ref, passwordRef,setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
-
+    try{
     // Validação do formulário
     if (shouldSubmit(emailRef, email2Ref)) {
       const formData = { // objeto que será passado no body da requisição
@@ -33,4 +33,7 @@ export const handleSubmit = async (e, emailRef, email2Ref, passwordRef,setApiMes
     }else{
       triggerErrorMessageShake(); // ativação da animação de erro
     }
+  }catch(error){
+      setApiMessage('Erro no servidor') // define o texto da div api-message 
+  }
   }

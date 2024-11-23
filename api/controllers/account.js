@@ -118,7 +118,9 @@ exports.userLogout = async (req, res) => {
 // PUT
 exports.userUpdate = async (req, res) => {
   const { newName, newEmail, newPassword, actualEmail, actualPassword} = req.body; // declaração dos valores enviados pelo form, e do email salvo no localStorage
-
+  // Existem 3 tipos de updates: dados simples, e-mail e senha. Eles são separados por if's nessa parte do código
+  
+  // Se chegar newName no req.body, se trata de update de dados simples
   try {
     if(newName){
       const newFormattedName = nameFormatation(newName);
@@ -132,9 +134,10 @@ exports.userUpdate = async (req, res) => {
     return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); // caso seja atualizado com sucesso
   }
 
+  // Se chegar newEmail no req.body, se trata de update de email
   if(newEmail){
-      const errors = checkEmail(newEmail) 
-      if(errors.length >= 1) return res.status(400).json({ message: errors});
+      const errors = checkEmail(newEmail) // a constante errors retorna true se o erro existir
+      if(errors.length >= 1) return res.status(400).json({ message: errors}); // exibição dos erros na tela
 
       // procura o usuário pelo email salvo no localStorage
       const user = await User.findOne({ where: { email: actualEmail } });
@@ -154,11 +157,12 @@ exports.userUpdate = async (req, res) => {
     return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); // caso seja atualizado com sucesso
   }
 
+  // Se chegar newPassword no req.body, se trata de update de senha
   if(newPassword){
-    const errors = checkPassword(newPassword) 
-    if(errors.length >= 1) return res.status(400).json({ message: errors.join(' ')});
+    const errors = checkPassword(newPassword)  // a constante errors retorna true se o erro existir
+    if(errors.length >= 1) return res.status(400).json({ message: errors.join(' ')}); // exibição dos erros na tela
 
-      const hashNewPassword = await hashPassword(newPassword);
+      const hashNewPassword = await hashPassword(newPassword); // faz a criptografia da nova senha
       const updated = await User.update(
       { senha: hashNewPassword }, // campos recebem valores atualizados
       { where: { email: actualEmail } }  // condição para encontrar o usuário
@@ -167,6 +171,7 @@ exports.userUpdate = async (req, res) => {
      if (!updated) {
       return res.status(404).json({ message: 'Usuário não encontrado.' }); // caso usuário não seja encontrado
    }
+
     return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); // caso seja atualizado com sucesso
   }
 
@@ -179,17 +184,16 @@ exports.userUpdate = async (req, res) => {
 // DELETE
 exports.userDelete = async (req, res) => {
   try{
-  const { userEmail } = req.body;
-  const deletedUser = await User.destroy({ where: {email: userEmail}});
+  const { userEmail } = req.body; // email atual do usuário
+  const deletedUser = await User.destroy({ where: {email: userEmail}}); // deleta o usuário, se ele não for encontrado, deletedUser terá um valor falsy
 
-  if(!deletedUser) res.status(400).json({message: 'Usuário não encontrado'}); // caso dê algum erro na requisição
+  if(!deletedUser) res.status(400).json({message: 'Usuário não encontrado'}); // caso usuário não seja encontrado
 
   return res.status(200).json({ 
-    message: 'Usuário excluído com sucesso.', 
-    redirectUrl: 'http://localhost:3000/', 
+    message: 'Usuário excluído com sucesso.',
+    redirectUrl: 'http://localhost:3000/', // redirecionar usuário para rota da home
     cookieName: 'felicitaToken', // nome do cookie que vai ser retirado }); // caso seja atualizado com sucesso
   })}catch(error){
     res.status(500).json({message: 'Erro ao excluir usuário'}); // caso dê algum erro na requisição
   }
-
 }
