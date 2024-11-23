@@ -60,6 +60,13 @@ export const checkPassword = (password) => {
     
 }
 
+export const checkNameLenght = (name) => {
+    if(name.current.value.length > 120){
+        name.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(name, 'O número máximo de caractéres é 120');
+    }
+}
+
 // CHECA SE AS SENHAS SÃO IGUAIS
 export const checkEqualPasswords = (password, password2) => {
     if(password.current.value !== password2.current.value){ // checa se os valores dos campos senha e repetir senha são iguais
@@ -108,6 +115,8 @@ export const shouldSubmit = (nomeRef, sobrenomeRef, emailRef, passwordRef, passw
     checkEmail(emailRef); // checa se email é válido
     checkEqualPasswords(passwordRef, password2Ref); // checa se os campos senha e repetir senha tem valores iguais
     checkPassword(passwordRef); // checa se a senha segue as restrições de segurança
+    checkNameLenght(nomeRef);
+    checkNameLenght(sobrenomeRef);
     checkIfNameIsString(nomeRef, sobrenomeRef); // checa se  o nome tem apenas valores permitidos
     checkForEmpty(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref); // checa se existe algum campo vazio
 

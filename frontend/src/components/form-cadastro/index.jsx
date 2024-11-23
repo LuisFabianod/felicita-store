@@ -35,11 +35,11 @@ export const FormCadastro = () => {
         <h1>Faça seu cadastro</h1>
         <div className='nome-sobrenome'>
           <div className='nome'>
-            <input type='text' placeholder='*Nome' name='nome' id='nome' ref={nomeRef}></input>
+            <input type='text' placeholder='*Nome' name='nome' id='nome' ref={nomeRef} maxLength={120}></input>
             <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
           <div className='sobrenome'>
-            <input type='text' placeholder='*Sobrenome' name='sobrenome' id='sobrenome' ref={sobrenomeRef}></input>
+            <input type='text' placeholder='*Sobrenome' name='sobrenome' id='sobrenome' ref={sobrenomeRef} maxLength={120}></input>
             <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
         </div>

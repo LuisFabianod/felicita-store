@@ -22,6 +22,13 @@ export const removeErrorClass = (...inputs) => {
     });
 };
 
+export const checkNameLenght = (name) => {
+    if(name.current.value.length > 240){
+        name.current.classList.add(SHOW_ERROR_MESSAGE);
+        showErrorMessage(name, 'O número máximo de caractéres é 240');
+    }
+}
+
 // ADICIONA O TEXTO PARA A SPAN DO CAMPO SOLICITADO
 const showErrorMessage = (input, msg) => {
     const field = input.current.parentElement; // declaração da div pai do campo
@@ -36,7 +43,7 @@ export const shouldSubmit = (nomeRef) => {
     const inputs = [nomeRef]; // declaração do array de inputs, para o forEach seja possível
 
     removeErrorClass(nomeRef); // antes das validações, as classes de erro são removidas
-
+    checkNameLenght(nomeRef);
     checkForEmpty(nomeRef); // checa se existe algum campo vazio
 
     let submit = true; // variável que retornará um boolean que dirá se o form será enviado ou não

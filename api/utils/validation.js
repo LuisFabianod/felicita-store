@@ -45,6 +45,15 @@ const checkPassword = (password) => {
     return errors;
 };
 
+const checkNameLenght = (name) => {
+    const errors = [];
+    if(name.value.length > 120){
+        errors.push('O limite de caracteres é de 120')
+    }
+}
+
+
+
 // Checa se as senhas são iguais
 const checkEqualPasswords = (password, password2) => {
     const errors = [];
@@ -77,6 +86,8 @@ const shouldSubmit = (name, surname, email, password, password2) => {
         ...checkForEmpty(name, surname, email, password, password2),
         ...checkEmail(email),
         ...checkPassword(password),
+        ...checkNameLenght(name),
+        ...checkNameLenght(surname),
         ...checkEqualPasswords(password, password2),
         ...checkIfNameIsString(name, surname),
     ];
