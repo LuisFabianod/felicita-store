@@ -1,7 +1,8 @@
 import './styles.css'
-import React, { useRef, useState} from "react";
+import React, { useEffect, useRef, useState} from "react";
 import { handleSubmit } from './api/handleSubmit';
 import { PasswordChecks } from './sub-components/password-check';
+import { handleVerifyEmail } from './api/handleVerifyEmail';
 
 export const FormCadastro = () => {
 
@@ -11,12 +12,15 @@ export const FormCadastro = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const password2Ref = useRef(null);
+  const verificationCodeRef = useRef(null)
 
   const [apiMessage, setApiMessage] = useState(''); // Estado para feedback da API (sucesso ou erro)
 
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // Estado para animação de erro mensagem dos inputs
 
   const [isApiMessageShaking, setIsApiMessageShaking] = useState(false); // Estado para animação de erro mensagem da API
+
+  const [verifyEmailDisplay, setVerifyEmailDisplay] = useState(false)
 
   const triggerErrorMessageShake = () => { // ativa a animação de erro nos inputs 
     setIsErrorMessageShaking(true);
@@ -26,9 +30,16 @@ export const FormCadastro = () => {
   const triggerApiMessageShake = () => { // ativa a animação de erro na div api-message
     setIsApiMessageShaking(true);
     setTimeout(() => setIsApiMessageShaking(false), 1000); // Duração da animação
+  
   };
 
+  useEffect(() => {
+    if(Array.from(apiMessage)[0] === 'V')
+      setVerifyEmailDisplay(true)
+  }, [apiMessage])
+
  return (
+  
     <div className='form-cadastro'>
       <form  className='form' onSubmit={(e) => handleSubmit(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
       {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>} 
@@ -60,10 +71,23 @@ export const FormCadastro = () => {
         </div>
         <PasswordChecks passwordRef={passwordRef}/>
 
-        <button type='submit' >Cadastrar</button>
+       {verifyEmailDisplay && 
+      <div className='verify-email'>
+      <form className='form' >
+      <input type="text" name="verificationCode" id="verificationCode" ref={verificationCodeRef}/>
+      <button type='button' onClick={(e) => handleVerifyEmail(e, verificationCodeRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>Enviar</button>
+      </form>
+      </div>
+       }
+        
+        
+
+        <button type='submit'>Cadastrar</button>
 
       </form>
 
     </div>
+
+  
   )
 }

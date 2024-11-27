@@ -1,4 +1,5 @@
 const express = require('express'); // declaração do express
+const session = require('express-session');
 const cors = require('cors'); // inicialização da biblioteca cors
 const cookieParser = require('cookie-parser'); // declaração da biblioteca cookie-parser 
 
@@ -15,6 +16,15 @@ const corsOptions = {
     credentials: true, // possibilta os cookies ?
   };
 
+  const sessionOptions = {
+    secret: 'segredo', // Chave para criptografar a sessão
+    resave: false, // Não salva sessões não modificadas
+    saveUninitialized: true, // Força a criação de sessões, mesmo sem dados
+    cookie: { secure: false, maxAge: 3600000 } // cookie com expiração de 1 hora
+};
+
+
+app.use(session(sessionOptions));
 app.use(cors(corsOptions)); // habilita o uso de cors com as configs declaradas
 app.use(cookieParser()); // habilita o uso de cookie-parser
 

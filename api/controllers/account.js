@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken'); // declaração da biblioteca jwt
 const { shouldSubmit, checkEmail, checkPassword } = require('../utils/validation'); // declaração da função que valida os dados enviados pelo form
 const { nameFormatation } = require('../utils/nameFormatation'); // declaração da função que formata o nome enviado pelo form
 
+const sendEmail  = require('../utils/sendEmail');
+
 // verifica se usuário com email enviado já existe na db
 const verifyIfUsersAlreadyExists = async (email) => {
   try {
@@ -34,9 +36,12 @@ const hashPassword = async (password) => {
 
 
 // POST 
-exports.userRegister = async (req, res) => {
+exports.userRegister = async (req, res, next) => {
   const { nome, sobrenome, email, password, password2 } = req.body; // declaração dos valores enviados pelo formulário
-  try {
+  
+  const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+  
     if (await verifyIfUsersAlreadyExists(email)) {
       return res.status(400).json({ message: 'Esse e-mail já está cadastrado!' }); // caso o email já esteja registrado na db, retorna um erro
     }
@@ -48,17 +53,17 @@ exports.userRegister = async (req, res) => {
     }
 
     const hashedPassword = await hashPassword(password); // declaração da chamada da função que criptografa a senha
+    
+    req.session.nome = nome;
+    req.session.sobrenome = sobrenome;
+    req.session.email = email;
+    req.session.hashedPassword = hashedPassword; 
+    req.session.verificationCode = verificationCode;
 
-    await User.create({ nome: nameFormatation(nome) + ' ' + nameFormatation(sobrenome), email, senha: hashedPassword });  // declaração do método create (adiciona o usuário à db) com os campos enviados pelo form
+    await sendEmail(email, verificationCode);  
 
-    res.json({ message: 'Usuário cadastrado com sucesso!' }); // responde com sucesso
-
-  } catch (erro) {
-    res.status(500).json({ message: 'Erro ao cadastrar usuário.' }); // caso algo dê errado, responde com erro
-  }
-
-}
-
+    return res.status(200).json({ message: `Você está a um passo de criar sua conta! Enviamos um código para ${email}`});
+  } 
 
 // POST 
 exports.userLogin = async (req, res) => {
@@ -196,4 +201,22 @@ exports.userDelete = async (req, res) => {
   })}catch(error){
     res.status(500).json({message: 'Erro ao excluir usuário'}); // caso dê algum erro na requisição
   }
+}
+
+exports.verifyEmail = async (req, res) => {
+  const { userVerificationCode } = req.body;
+
+  const nome = req.session.nome;
+  const sobrenome = req.session.sobrenome;
+  const email = req.session.email
+  const hashedPassword = req.session.hashedPassword
+  const storedCode = req.session.verificationCode 
+
+  if(storedCode === userVerificationCode){
+      await User.create({ nome: nameFormatation(nome) + ' ' + nameFormatation(sobrenome), email, senha: hashedPassword });  // declaração do método create (adiciona o usuário à db) com os campos enviados pelo form
+      res.status(200).json({ message: 'Você verificou sua conta e ela foi cadastrada!' }); // responde com sucesso
+  }else{
+      res.status(400).json({ message: 'O código está incorreto ou expirado' + storedCode }); // responde com bad request
+  }
+ 
 }

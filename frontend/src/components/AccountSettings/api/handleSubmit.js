@@ -33,7 +33,7 @@ export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageS
         
         }
       }catch(error){
-        res.status(500).json({message: 'Erro no servidor'}) // define o texto da div api-message 
+        setApiMessage('Erro no servidor'); // define o texto da div api-message 
       }
       }
       

@@ -1,26 +1,17 @@
-import { shouldSubmit } from '../utils/validation';
-import { nameFormatation } from '../utils/nameFormatation';
-
 // Função para tratar o envio do formulário
-export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
+export const handleVerifyEmail = async (e, verificationCodeRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
     // Validação do formulário
-    if (shouldSubmit(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref)) {
-      nomeRef.current.value = nameFormatation(nomeRef); // Formatar o nome
-      sobrenomeRef.current.value = nameFormatation(sobrenomeRef); // Formatar o sobrenome
+    
 
       // Coleta os dados do formulário
       const formData = {
-        nome: nomeRef.current.value,
-        sobrenome: sobrenomeRef.current.value,
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-        password2: password2Ref.current.value,
+        userVerificationCode: verificationCodeRef.current.value
       }
         
       try {
         // Envia os dados para a API
-        const response = await fetch('http://localhost:5000/account/register-user', {
+        const response = await fetch('http://localhost:5000/account/verify-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -40,11 +31,8 @@ export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordR
           triggerApiMessageShake(); // ativação da animação de erro
         }
       } catch (error) {
-        console.error(error)
         setApiMessage('Erro ao enviar dados. Verifique sua conexão.'); // define o texto da div api-message 
         triggerApiMessageShake(); // ativação da animação de erro
       }
-    }else{
-      triggerErrorMessageShake(); // ativação da animação de erro
-    }
+    
   }

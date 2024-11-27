@@ -47,9 +47,10 @@ const checkPassword = (password) => {
 
 const checkNameLenght = (name) => {
     const errors = [];
-    if(name.value.length > 120){
+    if(name.length > 120){
         errors.push('O limite de caracteres é de 120')
     }
+    return errors;
 }
 
 

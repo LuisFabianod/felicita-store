@@ -17,4 +17,7 @@ router.put('/update', accountController.userUpdate)
 // rota de delete que controla a exclusão do usuário
 router.delete('/delete', accountController.userDelete)
 
+router.post('/verify-email', accountController.verifyEmail)
+
+
 module.exports = router; // exporta as rotas do arquivo
