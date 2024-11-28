@@ -22,9 +22,8 @@ const corsOptions = {
     saveUninitialized: true, // Força a criação de sessões, mesmo sem dados
     cookie: { secure: false, maxAge: 3600000 } // cookie com expiração de 1 hora
 };
-
-
-app.use(session(sessionOptions));
+ 
+app.use(session(sessionOptions)); // habilita o uso de req.session que será útil na verificação de e-mail
 app.use(cors(corsOptions)); // habilita o uso de cors com as configs declaradas
 app.use(cookieParser()); // habilita o uso de cookie-parser
 

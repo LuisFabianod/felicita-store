@@ -96,6 +96,10 @@ input.show-error-message{
     display: none;
 }
 
+.verify-email{
+    gap: 10px;
+}
+
 @keyframes shake {
     0% {
         transform: translateX(0);
