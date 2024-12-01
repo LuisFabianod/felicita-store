@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken'); // declaração da biblioteca jwt
 const { shouldSubmit, checkEmail, checkPassword } = require('../utils/validation'); // declaração da função que valida os dados enviados pelo form
 const { nameFormatation } = require('../utils/nameFormatation'); // declaração da função que formata o nome enviado pelo form
 
-const sendEmail  = require('../utils/sen    await sendEmail(email, verificationCode); dEmail'); // declaração da função que envia e-mails para o usuário
+const sendEmail  = require('../utils/sendEmail'); // declaração da função que envia e-mails para o usuário
 
 // verifica se usuário com email enviado já existe na db
 const verifyIfUsersAlreadyExists = async (email) => {
