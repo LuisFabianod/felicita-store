@@ -4,12 +4,13 @@ import { nameFormatation } from '../utils/nameFormatation';
 // Função para tratar o envio do formulário
 export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
+    
     // Validação do formulário
     if (shouldSubmit(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref)) {
       nomeRef.current.value = nameFormatation(nomeRef); // Formatar o nome
       sobrenomeRef.current.value = nameFormatation(sobrenomeRef); // Formatar o sobrenome
 
-      // Coleta os dados do formulário
+      // Coleta os dados do formulário (Sem o código de verificação de e-mail)
       const formData = {
         nome: nomeRef.current.value,
         sobrenome: sobrenomeRef.current.value,

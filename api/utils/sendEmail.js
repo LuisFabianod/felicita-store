@@ -1,16 +1,15 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer'); // declaração da biblioteca nodemailer
 
 const sendEmail = (email,subject, text) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'luisfabianocarvalholeite@gmail.com', // Substitua pelo seu email
-            pass: 'okdzwsnvgzcuydgp'            // Substitua pela sua senha do email
+            user: 'luisfabianocarvalholeite@gmail.com', 
+            pass: 'okdzwsnvgzcuydgp'         
           }
-    
-        
     })
     
+    // configurações do envio do e-mail
     const mailOptions = {
         from: 'luisfabianocarvalholeite@gmail.com',
         to: email,
@@ -18,6 +17,7 @@ const sendEmail = (email,subject, text) => {
         text
     }
 
+    // envio do e-mail
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.log('Erro ao enviar o email:', error);
@@ -27,4 +27,4 @@ const sendEmail = (email,subject, text) => {
     });
 } 
 
-module.exports = sendEmail
+module.exports = sendEmail // export da função sendEmail que será usada no account controller

@@ -1,16 +1,14 @@
 // Função para tratar o envio do formulário
 export const handleVerifyEmail = async (e, verificationCodeRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
-    // Validação do formulário
     
-
-      // Coleta os dados do formulário
+      // Coleta o código de verificação de e-mail
       const formData = {
         userVerificationCode: verificationCodeRef.current.value
       }
         
       try {
-        // Envia os dados para a API
+        // Envia os dados para a API (código de verificação de e-mail)
         const response = await fetch('http://localhost:5000/account/verify-email', {
           method: 'POST',
           headers: {

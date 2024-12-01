@@ -20,7 +20,7 @@ export const FormCadastro = () => {
 
   const [isApiMessageShaking, setIsApiMessageShaking] = useState(false); // Estado para animação de erro mensagem da API
 
-  const [verifyEmailDisplay, setVerifyEmailDisplay] = useState(false)
+  const [verifyEmailDisplay, setVerifyEmailDisplay] = useState(false) // Estado para controlar a aparição do input verify-email
 
   const triggerErrorMessageShake = () => { // ativa a animação de erro nos inputs 
     setIsErrorMessageShaking(true);

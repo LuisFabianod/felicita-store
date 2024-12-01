@@ -17,6 +17,7 @@ router.put('/update', accountController.userUpdate)
 // rota de delete que controla a exclusão do usuário
 router.delete('/delete', accountController.userDelete)
 
+// rota de post que controla a verificação de e-mail do usuário e cadastro na db
 router.post('/verify-email', accountController.verifyEmail)
 
 router.post('/forgot-password', accountController.forgotPassword)

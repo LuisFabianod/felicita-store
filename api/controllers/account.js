@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken'); // declaração da biblioteca jwt
 const { shouldSubmit, checkEmail, checkPassword } = require('../utils/validation'); // declaração da função que valida os dados enviados pelo form
 const { nameFormatation } = require('../utils/nameFormatation'); // declaração da função que formata o nome enviado pelo form
 
-const sendEmail  = require('../utils/sendEmail');
+const sendEmail  = require('../utils/sen    await sendEmail(email, verificationCode); dEmail'); // declaração da função que envia e-mails para o usuário
 
 // verifica se usuário com email enviado já existe na db
 const verifyIfUsersAlreadyExists = async (email) => {
@@ -39,8 +39,7 @@ const hashPassword = async (password) => {
 exports.userRegister = async (req, res, next) => {
   const { nome, sobrenome, email, password, password2 } = req.body; // declaração dos valores enviados pelo formulário
   
-  const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-
+  const verificationCode = Math.floor(100000 + Math.random() * 900000).toString(); // criação de um código aleatório para verificação de e-mail
   
     if (await verifyIfUsersAlreadyExists(email)) {
       return res.status(400).json({ message: 'Esse e-mail já está cadastrado!' }); // caso o email já esteja registrado na db, retorna um erro
@@ -54,6 +53,7 @@ exports.userRegister = async (req, res, next) => {
 
     const hashedPassword = await hashPassword(password); // declaração da chamada da função que criptografa a senha
     
+    // Salva os dados enviados em uma sessão, para que não se percam na próxima requisição (que virá com código de verificação)
     req.session.nome = nome;
     req.session.sobrenome = sobrenome;
     req.session.email = email;
@@ -62,7 +62,7 @@ exports.userRegister = async (req, res, next) => {
 
     const subject = 'Esse é o seu código de verificação'
 
-    await sendEmail(email, subject ,verificationCode);  
+    await sendEmail(email, subject ,verificationCode); 
 
     return res.status(200).json({ message: `Você está a um passo de criar sua conta! Enviamos um código para ${email}`});
   } 
@@ -205,15 +205,19 @@ exports.userDelete = async (req, res) => {
   }
 }
 
+// POST 
 exports.verifyEmail = async (req, res) => {
-  const { userVerificationCode } = req.body;
+  const { userVerificationCode } = req.body; // declaração do código de verificação
 
+  // declaração dos valores guardados na sessão
   const nome = req.session.nome;
   const sobrenome = req.session.sobrenome;
   const email = req.session.email
   const hashedPassword = req.session.hashedPassword
   const storedCode = req.session.verificationCode 
 
+  // VERIFICA SE O CÓDIGO ENVIADO PELO USUÁRIO É O MESMO ENVIADO PELA ROTA userRegister)
+  // SE SIM, CADASTRA O USUÁRIO NA DB
   if(storedCode === userVerificationCode){
       await User.create({ nome: nameFormatation(nome) + ' ' + nameFormatation(sobrenome), email, senha: hashedPassword });  // declaração do método create (adiciona o usuário à db) com os campos enviados pelo form
       res.status(200).json({ message: 'Você verificou sua conta e ela foi cadastrada!' }); // responde com sucesso
