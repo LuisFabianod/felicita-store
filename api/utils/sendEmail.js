@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const sendEmail = (email, verificationCode) => {
+const sendEmail = (email,subject, text) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -14,8 +14,8 @@ const sendEmail = (email, verificationCode) => {
     const mailOptions = {
         from: 'luisfabianocarvalholeite@gmail.com',
         to: email,
-        subject: 'Esse é o seu código de verificação',
-        text: `${verificationCode}`
+        subject,
+        text
     }
 
     transporter.sendMail(mailOptions, (error, info) => {

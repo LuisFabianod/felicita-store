@@ -19,5 +19,7 @@ router.delete('/delete', accountController.userDelete)
 
 router.post('/verify-email', accountController.verifyEmail)
 
+router.post('/forgot-password', accountController.forgotPassword)
+
 
 module.exports = router; // exporta as rotas do arquivo

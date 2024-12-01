@@ -1,12 +1,15 @@
 import './styles.css'
 import React, { useRef, useState } from "react";
 import { handleSubmit } from './api/handleSubmit';
+import { ResetPassword } from './sub-component/ResetPassword';
 
 export const FormLogin = () => {
 
   // DECLARAÇÃO DOS FIELDS(INPUTS) 
-  const emailRef = useRef(null);
+  const emailRef = useRef(null);  
   const passwordRef = useRef(null);
+  
+  const [ resetPasswordDisplay, setResetPasswordDisplay] = useState('none') // estado para controle do dialog de update de email
 
   const [apiMessage, setApiMessage] = useState('');   // Estado para feedback da API (sucesso ou erro)
 
@@ -27,6 +30,7 @@ export const FormLogin = () => {
   };  
 
   return(
+    <>
       <div className='form-login'>
         <form className='form' onSubmit={(e) => handleSubmit(e, emailRef, passwordRef, setApiMessage, rememberSession, triggerApiMessageShake, triggerErrorMessageShake)}>
        {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
@@ -44,7 +48,10 @@ export const FormLogin = () => {
               <input type="checkbox" name="rememberSession" id="rememberSession" onClick={() => setRememberSession(!rememberSession)}/>
               <label htmlFor="rememberSession">Lembre de mim</label>
             </div>
+            <p className='forgot-my-password' onClick={() => setResetPasswordDisplay('flex')}>Esqueci minha senha</p>
         </form>
       </div>
-    )
+      <ResetPassword resetPasswordDisplay={resetPasswordDisplay} setResetPasswordDisplay={setResetPasswordDisplay}/>
+    </>  
+  )
 }

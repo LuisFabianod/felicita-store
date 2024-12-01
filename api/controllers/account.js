@@ -60,7 +60,9 @@ exports.userRegister = async (req, res, next) => {
     req.session.hashedPassword = hashedPassword; 
     req.session.verificationCode = verificationCode;
 
-    await sendEmail(email, verificationCode);  
+    const subject = 'Esse é o seu código de verificação'
+
+    await sendEmail(email, subject ,verificationCode);  
 
     return res.status(200).json({ message: `Você está a um passo de criar sua conta! Enviamos um código para ${email}`});
   } 
@@ -216,7 +218,24 @@ exports.verifyEmail = async (req, res) => {
       await User.create({ nome: nameFormatation(nome) + ' ' + nameFormatation(sobrenome), email, senha: hashedPassword });  // declaração do método create (adiciona o usuário à db) com os campos enviados pelo form
       res.status(200).json({ message: 'Você verificou sua conta e ela foi cadastrada!' }); // responde com sucesso
   }else{
-      res.status(400).json({ message: 'O código está incorreto ou expirado' + storedCode }); // responde com bad request
+      res.status(400).json({ message: 'O código está incorreto ou expirado' }); // responde com bad request
   }
  
 }
+
+exports.forgotPassword = async (req, res) => {
+  const { userEmail } = req.body;
+
+  const userExists = await verifyIfUsersAlreadyExists(userEmail);
+
+  if(!userExists){
+    return res.status(400).json({ message: 'Esse e-mail não está cadastrado'}); // responde com bad request
+  }
+
+  const subject = 'Redefinição de senha para sua conta FelicitaStore';
+
+  const text = "Foi requisitada uma mudança de senha para a sua conta FelicitaStore, Clique no link abaixo para redefinir a senha da sua conta, se não foi você que fez isso, ignore esse e-mail."
+
+  sendEmail(userEmail, subject, text);
+  res.status(200).json({ message: `Um e-mail foi enviado para ${userEmail}, confira sua caixa de entrada`}); // responde com bad request
+} 

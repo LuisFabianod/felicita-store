@@ -50,6 +50,11 @@ input{
     animation: shake 0.5s ease-in-out !important
 }
 
+.forgot-my-password{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 @keyframes shake {
     0% {
         transform: translateX(0);

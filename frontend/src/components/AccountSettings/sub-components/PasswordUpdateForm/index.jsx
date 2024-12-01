@@ -58,7 +58,7 @@ export const PasswordUpdateForm = ({passwordUpdateFormDisplay, setPasswordUpdate
           </div>
         </div>
 
-        <button onSubmit={handleSubmit}>Salvar alterações</button>
+        <button type='submit'>Salvar alterações</button>
 
       </form>
 
