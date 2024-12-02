@@ -230,16 +230,41 @@ exports.verifyEmail = async (req, res) => {
 exports.forgotPassword = async (req, res) => {
   const { userEmail } = req.body;
 
-  const userExists = await verifyIfUsersAlreadyExists(userEmail);
+  const user = await User.findOne({ where: { email: userEmail } });
 
-  if(!userExists){
+  if(!user){
     return res.status(400).json({ message: 'Esse e-mail não está cadastrado'}); // responde com bad request
   }
 
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
   const subject = 'Redefinição de senha para sua conta FelicitaStore';
 
-  const text = "Foi requisitada uma mudança de senha para a sua conta FelicitaStore, Clique no link abaixo para redefinir a senha da sua conta, se não foi você que fez isso, ignore esse e-mail."
+  const text = `Foi requisitada uma mudança de senha para a sua conta FelicitaStore, Clique no link abaixo para redefinir a senha da sua conta, se não foi você que fez isso, ignore esse e-mail.\n http://localhost:3000/auth/reset-password?token=${token}`
 
   sendEmail(userEmail, subject, text);
   res.status(200).json({ message: `Um e-mail foi enviado para ${userEmail}, confira sua caixa de entrada`}); // responde com bad request
 } 
+
+exports.resetPassword = async (req, res) => {
+  const {newPassword, token } = req.body;
+   try{
+     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  
+     const hashNewPassword = await hashPassword(newPassword);
+  
+     const [updated] = await User.update(
+      { senha: hashNewPassword }, // campos recebem valores atualizados
+      { where: { id: decoded.userId } }  // condição para encontrar o usuário
+    );
+
+    if (updated === 0) {
+     return res.status(400).json({ message: 'Erro ao atualizar usuário ou usuário não encontrado' });
+   }
+
+    return res.status(200).json({ message: `Senha atualizada!`}); // responde com sucesso
+   }catch(err){
+     console.error(err)
+   }
+
+}

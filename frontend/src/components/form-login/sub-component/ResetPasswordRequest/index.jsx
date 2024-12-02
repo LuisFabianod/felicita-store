@@ -3,7 +3,7 @@ import { handleSubmit } from './api/handleSubmit'
 
 import closeIcon from '../../../../images/x.png'
 
-export const ResetPassword = ({resetPasswordDisplay, setResetPasswordDisplay}) => {
+export const ResetPasswordRequest = ({resetPasswordDisplay, setResetPasswordDisplay}) => {
 
    // DECLARAÇÃO DOS FIELDS(INPUTS) 
   const emailRef = useRef(null);

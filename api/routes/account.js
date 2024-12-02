@@ -22,5 +22,7 @@ router.post('/verify-email', accountController.verifyEmail)
 
 router.post('/forgot-password', accountController.forgotPassword)
 
+router.post('/reset-password', accountController.resetPassword)
+
 
 module.exports = router; // exporta as rotas do arquivo

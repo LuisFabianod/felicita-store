@@ -1,7 +1,7 @@
 import './styles.css'
 import React, { useRef, useState } from "react";
 import { handleSubmit } from './api/handleSubmit';
-import { ResetPassword } from './sub-component/ResetPassword';
+import { ResetPasswordRequest } from './sub-component/ResetPasswordRequest';
 
 export const FormLogin = () => {
 
@@ -51,7 +51,7 @@ export const FormLogin = () => {
             <p className='forgot-my-password' onClick={() => setResetPasswordDisplay('flex')}>Esqueci minha senha</p>
         </form>
       </div>
-      <ResetPassword resetPasswordDisplay={resetPasswordDisplay} setResetPasswordDisplay={setResetPasswordDisplay}/>
+      <ResetPasswordRequest resetPasswordDisplay={resetPasswordDisplay} setResetPasswordDisplay={setResetPasswordDisplay}/>
     </>  
   )
 }
