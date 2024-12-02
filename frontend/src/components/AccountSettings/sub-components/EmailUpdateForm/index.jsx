@@ -11,12 +11,12 @@ export const EmailUpdateForm = ({emailUpdateFormDisplay, setEmailUpdateFormDispl
   const email2Ref = useRef(null);
   const passwordRef = useRef(null);
 
-  const [apiMessage, setApiMessage] = useState('');
+  const [apiMessage, setApiMessage] = useState(''); // estado para mensagem de feedback do servidor
 
-  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false);
+  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // estado para controle da animação de erro da span erro
 
-  const [isApiMessageShaking, setApiMessageIsShaking] = useState(false);
-
+  const [isApiMessageShaking, setApiMessageIsShaking] = useState(false); // estado para controle da animação de erro da api-message
+  
   const triggerErrorMessageShake = () => { // ativa a animação de erro nos inputs 
     setIsErrorMessageShaking(true);
     setTimeout(() => setIsErrorMessageShaking(false), 1000); // Duração da animação

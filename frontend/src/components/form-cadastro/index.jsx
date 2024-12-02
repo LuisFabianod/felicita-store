@@ -33,7 +33,7 @@ export const FormCadastro = () => {
   
   };
 
-  useEffect(() => {
+  useEffect(() => { // se a api responde à requisição de verificação de e-mail com sucesso, o input do código de verificação aparece
     if(Array.from(apiMessage)[0] === 'V')
       setVerifyEmailDisplay(true)
   }, [apiMessage])
