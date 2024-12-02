@@ -4,7 +4,7 @@ import { handleSubmit } from './api/handleSubmit';
 
 import { PasswordChecks } from '../form-cadastro/sub-components/password-check';
 
-const params = new URLSearchParams(window.location.search);
+const params = new URLSearchParams(window.location.search); // pegando o token do usuário na query param
 export const ResetPassword = () => {
 
   // DECLARAÇÃO DOS FIELDS(INPUTS) 
