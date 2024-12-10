@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState} from "react";
 import { handleSubmit } from './api/handleSubmit';
 import { PasswordChecks } from './sub-components/password-check';
 import { handleVerifyEmail } from './api/handleVerifyEmail';
+import showPasswordIcon from '../../images/open-eye.png'
+import hidePasswordIcon from '../../images/closed-eye.png'
 
 export const FormCadastro = () => {
 
@@ -14,6 +16,10 @@ export const FormCadastro = () => {
   const password2Ref = useRef(null);
   const verificationCodeRef = useRef(null)
 
+  const [passwordIcon, setPasswordIcon ] = useState(hidePasswordIcon)
+
+  const [showPassword, setShowPassword ] = useState('password')
+
   const [apiMessage, setApiMessage] = useState(''); // Estado para feedback da API (sucesso ou erro)
 
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // Estado para animação de erro mensagem dos inputs
@@ -21,6 +27,16 @@ export const FormCadastro = () => {
   const [isApiMessageShaking, setIsApiMessageShaking] = useState(false); // Estado para animação de erro mensagem da API
 
   const [verifyEmailDisplay, setVerifyEmailDisplay] = useState(false) // Estado para controlar a aparição do input verify-email
+
+  const handleShowPasswordClick = () => {
+    if(showPassword === 'password'){
+      setShowPassword('text')
+      setPasswordIcon(showPasswordIcon)
+    }else{
+      setShowPassword('password')
+      setPasswordIcon(hidePasswordIcon)
+    }
+  }
 
   const triggerErrorMessageShake = () => { // ativa a animação de erro nos inputs 
     setIsErrorMessageShaking(true);
@@ -59,16 +75,18 @@ export const FormCadastro = () => {
           <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
         </div>
 
-        <div className='senha'>
           <div className='password'>
-            <input type='password' placeholder='*Senha' name='password' id='password' ref={passwordRef}></input>
+            <div className='password-input'>
+              <input type={showPassword} placeholder='*Senha' name='password' id='password' ref={passwordRef}></input>
+              <img src={passwordIcon} alt="" onClick={handleShowPasswordClick} style={{width: '20px', height: '20px', cursor: 'pointer'}}/>
+            </div>
             <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
           <div className='password2'>
             <input type='password' placeholder='*Confirmar Senha' name='password2' id='password2' ref={password2Ref}></input>
             <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
-        </div>
+
         <PasswordChecks passwordRef={passwordRef}/>
 
        {verifyEmailDisplay && 

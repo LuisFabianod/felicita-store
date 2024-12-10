@@ -3,6 +3,8 @@ import React, { useRef, useState} from 'react'
 import { handleSubmit } from './api/handleSubmit'
 
 import closeIcon from '../../../../images/x.png'
+import showPasswordIcon from '../../../../images/open-eye.png'
+import hidePasswordIcon from '../../../../images/closed-eye.png'
 
 export const EmailUpdateForm = ({emailUpdateFormDisplay, setEmailUpdateFormDisplay}) => {
 
@@ -11,11 +13,25 @@ export const EmailUpdateForm = ({emailUpdateFormDisplay, setEmailUpdateFormDispl
   const email2Ref = useRef(null);
   const passwordRef = useRef(null);
 
+  const [passwordIcon, setPasswordIcon ] = useState(hidePasswordIcon)
+
+  const [showPassword, setShowPassword ] = useState('password')
+
   const [apiMessage, setApiMessage] = useState('');
 
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false);
 
   const [isApiMessageShaking, setApiMessageIsShaking] = useState(false);
+
+  const handleShowPasswordClick = () => {
+    if(showPassword === 'password'){
+      setShowPassword('text')
+      setPasswordIcon(showPasswordIcon)
+    }else{
+      setShowPassword('password')
+      setPasswordIcon(hidePasswordIcon)
+    }
+  }
 
   const triggerErrorMessageShake = () => { // ativa a animação de erro nos inputs 
     setIsErrorMessageShaking(true);
@@ -50,11 +66,12 @@ export const EmailUpdateForm = ({emailUpdateFormDisplay, setEmailUpdateFormDispl
           </div>
         </div>
         <div className='update-password'>
-          <div className='password'>
-            <input type='password' placeholder='*Sua senha' name='password' ref={passwordRef}></input>
+            <div className='password-input'>
+              <input type={showPassword} placeholder='*Sua senha' name='password'  ref={passwordRef}></input>
+              <img src={passwordIcon} alt="" onClick={handleShowPasswordClick} style={{width: '20px', height: '20px', cursor: 'pointer'}}/>
+            </div>
             <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
-        </div>
 
         <button onSubmit={handleSubmit}>Salvar alterações</button>
 

@@ -1,6 +1,9 @@
 const nodemailer = require('nodemailer'); // declaração da biblioteca nodemailer
+const resetPasswordHtml = require('./html-for-emails/resetPasswordHTML')
+const verifyEmailHtml = require('./html-for-emails/verifyEmailHTML')
 
-const sendEmail = (email,subject, text) => {
+const sendEmail = (email,subject, content) => {
+
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -14,7 +17,8 @@ const sendEmail = (email,subject, text) => {
         from: 'luisfabianocarvalholeite@gmail.com',
         to: email,
         subject,
-        text
+        html: content.token? resetPasswordHtml(content.token) : verifyEmailHtml(content.verificationCode, content.userName)
+        
     }
 
     // envio do e-mail

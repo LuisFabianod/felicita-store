@@ -25,6 +25,12 @@ input{
     border: 1px solid grey;
 }
 
+.password-input{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .nome-sobrenome{
     display: flex;
     gap: 10px;

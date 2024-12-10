@@ -60,9 +60,11 @@ exports.userRegister = async (req, res, next) => {
     req.session.hashedPassword = hashedPassword; 
     req.session.verificationCode = verificationCode;
 
-    const subject = 'Esse é o seu código de verificação'
+    const subject = 'Verifique sua conta Felicita Store'
 
-    await sendEmail(email, subject ,verificationCode); 
+    const content = { verificationCode, userName: nome }  
+
+    await sendEmail(email, subject , content); 
 
     return res.status(200).json({ message: `Você está a um passo de criar sua conta! Enviamos um código para ${email}`});
   } 
@@ -240,9 +242,9 @@ exports.forgotPassword = async (req, res) => {
 
   const subject = 'Redefinição de senha para sua conta FelicitaStore';
 
-  const text = `Foi requisitada uma mudança de senha para a sua conta FelicitaStore, Clique no link abaixo para redefinir a senha da sua conta, se não foi você que fez isso, ignore esse e-mail.\n http://localhost:3000/auth/reset-password?token=${token}`
+  const content = { token };
 
-  sendEmail(userEmail, subject, text);
+  sendEmail(userEmail, subject, content);
   res.status(200).json({ message: `Um e-mail foi enviado para ${userEmail}, confira sua caixa de entrada`}); // responde com bad request
 } 
 
