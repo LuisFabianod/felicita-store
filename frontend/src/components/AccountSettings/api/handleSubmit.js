@@ -11,7 +11,7 @@ export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageS
         newName: nomeRef.current.value // nome enviado pelo form
       };
       
-        const response = await fetch('http://localhost:5000/account/update', { // acessa a rota de login da api, com os dados do form
+        const response = await fetch('http://localhost:5000/account/update', { // acessa a rota de update da api com os dados do form
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageS
 
         if (response.ok) {
             setApiMessage(data.message); // define o texto da div api-message 
-            localStorage.setItem('userName', nomeRef.current.value)
+            localStorage.setItem('userName', nomeRef.current.value) // edita o nome do usuário no localStorage
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
           triggerApiMessageShake(); // ativação da animação de erro

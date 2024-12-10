@@ -19,11 +19,11 @@ export const PasswordUpdateForm = ({passwordUpdateFormDisplay, setPasswordUpdate
   
   const [showPassword, setShowPassword ] = useState('password')
 
-  const [apiMessage, setApiMessage] = useState('');
+  const [apiMessage, setApiMessage] = useState(''); // estado para mensagem de feedback do servidor
 
-  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false);
+  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // estado para controle da animação de erro da span erro
 
-  const [isApiMessageShaking, setApiMessageIsShaking] = useState(false);
+  const [isApiMessageShaking, setApiMessageIsShaking] = useState(false); // estado para controle da animação de erro da api-message
 
   const handleShowPasswordClick = () => {
     if(showPassword === 'password'){

@@ -19,7 +19,7 @@ export const EmailUpdateForm = ({emailUpdateFormDisplay, setEmailUpdateFormDispl
 
   const [apiMessage, setApiMessage] = useState('');
 
-  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false);
+  const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // estado para controle da animação de erro da span erro
 
   const [isApiMessageShaking, setApiMessageIsShaking] = useState(false);
 

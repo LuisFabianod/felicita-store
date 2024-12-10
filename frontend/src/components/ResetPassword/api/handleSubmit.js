@@ -8,10 +8,10 @@ export const handleSubmit = async (e, token, passwordRef, password2Ref, setApiMe
     if (shouldSubmit(passwordRef, password2Ref)) {
       const formData = { // objeto que será passado no body da requisição
         newPassword: passwordRef.current.value, // senha enviada pelo form
-        token
+        token // token com id do usuário
       };
 
-        const response = await fetch('http://localhost:5000/account/reset-password', { // acessa a rota de login da api, com os dados do form
+        const response = await fetch('http://localhost:5000/account/reset-password', { // acessa a rota de reset da senha da api, com os dados do form
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

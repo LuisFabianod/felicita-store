@@ -230,17 +230,17 @@ exports.verifyEmail = async (req, res) => {
 }
 
 exports.forgotPassword = async (req, res) => {
-  const { userEmail } = req.body;
+  const { userEmail } = req.body; // e-mail do usuário
 
-  const user = await User.findOne({ where: { email: userEmail } });
+  const user = await User.findOne({ where: { email: userEmail } }); // busca o usuário com o e-mail usuário
 
   if(!user){
-    return res.status(400).json({ message: 'Esse e-mail não está cadastrado'}); // responde com bad request
+    return res.status(400).json({ message: 'Esse e-mail não está cadastrado'}); // responde com bad request se o e-mail não estiver registrado
   }
 
-  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' }); // cria o token que vai guardar o id do usuário (vai ser usado na troca de senha)
 
-  const subject = 'Redefinição de senha para sua conta FelicitaStore';
+  const subject = 'Redefinição de senha para sua conta FelicitaStore'; // Título do e-mail 
 
   const content = { token };
 
@@ -249,24 +249,25 @@ exports.forgotPassword = async (req, res) => {
 } 
 
 exports.resetPassword = async (req, res) => {
-  const {newPassword, token } = req.body;
+  const {newPassword, token } = req.body; // nova senha e token com id do usuário
+
    try{
-     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+     const decoded = jwt.verify(token, process.env.JWT_SECRET); // decodificação do token
   
-     const hashNewPassword = await hashPassword(newPassword);
+     const hashNewPassword = await hashPassword(newPassword); // criptografia da nova senha 
   
-     const [updated] = await User.update(
+     const [updated] = await User.update( // atualização no banco de dados
       { senha: hashNewPassword }, // campos recebem valores atualizados
       { where: { id: decoded.userId } }  // condição para encontrar o usuário
     );
 
     if (updated === 0) {
-     return res.status(400).json({ message: 'Erro ao atualizar usuário ou usuário não encontrado' });
+     return res.status(400).json({ message: 'Token expirado, tente novamente'}); // retorna com erro 
    }
 
     return res.status(200).json({ message: `Senha atualizada!`}); // responde com sucesso
    }catch(err){
-     console.error(err)
+    return res.status(500).json({ message: 'Erro no servidor'}); // retorna com erro
    }
 
 }

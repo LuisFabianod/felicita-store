@@ -7,12 +7,12 @@ export const handleSubmit = async (e, newPasswordRef, newPassword2Ref, passwordR
       // Validação do formulário
     if (shouldSubmit(newPasswordRef, newPassword2Ref)) {
       const formData = { // objeto que será passado no body da requisição
-        actualEmail: localStorage.getItem('userEmail'),
-        newPassword: newPasswordRef.current.value, // senha enviada pelo form
-        actualPassword: passwordRef.current.value, // senha atual pegada no localStorage
+        actualEmail: localStorage.getItem('userEmail'), // email associado ao usuário atualmente
+        newPassword: newPasswordRef.current.value, // senha nova enviada pelo form
+        actualPassword: passwordRef.current.value, // senha associada ao usuário enviada pelo form
       };
 
-        const response = await fetch('http://localhost:5000/account/update', { // acessa a rota de login da api, com os dados do form
+        const response = await fetch('http://localhost:5000/account/update', { // acessa a rota de update da api, com os dados do form
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

@@ -7,12 +7,12 @@ export const handleSubmit = async (e, emailRef, email2Ref, passwordRef,setApiMes
     // Validação do formulário
     if (shouldSubmit(emailRef, email2Ref)) {
       const formData = { // objeto que será passado no body da requisição
-        actualEmail: localStorage.getItem('userEmail'),
-        newEmail: emailRef.current.value, // nome enviado pelo form
-        actualPassword: passwordRef.current.value,
+        actualEmail: localStorage.getItem('userEmail'), // e-mail que está associado ao usuário atualmente
+        newEmail: emailRef.current.value, // email enviado pelo form
+        actualPassword: passwordRef.current.value, // senha enviada pelo form
       };
 
-        const response = await fetch('http://localhost:5000/account/update', { // acessa a rota de login da api, com os dados do form
+        const response = await fetch('http://localhost:5000/account/update', { // acessa a rota de update da api, com os dados do form
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export const handleSubmit = async (e, emailRef, email2Ref, passwordRef,setApiMes
 
         if (response.ok) {
             setApiMessage(data.message); // define o texto da div api-message 
-            localStorage.setItem('userEmail', emailRef.current.value);
+            localStorage.setItem('userEmail', emailRef.current.value); // altera email do localStorage para o novo
             
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
