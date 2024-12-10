@@ -47,7 +47,9 @@ exports.userRegister = async (req, res, next) => {
  
     const validation = shouldSubmit(nome, sobrenome, email, password, password2); // declara a chamada da função que valida os valores
     
-    if(!termsCheck) res.status(400).json({ message: 'É preciso aceitar os Termos de uso e as Políticas de Privacidade para se cadastrar' })
+    if(!termsCheck){
+      return res.status(400).json({ message: 'É preciso aceitar os Termos de uso e as Políticas de Privacidade para se cadastrar' })
+    } 
 
     if (!validation.isValid) {
       return res.status(400).json({ message: validation.errors }); // se no retorno da função for {isValid: false}, a resposta será os erros que foram cometidos
