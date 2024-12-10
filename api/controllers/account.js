@@ -37,7 +37,7 @@ const hashPassword = async (password) => {
 
 // POST 
 exports.userRegister = async (req, res, next) => {
-  const { nome, sobrenome, email, password, password2 } = req.body; // declaração dos valores enviados pelo formulário
+  const { nome, sobrenome, email, password, password2, termsCheck } = req.body; // declaração dos valores enviados pelo formulário
   
   const verificationCode = Math.floor(100000 + Math.random() * 900000).toString(); // criação de um código aleatório para verificação de e-mail
   
@@ -47,6 +47,8 @@ exports.userRegister = async (req, res, next) => {
  
     const validation = shouldSubmit(nome, sobrenome, email, password, password2); // declara a chamada da função que valida os valores
     
+    if(!termsCheck) res.status(400).json({ message: 'É preciso aceitar os Termos de uso e as Políticas de Privacidade para se cadastrar' })
+
     if (!validation.isValid) {
       return res.status(400).json({ message: validation.errors }); // se no retorno da função for {isValid: false}, a resposta será os erros que foram cometidos
     }

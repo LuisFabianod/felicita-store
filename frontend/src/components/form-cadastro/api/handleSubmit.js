@@ -2,7 +2,7 @@ import { shouldSubmit } from '../utils/validation';
 import { nameFormatation } from '../utils/nameFormatation';
 
 // Função para tratar o envio do formulário
-export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
+export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref,termsCheck, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
     
     // Validação do formulário
@@ -17,6 +17,7 @@ export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordR
         email: emailRef.current.value,
         password: passwordRef.current.value,
         password2: password2Ref.current.value,
+        termsCheck,
       }
         
       try {

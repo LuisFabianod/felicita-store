@@ -16,6 +16,8 @@ export const FormCadastro = () => {
   const password2Ref = useRef(null);
   const verificationCodeRef = useRef(null)
 
+  const [termsCheck, setTermsCheck] = useState(false); // Estado para checkBox rememberSession
+
   const [passwordIcon, setPasswordIcon ] = useState(hidePasswordIcon)
 
   const [showPassword, setShowPassword ] = useState('password')
@@ -57,7 +59,7 @@ export const FormCadastro = () => {
  return (
   
     <div className='form-cadastro'>
-      <form  className='form' onSubmit={(e) => handleSubmit(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
+      <form  className='form' onSubmit={(e) => handleSubmit(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref,termsCheck, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
       {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>} 
         <h1>Faça seu cadastro</h1>
         <div className='nome-sobrenome'>
@@ -86,6 +88,11 @@ export const FormCadastro = () => {
             <input type='password' placeholder='*Confirmar Senha' name='password2' id='password2' ref={password2Ref}></input>
             <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
+          <div className='terms-check'>
+            <input type="checkbox" name="terms-check" id="terms-check" onClick={() => setTermsCheck(!termsCheck)} />
+            <label htmlFor="terms-check">Li e aceito os <a href="">Termos de uso</a> e as <a href="">Políticas de Privacidade</a></label>
+          </div>
+
 
         <PasswordChecks passwordRef={passwordRef}/>
 
