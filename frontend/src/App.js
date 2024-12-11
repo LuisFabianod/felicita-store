@@ -4,6 +4,8 @@ import { Home } from './templates/home';
 import { Auth } from './templates/auth';
 import { Account } from './templates/account';
 import { ResetPassword } from './components/ResetPassword';
+import { Terms } from './components/terms-and-privacyPolitcs/terms';
+import { Privacy } from './components/terms-and-privacyPolitcs/privacy';
 
 function App() {
 
@@ -14,6 +16,8 @@ function App() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/account" element={<Account />} />
           <Route path="/auth/reset-password" element={<ResetPassword />} />
+          <Route path="/terms" element={<Terms/>}/>
+          <Route path="/privacy-politics" element={<Privacy/>}/>
         </Routes>
       </Router>
 

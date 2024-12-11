@@ -1,0 +1,76 @@
+import './styles.css'
+import React from "react"
+
+export const Privacy = () => {
+    return (
+        <body>
+        <main>
+            <div class="section">
+                <h2 class="section-title">POLÍTICA DE PRIVACIDADE — Felicita</h2>
+                <div class="section-content">
+                    <p>– A Felicita, pessoa jurídica de direito privado, estabelece nesta Política de Privacidade as condições para coleta, uso e proteção das informações pessoais dos usuários.</p>
+                    <p>– Ao utilizar nosso website, você concorda com os termos aqui descritos. Caso não concorde, pedimos que não acesse ou utilize nossos serviços.</p>
+                    <p>– Esta Política de Privacidade foi atualizada pela última vez em <strong>11 de Dezembro de 2024</strong></p>
+                </div>
+            </div>
+    
+            <div class="section">
+                <h2 class="section-title">Seção 1 - Informações coletadas</h2>
+                <div class="section-content">
+                    <p>– Coletamos informações fornecidas diretamente pelo usuário, como nome, e-mail, telefone e outros dados necessários para o uso de nossos serviços.</p>
+                    <p>– Também coletamos informações automaticamente, como endereço IP, dados de navegação, tipo de dispositivo e cookies para personalizar a experiência do usuário.</p>
+                    <p>– Os cookies utilizados incluem aqueles essenciais para o funcionamento do site e para análises de desempenho e preferências do usuário.</p>
+                </div>
+            </div>
+    
+            <div class="section">
+                <h2 class="section-title">Seção 2 - Uso das informações</h2>
+                <div class="section-content">
+                    <p>– As informações coletadas são utilizadas para fornecer e melhorar nossos serviços, personalizar o conteúdo, enviar comunicações importantes e garantir a segurança dos usuários.</p>
+                    <p>– Não compartilhamos suas informações pessoais com terceiros, exceto quando necessário para cumprir obrigações legais ou proteger nossos direitos.</p>
+                    <p>– Podemos compartilhar informações com prestadores de serviços contratados para operar, gerenciar ou melhorar nossos serviços, sempre mediante cláusulas contratuais de confidencialidade e segurança.</p>
+                </div>
+            </div>
+    
+            <div class="section">
+                <h2 class="section-title">Seção 3 - Armazenamento de dados</h2>
+                <div class="section-content">
+                    <p>– Os dados coletados são armazenados em servidores seguros, utilizando medidas de proteção contra acesso não autorizado, uso indevido, alteração ou destruição.</p>
+                    <p>– Retemos suas informações pelo tempo necessário para cumprir os propósitos descritos nesta política, salvo disposição em contrário pela legislação aplicável.</p>
+                    <p>– Caso solicite a exclusão dos dados, procederemos com a remoção, exceto nos casos em que a retenção for necessária para cumprir exigências legais ou regulatórias.</p>
+                </div>
+            </div>
+    
+            <div class="section">
+                <h2 class="section-title">Seção 4 - Direitos do usuário</h2>
+                <div class="section-content">
+                    <p>– O usuário tem direito de acessar, corrigir, excluir ou limitar o uso de seus dados pessoais. Para isso, basta entrar em contato através dos canais disponibilizados.</p>
+                    <p>– O usuário também pode retirar seu consentimento a qualquer momento, sem comprometer a legalidade do tratamento realizado anteriormente.</p>
+                    <p>– Para exercer seus direitos, envie sua solicitação para o e-mail <a href="mailto:felicita@felicitapijamaria.com.br">felicita@felicitapijamaria.com.br</a></p>
+                </div>
+            </div>
+    
+            <div class="section">
+                <h2 class="section-title">Seção 5 - Alterações nesta política</h2>
+                <div class="section-content">
+                    <p>– Reservamo-nos o direito de alterar esta Política de Privacidade a qualquer momento. Publicaremos as alterações em nosso website e informaremos os usuários, caso necessário.</p>
+                    <p>– Recomendamos a consulta periódica desta página para manter-se informado sobre como protegemos suas informações pessoais.</p>
+                    <p>– Alterações significativas serão notificadas por e-mail ou destacadas no site.</p>
+                </div>
+            </div>
+    
+            <div class="section">
+                <h2 class="section-title">Seção 6 - Contato</h2>
+                <div class="section-content">
+                    <p>– Caso tenha dúvidas sobre esta Política de Privacidade, entre em contato pelo e-mail <a href="mailto:felicita@felicitapijamaria.com.br">felicita@felicitapijamaria.com.br</a>.</p>
+                    <p>– Adicionalmente, você pode acessar nossa página de contato para mais opções de comunicação.</p>
+                </div>
+            </div>
+        </main>
+    
+        <footer>
+            <p>&copy; 2024 Felicita. Todos os direitos reservados. </p>
+        </footer>
+    </body>
+    )
+}

@@ -1,5 +1,6 @@
 import './styles.css'
 import React, { useEffect, useRef, useState} from "react";
+import { Link } from 'react-router-dom';
 import { handleSubmit } from './api/handleSubmit';
 import { PasswordChecks } from './sub-components/password-check';
 import { handleVerifyEmail } from './api/handleVerifyEmail';
@@ -90,7 +91,7 @@ export const FormCadastro = () => {
           </div>
           <div className='terms-check'>
             <input type="checkbox" name="terms-check" id="terms-check" onClick={() => setTermsCheck(!termsCheck)} />
-            <label htmlFor="terms-check">Li e aceito os <a href="../../terms.html">Termos de uso</a> e as <a href="../../privacy-politics.html">Políticas de Privacidade</a></label>
+            <label htmlFor="terms-check">Li e aceito os <Link to={'/terms'} >Termos de uso</Link> e as <Link to={'/privacy-politics'}>Políticas de Privacidade</Link></label>
           </div>
 
 
