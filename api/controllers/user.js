@@ -36,7 +36,7 @@ const hashPassword = async (password) => {
 
 
 // POST 
-exports.userRegister = async (req, res, next) => {
+exports.verifyEmail = async (req, res, next) => {
   const { nome, sobrenome, email, password, password2, termsCheck } = req.body; // declaração dos valores enviados pelo formulário
   
   const verificationCode = Math.floor(100000 + Math.random() * 900000).toString(); // criação de um código aleatório para verificação de e-mail
@@ -212,7 +212,7 @@ exports.userDelete = async (req, res) => {
 }
 
 // POST 
-exports.verifyEmail = async (req, res) => {
+exports.userRegister = async (req, res) => {
   const { userVerificationCode } = req.body; // declaração do código de verificação
 
   // declaração dos valores guardados na sessão

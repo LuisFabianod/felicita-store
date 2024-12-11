@@ -22,7 +22,7 @@ export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordR
         
       try {
         // Envia os dados para a API
-        const response = await fetch('http://localhost:5000/account/register-user', {
+        const response = await fetch('http://localhost:5000/account/verify-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

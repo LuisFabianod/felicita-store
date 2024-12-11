@@ -9,7 +9,7 @@ export const handleVerifyEmail = async (e, verificationCodeRef, setApiMessage, t
         
       try {
         // Envia os dados para a API (código de verificação de e-mail)
-        const response = await fetch('http://localhost:5000/account/verify-email', {
+        const response = await fetch('http://localhost:5000/account/register-user', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

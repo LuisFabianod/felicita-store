@@ -1,6 +1,6 @@
 const express = require('express'); // declaração do express
 const router = express.Router(); // declaração do router (redireciona o código com base no caminho rota da url)
-const accountController = require('../controllers/account'); // declaração do controller do cadastro
+const accountController = require('../controllers/user'); // declaração do controller do cadastro
 
 // cria uma rota de post que utiliza o método userRegister do cadastroController
 router.post('/register-user', accountController.userRegister)
