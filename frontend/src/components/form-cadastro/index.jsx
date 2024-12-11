@@ -90,7 +90,7 @@ export const FormCadastro = () => {
           </div>
           <div className='terms-check'>
             <input type="checkbox" name="terms-check" id="terms-check" onClick={() => setTermsCheck(!termsCheck)} />
-            <label htmlFor="terms-check">Li e aceito os <a href="">Termos de uso</a> e as <a href="">Políticas de Privacidade</a></label>
+            <label htmlFor="terms-check">Li e aceito os <a href="../../terms.html">Termos de uso</a> e as <a href="../../privacy-politics.html">Políticas de Privacidade</a></label>
           </div>
 
 
