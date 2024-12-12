@@ -6,6 +6,7 @@ import { Account } from './templates/account';
 import { ResetPassword } from './components/ResetPassword';
 import { Terms } from './components/terms-and-privacyPolitcs/terms';
 import { Privacy } from './components/terms-and-privacyPolitcs/privacy';
+import { AdminSettings } from './components/AdminSettings';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/auth/reset-password" element={<ResetPassword />} />
           <Route path="/terms" element={<Terms/>}/>
           <Route path="/privacy-politics" element={<Privacy/>}/>
+          <Route path="/admin-settings" element={<AdminSettings/>}/>
         </Routes>
       </Router>
 

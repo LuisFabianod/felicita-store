@@ -29,6 +29,7 @@ app.use(cookieParser()); // habilita o uso de cookie-parser
 
 // declaração das rotas definidas na pasta routes
 const accountRoutes = require('./routes/account'); 
+const productRoutes = require('./routes/product')
 const homeRoutes = require('./routes/home');
 
 app.use(express.json()); // habilita a compreenssão das reqs como json pelo express
@@ -36,10 +37,11 @@ app.use(express.urlencoded({ extended: true })); // receber as informações de 
 
 // atribuição das rotas com base no caminho inicial
 app.use('/', homeRoutes)
+app.use('/product', productRoutes);
 app.use('/account', accountRoutes);
 
 // sincronizar tabelas da db com os modelos do sequelize
-sequelize.sync()
+sequelize.sync({alter: true})
 .then(() => {
     console.log('Tabelas sincronizadas com sucesso.');
     // iniciar servidor na porta declarada

@@ -1,0 +1,50 @@
+.register-product-form{
+    width: 98vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.register-product-form > form{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 15px;
+    width: 500px;
+    padding: 20px;
+    border: 1px solid black;
+    
+}
+
+.register-product-form > form > h1{
+    align-self: center;
+}
+
+.register-product-form> form button{
+    padding: 10px;
+    background-color: white;
+    color: grey;
+    border: 1px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color .5s;
+    transition: color .5s;
+}
+
+.register-product-form > form button:hover{
+    background-color: grey;
+    color: white;
+}
+
+.register-product-div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.register-product-form> form label{
+    font-size: 14px;
+}

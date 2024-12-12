@@ -6,6 +6,7 @@ import { PasswordChecks } from './sub-components/password-check';
 import { handleVerifyEmail } from './api/handleVerifyEmail';
 import showPasswordIcon from '../../images/open-eye.png'
 import hidePasswordIcon from '../../images/closed-eye.png'
+import { Header } from '../Header';
 
 export const FormCadastro = () => {
 
@@ -58,7 +59,8 @@ export const FormCadastro = () => {
   }, [apiMessage])
 
   return (
-
+    <>
+    <Header/>
     <div className='form-cadastro'>
       <form className='form' onSubmit={(e) => handleSubmit(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, termsCheck, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
         {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
@@ -112,7 +114,7 @@ export const FormCadastro = () => {
       </form>
 
     </div>
-
+    </>
 
   )
 }

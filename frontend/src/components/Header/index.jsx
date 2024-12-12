@@ -34,7 +34,7 @@ export const Header = () => {
                 isLoggedIn? <img src={menuIcon} alt="menu-icon" className='menu-icon' onClick={handleMenu}/> : <Link to="/auth">Fazer login</Link> 
                  }
                 
-                <img src="" alt="logo-felicita" />
+                <Link to={'/'}><img src="" alt="logo-felicita" /></Link>
                 </div>
                 <SearchBar/>
                 <div>{isLoggedIn? userEmail : 'Olá Cliente!'}</div>

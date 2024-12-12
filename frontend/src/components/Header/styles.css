@@ -1,7 +1,7 @@
 header.header{
-    background-color: violet;
+    background-color: rgb(192, 192, 164);
     height: 10vh;
-    width: 100vw;
+    width: 100%;
 }
 
 header > nav{
