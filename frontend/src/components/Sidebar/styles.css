@@ -7,7 +7,7 @@
     padding: 20px;
 }
 
-.dialog-header{
+.sidebar-header{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -21,11 +21,14 @@
     cursor: pointer;
 }
 
-.dialog-section{
+.sidebar-section{
+    display: flex;
+    flex-direction: column;
     height: 85%;
+    
 }
 
-.dialog-footer{
+.sidebar-footer{
     height: 10%;
 }
 

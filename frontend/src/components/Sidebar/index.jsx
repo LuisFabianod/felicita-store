@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import closeIcon from '../../images/x.png'
 import { handleExit } from './api/handleExit'
 
-export const Sidebar = ({display, setDisplay}) => {
+export const Sidebar = ({display, setDisplay, isAdmin}) => {
 
     const [apiMessage, setApiMessage] = useState(''); // Estado para mensagem da API (sucesso ou erro)
 
@@ -22,16 +22,17 @@ export const Sidebar = ({display, setDisplay}) => {
     return (
         <dialog style={{display}} className='sidebar'> 
             
-            <header className='dialog-header'>
+            <header className='sidebar-header'>
                 <p>Olá, {localStorage.getItem('userName')}</p>
                 <img src={closeIcon} alt="close-modal-icon" className='close-modal-icon' onClick={handleMenu}/>
             </header>
 
-            <section className='dialog-section'>
+            <section className='sidebar-section'>
                 <Link to={'/account'}>Minha conta</Link>
+                {isAdmin && <Link to={'/admin-settings'}>Interface administrador</Link>}
             </section>
             
-            <footer className='dialog-footer'>
+            <footer className='sidebar-footer'>
             {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`}>{apiMessage}</div>}
                 <button className='exit-account' onClick={() => handleExit(setApiMessage, triggerApiMessageShake)}>
                     SAIR

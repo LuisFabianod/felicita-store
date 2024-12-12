@@ -11,10 +11,10 @@ export const FormLogin = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  
-  const [passwordIcon, setPasswordIcon ] = useState(hidePasswordIcon)
 
-  const [showPassword, setShowPassword ] = useState('password')
+  const [passwordIcon, setPasswordIcon] = useState(hidePasswordIcon)
+
+  const [showPassword, setShowPassword] = useState('password')
 
   const [resetPasswordDisplay, setResetPasswordDisplay] = useState('none') // estado para controle do dialog de update de email
 
@@ -27,10 +27,10 @@ export const FormLogin = () => {
   const [isApiMessageShaking, setIsApiMessageShaking] = useState(false); // Estado para animação de erro da div api-message
 
   const handleShowPasswordClick = () => {
-    if(showPassword === 'password'){
+    if (showPassword === 'password') {
       setShowPassword('text')
       setPasswordIcon(showPasswordIcon)
-    }else{
+    } else {
       setShowPassword('password')
       setPasswordIcon(hidePasswordIcon)
     }
@@ -57,10 +57,8 @@ export const FormLogin = () => {
             <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
           <div className='password'>
-            <div className='password-input'>
-              <input type={showPassword} placeholder='*Senha' name='password' id='password' ref={passwordRef}></input>
-              <img src={passwordIcon} alt="" onClick={handleShowPasswordClick} style={{ width: '20px', height: '20px' , cursor: 'pointer'}} />
-            </div>
+            <input type={showPassword} placeholder='*Senha' name='password' id='password' ref={passwordRef}></input>
+            <img src={passwordIcon} alt="" onClick={handleShowPasswordClick} style={{ width: '20px', height: '20px', cursor: 'pointer' }} />
             <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
           <button type='submit'>Fazer login</button>

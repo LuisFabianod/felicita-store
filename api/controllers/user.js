@@ -9,12 +9,8 @@ const sendEmail  = require('../utils/sendEmail'); // declaração da função qu
 
 // verifica se usuário com email enviado já existe na db
 const verifyIfUsersAlreadyExists = async (email) => {
-  try {
     const usuarioExistente = await User.findOne({ where: { email: email } }); // busca por um registro com o email passado no form
     return Boolean(usuarioExistente) // retorna true se o usuário existir, false se ele não existir
-  } catch (err) {
-    res.status(500).json({message: 'Erro no servidor'})  // caso algo dê errado, é lançado um erro
-  }
 }
 
 // comapara o hash da senha enviada com a da db
@@ -226,7 +222,7 @@ exports.userRegister = async (req, res) => {
   // SE SIM, CADASTRA O USUÁRIO NA DB
   if(storedCode === userVerificationCode){
       await User.create({ nome: nameFormatation(nome) + ' ' + nameFormatation(sobrenome), email, senha: hashedPassword });  // declaração do método create (adiciona o usuário à db) com os campos enviados pelo form
-      res.status(200).json({ message: 'Você verificou sua conta e ela foi cadastrada!' }); // responde com sucesso
+      res.status(200).json({ message: 'Sua conta foi verificada e cadastrada!' }); // responde com sucesso
   }else{
       res.status(400).json({ message: 'O código está incorreto ou expirado' }); // responde com bad request
   }

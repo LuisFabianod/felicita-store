@@ -1,5 +1,5 @@
 // função para fazer o fetch e verificar se a sessão está ativa
-export const verifySession = async (setIsLoggedIn) => {
+export const verifySession = async (setIsLoggedIn, setIsAdmin) => {
     try {
         const response = await fetch('http://localhost:5000/verificar-login', { // acessa a rota de verificar login no back-end
             method: 'GET', 
@@ -12,6 +12,7 @@ export const verifySession = async (setIsLoggedIn) => {
         if (response.ok) {
             const data = await response.json(); // processa a resposta da api
             setIsLoggedIn(data.loggedIn); // muda o estado para logado
+            setIsAdmin(data.isAdmin);
             
         } else {
             console.error('Erro na verificação de login');

@@ -9,13 +9,13 @@ import menuIcon from '../../images/menu-aberto.png'
 
 // declaração do componente Header
 export const Header = () => {
-
+    const [ isAdmin, setIsAdmin ] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false); // declaração do estado (logado / não-logado)
     const [display, setDisplay] = useState('none'); // declaração do estado do sidebar (aberto / fechado)
 
     // é ativado toda vez que o componente é montado, verifica se o usuário está logado
     useEffect(() => {
-        verifySession(setIsLoggedIn);
+        verifySession(setIsLoggedIn, setIsAdmin);
     }, []);
 
     const handleMenu = () => {
@@ -26,7 +26,7 @@ export const Header = () => {
 
     return (
         <>
-        <Sidebar display={display} setDisplay={setDisplay}/>
+        <Sidebar display={display} setDisplay={setDisplay} isAdmin={isAdmin} />
         <header className='header'>
             <nav className='nav'>
                 <div className='menu-and-logo'>

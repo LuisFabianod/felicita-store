@@ -25,12 +25,6 @@ input{
     border: 1px solid grey;
 }
 
-.password-input{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
 .nome-sobrenome{
     display: flex;
     gap: 10px;
@@ -73,7 +67,8 @@ input{
 
 .password{
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 .password2{
@@ -103,6 +98,7 @@ input.show-error-message{
 }
 
 .verify-email{
+    display: flex;
     gap: 10px;
 }
 
