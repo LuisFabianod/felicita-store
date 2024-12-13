@@ -2,24 +2,21 @@
 export const handleSubmit = async (e, nomeProdutoRef, descricaoProdutoRef, categoriaProdutoRef, precoProdutoRef,estoqueProdutoRef, imagem1ProdutoRef, imagem2ProdutoRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
 
-    const formData = { 
-        nomeProduto: nomeProdutoRef.current.value, 
-        descricaoProduto: descricaoProdutoRef.current.value, 
-        categoriaProduto: categoriaProdutoRef.current.value,
-        precoProduto: precoProdutoRef.current.value, 
-        estoqueProduto: estoqueProdutoRef.current.value, 
-        imagem1Produto: imagem1ProdutoRef.current.files, 
-        imagem2Produto: imagem2ProdutoRef.current.files,
-    }
-    
+    const formData = new FormData();
+
+    formData.append('nomeProduto',  nomeProdutoRef.current.value)
+    formData.append('descricaoProduto',  descricaoProdutoRef.current.value)
+    formData.append('categoriaProduto',  categoriaProdutoRef.current.value)
+    formData.append('precoProduto',  precoProdutoRef.current.value)
+    formData.append('estoqueProduto',  estoqueProdutoRef.current.value)
+    formData.append('imagem1Produto',  imagem1ProdutoRef.current.files[0])
+    formData.append('imagem2Produto',  imagem2ProdutoRef.current.files[0])
+
     try {
         // Envia os dados para a API
         const response = await fetch('http://localhost:5000/product/register-product', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
+            body: formData,
             credentials: 'include'
         });
 
