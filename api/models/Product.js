@@ -15,10 +15,9 @@ const Product = sequelize.define('Product', {
     descricao: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
     },
     categoria: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.JSON,
         allowNull: false,
     },
     preco: {
@@ -33,13 +32,9 @@ const Product = sequelize.define('Product', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    foto1: {
+    imagens: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    foto2: {
-        type: DataTypes.STRING,
-        allowNull: true
     },
 });
 

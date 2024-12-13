@@ -41,7 +41,7 @@ app.use('/product', productRoutes);
 app.use('/account', accountRoutes);
 
 // sincronizar tabelas da db com os modelos do sequelize
-sequelize.sync({alter: true})
+sequelize.sync()
 .then(() => {
     console.log('Tabelas sincronizadas com sucesso.');
     // iniciar servidor na porta declarada

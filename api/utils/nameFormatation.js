@@ -14,8 +14,10 @@ const formatName = (name) => {
 };
 
 // função que recebe nome e sobrenome e retorna o nome completo formatado
-exports.nameFormatation = (name) => {
+const nameFormatation = (name) => {
     const formattedName = formatName(name); // Chamada da função de formatação com o valor do input
 
     return formattedName;
 };
+
+module.exports = nameFormatation

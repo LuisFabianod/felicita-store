@@ -10,6 +10,7 @@ export const AdminSettings = () => {
   const nomeProdutoRef = useRef(null);
   const descricaoProdutoRef = useRef(null);
   const categoriaProdutoRef = useRef(null);
+  const precoProdutoRef = useRef(null);
   const estoqueProdutoRef = useRef(null);
   const imagem1ProdutoRef = useRef(null);
   const imagem2ProdutoRef = useRef(null);
@@ -59,6 +60,11 @@ export const AdminSettings = () => {
           </div>
 
           <div className='nome'>
+            <input type='number' placeholder='*Preço (Ex: 100,00)' name='preco' ref={precoProdutoRef}></input>
+            <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+          </div>
+
+          <div className='nome'>
             <input type='number' placeholder='*Estoque' name='descricao' ref={estoqueProdutoRef}></input>
             <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
           </div>
@@ -77,7 +83,7 @@ export const AdminSettings = () => {
 
         </div>
 
-        <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, categoriaProdutoRef, estoqueProdutoRef, imagem1ProdutoRef, imagem2ProdutoRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>Registrar novo produto</button>
+        <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, categoriaProdutoRef, precoProdutoRef,estoqueProdutoRef, imagem1ProdutoRef, imagem2ProdutoRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>Registrar novo produto</button>
         
       </form>
 
