@@ -1,5 +1,5 @@
 // Função para tratar o envio do formulário
-export const handleSubmit = async (e, nomeProdutoRef, descricaoProdutoRef, categoriaProdutoRef, precoProdutoRef,estoqueProdutoRef, imagem1ProdutoRef, imagem2ProdutoRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
+export const handleSubmit = async (e, nomeProdutoRef, descricaoProdutoRef, categoriaProdutoRef, precoProdutoRef,estoqueProdutoRef, imagem1ProdutoRef, imagem2ProdutoRef, setApiMessage, triggerApiMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
 
     const formData = new FormData();

@@ -1,10 +1,10 @@
 import './styles.css'
 import React, { useState, useRef } from 'react'
-import { handleSubmit } from './api/handleSubmit';
-import { Header } from '../Header';
+import { handleSubmit } from './api/handleSubmit.js';
+import { Header } from '../../../Header';
 
 
-export const AdminSettings = () => {
+export const ProductRegister = () => {
 
   // DECLARAÇÃO DOS INPUTS
   const nomeProdutoRef = useRef(null);
@@ -33,7 +33,6 @@ export const AdminSettings = () => {
 
  return (
     <>
-    <Header/>
     <div className='register-product-form'>
     
       <form  className='form'>

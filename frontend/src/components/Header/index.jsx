@@ -1,45 +1,50 @@
 import './styles.css'
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { verifySession } from './api/verificarLogin';
-
+import { verifySession } from './api/verifySession';
 import { SearchBar } from './sub-components/SearchBar';
 import { Sidebar } from '../Sidebar';
-import menuIcon from '../../images/menu-aberto.png'
+import menuIcon from '../../images/menu-aberto.png';
 
-// declaração do componente Header
-export const Header = () => {
-    const [ isAdmin, setIsAdmin ] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // declaração do estado (logado / não-logado)
-    const [display, setDisplay] = useState('none'); // declaração do estado do sidebar (aberto / fechado)
+export const Header = ({ getIsAdmin }) => {
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [display, setDisplay] = useState('none');
 
-    // é ativado toda vez que o componente é montado, verifica se o usuário está logado
+    useEffect(() => {
+        if(getIsAdmin){
+            getIsAdmin(isAdmin);  // Passa o valor de isAdmin para o componente pai
+        }
+        
+    }, [isAdmin, getIsAdmin]);
+
     useEffect(() => {
         verifySession(setIsLoggedIn, setIsAdmin);
-    }, []);
+    }, [setIsAdmin]);
 
     const handleMenu = () => {
-        setDisplay('flex')
-    }
-    
-    const userEmail = localStorage.getItem('userEmail')
+        setDisplay('flex');
+    };
+
+    const userEmail = localStorage.getItem('userEmail');
 
     return (
         <>
-        <Sidebar display={display} setDisplay={setDisplay} isAdmin={isAdmin} />
-        <header className='header'>
-            <nav className='nav'>
-                <div className='menu-and-logo'>
-                {
-                isLoggedIn? <img src={menuIcon} alt="menu-icon" className='menu-icon' onClick={handleMenu}/> : <Link to="/auth">Fazer login</Link> 
-                 }
-                
-                <Link to={'/'}><img src="" alt="logo-felicita" /></Link>
-                </div>
-                <SearchBar/>
-                <div>{isLoggedIn? userEmail : 'Olá Cliente!'}</div>
-            </nav>
-        </header>
+            <Sidebar display={display} setDisplay={setDisplay} isAdmin={isAdmin} />
+            <header className='header'>
+                <nav className='nav'>
+                    <div className='menu-and-logo'>
+                        {isLoggedIn ? (
+                            <img src={menuIcon} alt="menu-icon" className='menu-icon' onClick={handleMenu} />
+                        ) : (
+                            <Link to="/auth">Fazer login</Link>
+                        )}
+                        <Link to={'/'}><img src="" alt="logo-felicita" /></Link>
+                    </div>
+                    <SearchBar />
+                    <div>{isLoggedIn ? userEmail : 'Olá Cliente!'}</div>
+                </nav>
+            </header>
         </>
-    )
-}
+    );
+};

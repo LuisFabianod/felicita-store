@@ -29,7 +29,7 @@ export const Sidebar = ({display, setDisplay, isAdmin}) => {
 
             <section className='sidebar-section'>
                 <Link to={'/account'}>Minha conta</Link>
-                {isAdmin && <Link to={'/admin-settings'}>Interface administrador</Link>}
+                {isAdmin && <Link to={'/admin-interface'}>Interface administrador</Link>}
             </section>
             
             <footer className='sidebar-footer'>
