@@ -1,8 +1,6 @@
 import './styles.css'
 import React, { useState, useRef } from 'react'
 import { handleSubmit } from './api/handleSubmit.js';
-import { Header } from '../../../Header';
-
 
 export const ProductRegister = () => {
 

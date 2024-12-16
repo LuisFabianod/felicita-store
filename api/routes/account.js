@@ -3,7 +3,7 @@ const router = express.Router(); // declaração do router (redireciona o códig
 const accountController = require('../controllers/user'); // declaração do controller do cadastro
 
 // cria uma rota de post que utiliza o método userRegister do cadastroController
-router.post('/register-user', accountController.userRegister)
+router.post('/register-user', accountController.userRegister, accountController.userLogin)
 
 // cria uma rota de post que controla o login do usuário
 router.post('/login-user', accountController.userLogin)
