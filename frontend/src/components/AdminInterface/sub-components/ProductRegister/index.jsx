@@ -7,11 +7,14 @@ export const ProductRegister = () => {
   // DECLARAÇÃO DOS INPUTS
   const nomeProdutoRef = useRef(null);
   const descricaoProdutoRef = useRef(null);
-  const categoriaProdutoRef = useRef(null);
+  const secaoProdutoRef = useRef(null);
   const precoProdutoRef = useRef(null);
+  const precoCustoProdutoRef = useRef(null);
   const estoqueProdutoRef = useRef(null);
   const imagem1ProdutoRef = useRef(null);
   const imagem2ProdutoRef = useRef(null);
+
+  const [ margemLucro, setMargemLucro ] = useState(null)
 
   const [apiMessage, setApiMessage] = useState(''); // estado para mensagem de feedback do servidor
 
@@ -29,63 +32,80 @@ export const ProductRegister = () => {
     setTimeout(() => setApiMessageIsShaking(false), 1000); // Duração da animação
   };
 
- return (
+  const handlePrecoProdutoChange = () => {
+    setMargemLucro('Margem de lucro = ' + ((precoProdutoRef.current.value - precoCustoProdutoRef.current.value) / precoProdutoRef.current.value) * 100 + '%')
+  }
+  
+
+  return (
     <>
-    <div className='register-product-form'>
-    
-      <form  className='form'>
-      {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
-        <h1>Registrar Novo Produto</h1>
-        <div>
-        
-        </div>
-        <div className='register-product-div'>
-          <div className='nome'>
-            <input type='text' placeholder='*Nome do produto' name='nome' ref={nomeProdutoRef}></input>
-            <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+      <div className='register-product-form'>
+
+        <form className='form'>
+          {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
+          <h1>Registrar Novo Produto</h1>
+          <div>
+
+          </div>
+          <div className='register-product-div'>
+            <div className='nome'>
+              <input type='text' placeholder='*Nome do produto' name='nome' ref={nomeProdutoRef}></input>
+              <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+            </div>
+
+            <div className='nome'>
+              <input type='text' placeholder='*Descrição do produto' name='descricao' ref={descricaoProdutoRef}></input>
+              <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+            </div>
+
+
+            <div className='nome'>
+              <input type='text' placeholder='*Seção do produto' name='categoria' ref={secaoProdutoRef}></input>
+              <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+            </div>
+
+            <div className='nome'>
+              <input type='number' placeholder='*Preço (Ex: 100,00)' name='preco' ref={precoProdutoRef} ></input>
+              <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+            </div>
+
+            <div className='nome'>
+              <input type='number' placeholder='Preço Promocional' name='preco' ></input>
+              <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+            </div>
+
+            <div className='margem-de-lucro'>
+
+              <div className='nome'>
+                <input type='number' placeholder='Preço de Custo' name='preco' ref={precoCustoProdutoRef} onBlur={handlePrecoProdutoChange}></input>
+                <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+              </div>
+
+              <div className='nome'>
+                <input type='number' placeholder={margemLucro? margemLucro : 'Margem de Lucro'} name='preco' ></input>
+                <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+              </div>
+            </div>
+
+            <div className='nome'>
+              <input type='number' placeholder='*Estoque' name='descricao' ref={estoqueProdutoRef}></input>
+              <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+            </div>
+
+            <div className='nome'>
+              <label htmlFor="imagem1">*Imagem 1</label>
+              <input type='file' name='imagem1' ref={imagem1ProdutoRef}></input>
+              <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+            </div>
+
           </div>
 
-          <div className='nome'>
-            <input type='text' placeholder='*Descrição do produto' name='descricao' ref={descricaoProdutoRef}></input>
-            <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
-          </div>
-          
+          <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, imagem1ProdutoRef, imagem2ProdutoRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>Registrar novo produto</button>
 
-        <div className='nome'>
-            <input type='text' placeholder='*Categoria(s) (separe-as por vírgula)' name='categoria' ref={categoriaProdutoRef}></input>
-            <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
-          </div>
+        </form>
 
-          <div className='nome'>
-            <input type='number' placeholder='*Preço (Ex: 100,00)' name='preco' ref={precoProdutoRef}></input>
-            <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
-          </div>
+      </div>
 
-          <div className='nome'>
-            <input type='number' placeholder='*Estoque' name='descricao' ref={estoqueProdutoRef}></input>
-            <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
-          </div>
-
-          <div className='nome'>
-            <label htmlFor="imagem1">*Imagem 1</label>
-            <input type='file' name='imagem1' ref={imagem1ProdutoRef}></input>
-            <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
-          </div>
-
-          <div className='nome'>
-          <label htmlFor="imagem1">*Imagem 2 (opcional)</label>
-            <input type='file' name='imagem2' ref={imagem2ProdutoRef}></input>
-            <span  className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
-          </div>
-
-        </div>
-
-        <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, categoriaProdutoRef, precoProdutoRef,estoqueProdutoRef, imagem1ProdutoRef, imagem2ProdutoRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>Registrar novo produto</button>
-        
-      </form>
-
-    </div>
-    
     </>
   )
 }

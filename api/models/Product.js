@@ -16,8 +16,16 @@ const Product = sequelize.define('Product', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    categoria: {
+    variacoesTamanho:{
         type: DataTypes.JSON,
+        allowNull: false,
+    },
+    variacoesPeso:{
+        type: DataTypes.JSON,
+        allowNull: false,
+    },
+    secao: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
     preco: {
@@ -36,6 +44,14 @@ const Product = sequelize.define('Product', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    video: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    tabelaMedidas:{
+        type: DataTypes.JSON,
+        allowNull: false
+    }
 });
 
 module.exports = Product; // exporta o model

@@ -48,3 +48,8 @@
 .register-product-form> form label{
     font-size: 14px;
 }
+
+.margem-de-lucro{
+    display: flex;
+    justify-content: space-between;
+}
