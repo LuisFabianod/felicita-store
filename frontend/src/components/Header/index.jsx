@@ -1,22 +1,17 @@
 import './styles.css'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { verifySession } from './api/verifySession';
 import { SearchBar } from './sub-components/SearchBar';
 import { Sidebar } from '../Sidebar';
 import menuIcon from '../../images/menu-aberto.png';
+import { IsAdminContext } from '../../Contexts/IsAdmin';
 
 export const Header = ({ getIsAdmin }) => {
-    const [isAdmin, setIsAdmin] = useState(false);
+
+    const {isAdmin, setIsAdmin} = useContext(IsAdminContext);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [display, setDisplay] = useState('none');
-
-    useEffect(() => {
-        if(getIsAdmin){
-            getIsAdmin(isAdmin);  // Passa o valor de isAdmin para o componente pai
-        }
-        
-    }, [isAdmin, getIsAdmin]);
 
     useEffect(() => {
         verifySession(setIsLoggedIn, setIsAdmin);

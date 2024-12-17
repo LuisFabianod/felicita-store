@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Home } from './templates/home';
 import { Auth } from './templates/auth';
@@ -7,11 +7,20 @@ import { ResetPassword } from './components/ResetPassword';
 import { Terms } from './components/terms-and-privacyPolitcs/terms';
 import { Privacy } from './components/terms-and-privacyPolitcs/privacy';
 import { AdminInterface } from './components/AdminInterface';
+import { Header } from './components/Header';
 
-function App() {
+import { IsAdminContext } from './Contexts/IsAdmin';
+
+function App() {  
+
+  const [isAdmin, setIsAdmin] = useState(false)
 
   return (
+    <>
+      
       <Router>
+        <IsAdminContext.Provider value={{isAdmin, setIsAdmin}}>
+        <Header/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
@@ -21,7 +30,10 @@ function App() {
           <Route path="/privacy-politics" element={<Privacy/>}/>
           <Route path="/admin-interface" element={<AdminInterface/>}/>
         </Routes>
+        </IsAdminContext.Provider>
       </Router>
+
+      </>
   );
 }
 

@@ -60,7 +60,7 @@ export const FormCadastro = () => {
   return (
     <>
     <div className='form-cadastro'>
-      <form className='form' onSubmit={(e) => handleSubmit(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, termsCheck, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
+      <form className='form' onSubmit={(e) => handleVerifyEmail(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, termsCheck, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
         {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
         <h1>Faça seu cadastro</h1>
         <div className='nome-sobrenome'>
@@ -100,7 +100,7 @@ export const FormCadastro = () => {
           <div className='verify-email'>
             <form className='form' >
               <input type="text" name="verificationCode" id="verificationCode" ref={verificationCodeRef} />
-              <button type='button' onClick={(e) => handleVerifyEmail(e, verificationCodeRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>Enviar</button>
+              <button type='button' onClick={(e) => handleSubmit(e, verificationCodeRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>Enviar</button>
             </form>
           </div>
         }

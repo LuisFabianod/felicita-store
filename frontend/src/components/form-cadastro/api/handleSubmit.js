@@ -1,28 +1,15 @@
-import { shouldSubmit } from '../utils/validation';
-import { nameFormatation } from '../utils/nameFormatation';
-
 // Função para tratar o envio do formulário
-export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref,termsCheck, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
+export const handleSubmit = async (e, verificationCodeRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
     e.preventDefault(); // Impede o envio padrão
     
-    // Validação do formulário
-    if (shouldSubmit(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref)) {
-      nomeRef.current.value = nameFormatation(nomeRef); // Formatar o nome
-      sobrenomeRef.current.value = nameFormatation(sobrenomeRef); // Formatar o sobrenome
-
-      // Coleta os dados do formulário (Sem o código de verificação de e-mail)
+      // Coleta o código de verificação de e-mail
       const formData = {
-        nome: nomeRef.current.value,
-        sobrenome: sobrenomeRef.current.value,
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-        password2: password2Ref.current.value,
-        termsCheck,
+        userVerificationCode: verificationCodeRef.current.value
       }
         
       try {
-        // Envia os dados para a API
-        const response = await fetch('http://localhost:5000/account/verify-email', {
+        // Envia os dados para a API (código de verificação de e-mail)
+        const response = await fetch('http://localhost:5000/account/register-user', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -34,19 +21,21 @@ export const handleSubmit = async (e, nomeRef, sobrenomeRef, emailRef, passwordR
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {
-
-          setApiMessage(data.message); // define o texto da div api-message 
+          // salva dados do usuário que serão usados no frontend no localStorage
+          localStorage.setItem('userName', data.userName);
+          localStorage.setItem('userEmail', data.userEmail);
+          
+          // cria um cookie com as informações passadas pelo back-end
+          document.cookie = data.cookieName + "=" + data.cookieValue + ";" + data.cookieAge + ";path=/"; 
+          window.location.href = data.redirectUrl; // redireciona o usuário para home logado;
           
         } else {
           setApiMessage(data.message); // define o texto da div api-message 
           triggerApiMessageShake(); // ativação da animação de erro
         }
       } catch (error) {
-        console.error(error)
         setApiMessage('Erro ao enviar dados. Verifique sua conexão.'); // define o texto da div api-message 
         triggerApiMessageShake(); // ativação da animação de erro
       }
-    }else{
-      triggerErrorMessageShake(); // ativação da animação de erro
-    }
+    
   }
