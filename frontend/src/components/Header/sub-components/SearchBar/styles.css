@@ -1,7 +1,18 @@
-.search-bar{
+.search-bar-div{
     width: 40%;
+    background-color: var(--header-background);
+
 }
 
-.search-bar > input{
+.search-bar-div > input{
     width: 100%;
+    background-color: var(--header-background);
+}
+
+.search-bar{
+    outline: none;
+}
+
+.search-bar::placeholder{
+    color: var(--accent-color);
 }

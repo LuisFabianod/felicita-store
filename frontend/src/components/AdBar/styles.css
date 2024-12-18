@@ -1,0 +1,13 @@
+.ad-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--adbar-background);
+    padding: .5rem;
+}
+
+.ad-bar p{
+    font-size: 1rem;
+    color: var(--adbar-foreground);
+    font-family: "Plus Jakarta Sans", sans-serif;
+}

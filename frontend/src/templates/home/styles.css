@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+:root {
+    --main-foreground: #000000;
+    --main-background: #ffffff;
+    --accent-color: #8c8a78;
+    --button-background: #ffffff;
+    --button-foreground: #000000;
+    --label-background: #8c8a78;
+    --label-foreground: #333333;
+    --adbar-background: #8c8a78;
+    --adbar-foreground: #f4e4e1;
+    --header-background: #f6f0f1;
+    --header-foreground: #747C6C;
+    --header-transparent-foreground: ;
+    --footer-background: #ffffff;
+    --footer-foreground: #000000;
+    --main-foreground-opacity-05: #0000000D;
+    --main-foreground-opacity-08: #00000014;
+    --main-foreground-opacity-10: #0000001A;
+    --main-foreground-opacity-20: #00000033;
+    --main-foreground-opacity-30: #0000004D;
+    --main-foreground-opacity-40: #00000066;
+    --main-foreground-opacity-50: #00000080;
+    --main-foreground-opacity-60: #00000099;
+    --main-foreground-opacity-80: #000000CC;
+    --main-foreground-opacity-90: #000000E6;
+    --main-background-opacity-20: #ffffff33;
+    --main-background-opacity-30: #ffffff4D;
+    --main-background-opacity-50: #ffffff80;
+    --main-background-opacity-80: #ffffffCC;
+    --main-background-opacity-90: #ffffffE6;
+    --accent-color-opacity-20: #8c8a7833;
+    --header-foreground-opacity-20: #747C6C33;
+    --header-foreground-opacity-30: #747C6C4D;
+    --header-background-opacity-50: #f6f0f180;
+    --header-transparent-foreground-opacity-30: 4D;
+    --footer-foreground-opacity-20: #00000033;
+    --footer-foreground-opacity-30: #0000004D;
+    --footer-foreground-opacity-50: #00000080;
+    --footer-foreground-opacity-60: #00000099;
+    --footer-foreground-opacity-80: #000000CC;
+    --success: #4bb98c;
+    --danger: #dd7774;
+    --warning: #dc8f38;
+    --heading-font: "Plus Jakarta Sans", sans-serif;
+    --body-font: "Lato", sans-serif;
+}
+
+html{
+    font-size: 10px;
+}

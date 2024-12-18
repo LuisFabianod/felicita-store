@@ -1,10 +1,10 @@
 import './styles.css'
 import React from "react"
 
-export const SearchBar = () => {
+export const SearchBar = ({placeholder}) => {
     return(
-        <div className="search-bar">
-            <input type="text" name="search-bar" id="search-bar" />
+        <div className="search-bar-div">
+            <input type="text" name="search-bar" className="search-bar" placeholder={placeholder}/>
             
         </div>
     )
