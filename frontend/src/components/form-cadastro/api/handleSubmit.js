@@ -1,5 +1,5 @@
 // Função para tratar o envio do formulário
-export const handleSubmit = async (e, verificationCodeRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
+export const handleSubmit = async (e, verificationCodeRef, setApiMessage, triggerApiMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão
     
       // Coleta o código de verificação de e-mail
@@ -18,9 +18,11 @@ export const handleSubmit = async (e, verificationCodeRef, setApiMessage, trigge
           credentials: 'include'
         });
 
+        setIsLoading(true);
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {
+          setIsLoading(false);
           // salva dados do usuário que serão usados no frontend no localStorage
           localStorage.setItem('userName', data.userName);
           localStorage.setItem('userEmail', data.userEmail);
@@ -30,10 +32,12 @@ export const handleSubmit = async (e, verificationCodeRef, setApiMessage, trigge
           window.location.href = data.redirectUrl; // redireciona o usuário para home logado;
           
         } else {
+          setIsLoading(false);
           setApiMessage(data.message); // define o texto da div api-message 
           triggerApiMessageShake(); // ativação da animação de erro
         }
       } catch (error) {
+        setIsLoading(false);
         setApiMessage('Erro ao enviar dados. Verifique sua conexão.'); // define o texto da div api-message 
         triggerApiMessageShake(); // ativação da animação de erro
       }

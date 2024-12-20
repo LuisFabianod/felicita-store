@@ -1,11 +1,12 @@
 import './styles.css'
-import React, { useRef, useState} from 'react'
+import React, { useContext, useRef, useState} from 'react'
 import { handleSubmit } from './api/handleSubmit'
 import { PasswordChecks } from '../../../form-cadastro/sub-components/password-check';
 
 import closeIcon from '../../../../images/x.png'
 import showPasswordIcon from '../../../../images/open-eye.png'
 import hidePasswordIcon from '../../../../images/closed-eye.png'
+import { IsLoadingContext } from '../../../../Contexts/isLoading';
 
 
 export const PasswordUpdateForm = ({passwordUpdateFormDisplay, setPasswordUpdateFormDisplay}) => {
@@ -20,6 +21,8 @@ export const PasswordUpdateForm = ({passwordUpdateFormDisplay, setPasswordUpdate
   const [showPassword, setShowPassword ] = useState('password')
 
   const [apiMessage, setApiMessage] = useState(''); // estado para mensagem de feedback do servidor
+
+  const { setIsLoading } = useContext(IsLoadingContext);
 
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // estado para controle da animação de erro da span erro
 

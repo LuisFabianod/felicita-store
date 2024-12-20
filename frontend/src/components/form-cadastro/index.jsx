@@ -1,11 +1,12 @@
 import './styles.css'
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom';
 import { handleSubmit } from './api/handleSubmit';
 import { PasswordChecks } from './sub-components/password-check';
 import { handleVerifyEmail } from './api/handleVerifyEmail';
 import showPasswordIcon from '../../images/open-eye.png'
 import hidePasswordIcon from '../../images/closed-eye.png'
+import { IsLoadingContext } from '../../Contexts/isLoading';
 
 export const FormCadastro = () => {
 
@@ -24,6 +25,8 @@ export const FormCadastro = () => {
   const [showPassword, setShowPassword] = useState('password')
 
   const [apiMessage, setApiMessage] = useState(''); // Estado para feedback da API (sucesso ou erro)
+
+  const { setIsLoading } = useContext(IsLoadingContext)
 
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // Estado para animação de erro mensagem dos inputs
 
@@ -60,7 +63,7 @@ export const FormCadastro = () => {
   return (
     <>
     <div className='form-cadastro'>
-      <form className='form' onSubmit={(e) => handleVerifyEmail(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, termsCheck, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
+      <form className='form' onSubmit={(e) => handleVerifyEmail(e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref, termsCheck, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>
         {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
         <h1>Faça seu cadastro</h1>
         <div className='nome-sobrenome'>
@@ -100,7 +103,7 @@ export const FormCadastro = () => {
           <div className='verify-email'>
             <form className='form' >
               <input type="text" name="verificationCode" id="verificationCode" ref={verificationCodeRef} />
-              <button type='button' onClick={(e) => handleSubmit(e, verificationCodeRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>Enviar</button>
+              <button type='button' onClick={(e) => handleSubmit(e, verificationCodeRef, setApiMessage, triggerApiMessageShake, setIsLoading)}>Enviar</button>
             </form>
           </div>
         }

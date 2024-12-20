@@ -26,8 +26,8 @@ export const Header = () => {
 
     return (
         <>
-            <AdBar />
             <Sidebar display={display} setDisplay={setDisplay} isAdmin={isAdmin} />
+            <AdBar />
             <header className='header'>
                 <nav className='nav'>
                     <div className='logo-and-searchbar'>

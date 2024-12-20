@@ -1,10 +1,11 @@
 import './styles.css'
-import React, { useRef, useState} from 'react'
+import React, { useRef, useState, useContext} from 'react'
 import { handleSubmit } from './api/handleSubmit'
 
 import closeIcon from '../../../../images/x.png'
 import showPasswordIcon from '../../../../images/open-eye.png'
 import hidePasswordIcon from '../../../../images/closed-eye.png'
+import { IsLoadingContext } from '../../../../Contexts/isLoading'
 
 export const EmailUpdateForm = ({emailUpdateFormDisplay, setEmailUpdateFormDisplay}) => {
 
@@ -18,6 +19,8 @@ export const EmailUpdateForm = ({emailUpdateFormDisplay, setEmailUpdateFormDispl
   const [showPassword, setShowPassword ] = useState('password')
 
   const [apiMessage, setApiMessage] = useState('');
+
+  const { setIsLoading } = useContext(IsLoadingContext);
 
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // estado para controle da animação de erro da span erro
 
@@ -47,7 +50,7 @@ export const EmailUpdateForm = ({emailUpdateFormDisplay, setEmailUpdateFormDispl
     <dialog className='secure-update-form'style={{display: emailUpdateFormDisplay}}>
      <div className='form-update' >
     
-      <form  className='form' onSubmit={(e) => handleSubmit(e, emailRef, email2Ref, passwordRef,setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
+      <form  className='form' onSubmit={(e) => handleSubmit(e, emailRef, email2Ref, passwordRef,setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>
       {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
         <div className='div-close-icon'>
         <img src={closeIcon} alt="close-icon" className='close-form-icon' onClick={() => setEmailUpdateFormDisplay('none')}/>

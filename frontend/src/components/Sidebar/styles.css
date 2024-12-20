@@ -1,11 +1,12 @@
 .sidebar{
     display: flex;
+    position: fixed;
     flex-direction: column;
     height: 96vh;
     width: 350px;
     border: none;
     padding: 20px;
-    z-index: 10;
+    z-index: 9999;
 }
 
 .sidebar-header{

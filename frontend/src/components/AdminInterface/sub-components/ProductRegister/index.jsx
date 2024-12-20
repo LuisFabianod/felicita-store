@@ -1,6 +1,7 @@
 import './styles.css'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { handleSubmit } from './api/handleSubmit.js';
+import { IsLoadingContext } from '../../../../Contexts/isLoading.jsx';
 
 export const ProductRegister = () => {
 
@@ -12,11 +13,12 @@ export const ProductRegister = () => {
   const precoCustoProdutoRef = useRef(null);
   const estoqueProdutoRef = useRef(null);
   const imagem1ProdutoRef = useRef(null);
-  const imagem2ProdutoRef = useRef(null);
 
   const [ margemLucro, setMargemLucro ] = useState(null)
 
   const [apiMessage, setApiMessage] = useState(''); // estado para mensagem de feedback do servidor
+
+  const { setIsLoading } = useContext(IsLoadingContext)
 
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // estado para controle da animação de erro da span erro
 
@@ -100,7 +102,7 @@ export const ProductRegister = () => {
 
           </div>
 
-          <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, imagem1ProdutoRef, imagem2ProdutoRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>Registrar novo produto</button>
+          <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, imagem1ProdutoRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>Registrar novo produto</button>
 
         </form>
 

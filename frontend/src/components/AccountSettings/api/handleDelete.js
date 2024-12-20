@@ -1,5 +1,5 @@
 // Função para tratar o envio do formulário
-export const handleDelete = async ( setApiMessage, triggerApiMessageShake) => {
+export const handleDelete = async ( setApiMessage, triggerApiMessageShake, setIsLoading) => {
   try{
         const userEmail = localStorage.getItem('userEmail')
 
@@ -10,10 +10,11 @@ export const handleDelete = async ( setApiMessage, triggerApiMessageShake) => {
           },
           body: JSON.stringify({userEmail}) 
         });
-
+        setIsLoading(true);
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {
+            setIsLoading(false);
             setApiMessage(data.message); // define o texto da div api-message 
             // localStorage clear
             localStorage.removeItem('userName');
@@ -22,10 +23,12 @@ export const handleDelete = async ( setApiMessage, triggerApiMessageShake) => {
             window.location.href = data.redirectUrl; // redireciona o usuário para home
                      
         } else {
+          setIsLoading(false);
           setApiMessage(data.message); // define o texto da div api-message 
           triggerApiMessageShake(); // ativação da animação de erro
         }
     }catch(error){
+      setIsLoading(false);
         setApiMessage('Erro no servidor') // define o texto da div api-message 
     }
   }

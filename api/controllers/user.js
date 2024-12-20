@@ -116,11 +116,13 @@ exports.userLogin = async (req, res) => {
 // POST
 exports.userLogout = async (req, res) => {
   try {
+
     return res.status(200).json({
       // no frontend, quando a resposta do servidor for ok, o cookie será apagado
       cookieName: 'felicitaToken', // nome do cookie que vai ser retirado
       redirectUrl: 'http://localhost:3000/', // redireciona o usuário para home
     });
+
   } catch (error) {
     return res.status(500).json({ message: 'Erro ao realizar logout' }); // caso algo dê errado retorna o erro
   }
@@ -133,16 +135,27 @@ exports.userUpdate = async (req, res) => {
 
   // Se chegar newName no req.body, se trata de update de dados simples
   try {
+
     if (newName) {
       const newFormattedName = nameFormatation(newName);
+      
+      const user = await User.findOne({where: {email: actualEmail}});
+
+      if(newFormattedName === user.nome){
+        return res.status(404).json({ message: 'Esse já é o seu nome' }); 
+      }
+
       const updated = await User.update(
         { nome: newFormattedName }, // campos recebem valores atualizados
         { where: { email: actualEmail } }  // condição para encontrar o usuário
       );
+
       if (!updated) {
-        return res.status(404).json({ message: 'Usuário não encontrado.' }); // caso usuário não seja encontrado
+        return res.status(404).json({ message: 'Usuário não encontrado.' }); 
       }
-      return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); // caso seja atualizado com sucesso
+
+      return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); 
+    
     }
 
     // Se chegar newEmail no req.body, se trata de update de email
@@ -153,18 +166,30 @@ exports.userUpdate = async (req, res) => {
       // procura o usuário pelo email salvo no localStorage
       const user = await User.findOne({ where: { email: actualEmail } });
 
+      if(newEmail === user.email){
+        return res.status(404).json({ message: 'Esse já é o seu e-mail' }); 
+      }
+
+      const userNewEmail = await User.findOne({ where: { email: newEmail } });
+
+      if(userNewEmail){
+        return res.status(404).json({ message: 'Esse e-mail já pertence a uma conta' });
+      }
+
       // se a senha enviada não for igual a senha da db, retorna bad request
       if (!await checkEqualPasswords(actualPassword, user.senha)) {
-        return res.status(400).json({ message: 'Email ou senha inválidos' });
+        return res.status(400).json({ message: 'Senha incorreta' });
       }
 
       const updated = await User.update(
         { email: newEmail }, // campos recebem valores atualizados
         { where: { email: actualEmail } }  // condição para encontrar o usuário
       );
+
       if (!updated) {
         return res.status(404).json({ message: 'Usuário não encontrado.' }); // caso usuário não seja encontrado
       }
+
       return res.status(200).json({ message: 'Usuário atualizado com sucesso.' }); // caso seja atualizado com sucesso
     }
 
@@ -212,9 +237,8 @@ exports.userDelete = async (req, res) => {
 
 // POST 
 exports.userRegister = async (req, res, next) => {
-  const { userVerificationCode } = req.body; // declaração do código de verificação
+  const { userVerificationCode } = req.body; 
 
-  // declaração dos valores guardados na sessão
   const nome = req.session.nome;
   const sobrenome = req.session.sobrenome;
   const email = req.session.email

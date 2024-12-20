@@ -2,6 +2,9 @@ header.header{
     background-color: var(--header-background);
     height: 8.4rem;
     width: 100%;
+    position: sticky;
+    top: 26px;
+    z-index: 99;
 }
 
 header > nav{
@@ -9,7 +12,6 @@ header > nav{
     align-items: center;
     justify-content: space-between;
     padding: 0 4rem;
-    width: 100%;
     height: 100%;
     font-size: 1.3rem;
 }

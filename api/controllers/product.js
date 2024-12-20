@@ -40,21 +40,20 @@ exports.productRegister = async (req, res) => {
         }
 
         // Extrair os dados do corpo da requisição
-        const { nomeProduto, descricaoProduto, categoriaProduto, precoProduto, estoqueProduto } = req.body;
+        const { nomeProduto, descricaoProduto, secaoProduto, precoProduto, estoqueProduto } = req.body;
 
         // Verificar se todos os campos obrigatórios estão presentes
-        if (!nomeProduto || !descricaoProduto || !categoriaProduto || !precoProduto || !estoqueProduto || !req.files) {
+        if (!nomeProduto || !descricaoProduto || !secaoProduto || !precoProduto || !estoqueProduto || !req.files) {
             return res.status(400).json({ message: 'Atenção aos campos obrigatórios (marcados com *)' });
         }
 
         try {
-            const formattedCategorys = formatCategorys(categoriaProduto);
 
             // Criar o produto na base de dados
             await Product.create({
                 nome: nomeProduto,
                 descricao: descricaoProduto,
-                categoria: formattedCategorys,
+                secao: secaoProduto,
                 preco: precoProduto,
                 estoque: estoqueProduto,
                 status: estoqueProduto > 0 ? 1 : 0,
@@ -70,13 +69,3 @@ exports.productRegister = async (req, res) => {
     });
 };
 
-// Função para formatar as categorias
-const formatCategorys = (categorys) => {
-    if (!categorys.includes(',')) return categorys;
-
-    const splitedCategorys = categorys.trim().split(',');
-
-    const formattedCategorys = splitedCategorys.map(category => category.trim());
-
-    return formattedCategorys;
-};

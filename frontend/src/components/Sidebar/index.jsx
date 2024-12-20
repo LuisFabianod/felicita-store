@@ -20,7 +20,7 @@ export const Sidebar = ({display, setDisplay, isAdmin}) => {
     }
 
     return (
-        <dialog style={{display}} className='sidebar'> 
+        <dialog style={{display}} className='sidebar' open={display === 'none'? false : true}> 
             
             <header className='sidebar-header'>
                 <p>Olá, {localStorage.getItem('userName')}</p>

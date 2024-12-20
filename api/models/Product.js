@@ -20,10 +20,6 @@ const Product = sequelize.define('Product', {
         type: DataTypes.JSON,
         allowNull: false,
     },
-    variacoesPeso:{
-        type: DataTypes.JSON,
-        allowNull: false,
-    },
     secao: {
         type: DataTypes.STRING,
         allowNull: false,

@@ -4,6 +4,9 @@
     justify-content: center;
     background-color: var(--adbar-background);
     padding: .5rem;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
 }
 
 .ad-bar p{

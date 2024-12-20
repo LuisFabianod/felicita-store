@@ -1,11 +1,12 @@
 import './styles.css'
-import React, { useRef, useState} from 'react'
+import React, { useContext, useRef, useState} from 'react'
 import { handleSubmit } from './api/handleSubmit'
 import { handleDelete } from './api/handleDelete'
 import { usePutInputValuesEffect } from './hooks/usePutInputValuesEffect'
 
 import { EmailUpdateForm } from './sub-components/EmailUpdateForm'
 import { PasswordUpdateForm } from './sub-components/PasswordUpdateForm'
+import { IsLoadingContext } from '../../Contexts/isLoading'
 
 export const AccountSettings = () => {
 
@@ -16,6 +17,8 @@ export const AccountSettings = () => {
   const [ passwordUpdateFormDisplay, setPasswordUpdateFormDisplay] = useState('none') // estado para controle do dialog de update de senha
 
   const [apiMessage, setApiMessage] = useState(''); // estado para mensagem de feedback do servidor
+
+  const { setIsLoading } = useContext(IsLoadingContext);
 
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // estado para controle da animação de erro da span erro
 
@@ -39,7 +42,7 @@ export const AccountSettings = () => {
    
    if(!userWantsToDelete) return
 
-   handleDelete(setApiMessage, triggerApiMessageShake);
+   handleDelete(setApiMessage, triggerApiMessageShake, setIsLoading);
 
   }
 
@@ -47,7 +50,7 @@ export const AccountSettings = () => {
     <>
     <div className='form-update'>
     
-      <form  className='form' onSubmit={(e) => handleSubmit(e, nomeRef , setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
+      <form  className='form' onSubmit={(e) => handleSubmit(e, nomeRef , setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>
       {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
         <h1>Meus Dados</h1>
         <div>

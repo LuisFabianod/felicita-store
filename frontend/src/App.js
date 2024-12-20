@@ -10,30 +10,34 @@ import { AdminInterface } from './components/AdminInterface';
 import { Header } from './components/Header';
 
 import { IsAdminContext } from './Contexts/IsAdmin';
+import { IsLoadingContext } from './Contexts/isLoading';
 
-function App() {  
+function App() {
 
-  const [isAdmin, setIsAdmin] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <>
-      
+
       <Router>
-        <IsAdminContext.Provider value={{isAdmin, setIsAdmin}}>
-        <Header/>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/auth/reset-password" element={<ResetPassword />} />
-          <Route path="/terms" element={<Terms/>}/>
-          <Route path="/privacy-politics" element={<Privacy/>}/>
-          <Route path="/admin-interface" element={<AdminInterface/>}/>
-        </Routes>
+        <IsAdminContext.Provider value={{ isAdmin, setIsAdmin }}>
+          <IsLoadingContext.Provider value={{ isLoading, setIsLoading }}>
+          <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/auth/reset-password" element={<ResetPassword />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy-politics" element={<Privacy />} />
+              <Route path="/admin-interface" element={<AdminInterface />} />
+            </Routes>
+          </IsLoadingContext.Provider>
         </IsAdminContext.Provider>
       </Router>
 
-      </>
+    </>
   );
 }
 

@@ -2,7 +2,7 @@ import { shouldSubmit } from '../utils/validation';
 import { nameFormatation } from '../utils/nameFormatation';
 
 // Função para tratar o envio do formulário
-export const handleVerifyEmail = async (e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref,termsCheck, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
+export const handleVerifyEmail = async (e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref,termsCheck, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão
     
     // Validação do formulário
@@ -30,18 +30,21 @@ export const handleVerifyEmail = async (e, nomeRef, sobrenomeRef, emailRef, pass
           body: JSON.stringify(formData),
           credentials: 'include'
         });
-
+        
+        setIsLoading(true);
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {
-
+          setIsLoading(false);
           setApiMessage(data.message); // define o texto da div api-message 
           
         } else {
+          setIsLoading(false);
           setApiMessage(data.message); // define o texto da div api-message 
           triggerApiMessageShake(); // ativação da animação de erro
         }
       } catch (error) {
+        setIsLoading(false);
         console.error(error)
         setApiMessage('Erro ao enviar dados. Verifique sua conexão.'); // define o texto da div api-message 
         triggerApiMessageShake(); // ativação da animação de erro

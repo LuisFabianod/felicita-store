@@ -1,7 +1,7 @@
 import { shouldSubmit } from '../utils/validation';
 
 // Função para tratar o envio do formulário
-export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
+export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão
     try{
     // Validação do formulário
@@ -18,13 +18,16 @@ export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageS
           },
           body: JSON.stringify(formData) 
         });
-
+        
+        setIsLoading(true);
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {
+            setIsLoading(false);
             setApiMessage(data.message); // define o texto da div api-message 
             localStorage.setItem('userName', nomeRef.current.value) // edita o nome do usuário no localStorage
         } else {
+          setIsLoading(false);
           setApiMessage(data.message); // define o texto da div api-message 
           triggerApiMessageShake(); // ativação da animação de erro
         }
@@ -33,6 +36,7 @@ export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageS
         
         }
       }catch(error){
+        setIsLoading(false);
         setApiMessage('Erro no servidor'); // define o texto da div api-message 
       }
       }

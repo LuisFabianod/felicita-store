@@ -1,9 +1,10 @@
 import './styles.css'
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { handleSubmit } from './api/handleSubmit';
 import { ResetPasswordRequest } from './sub-component/ResetPasswordRequest';
 import showPasswordIcon from '../../images/open-eye.png'
 import hidePasswordIcon from '../../images/closed-eye.png'
+import { IsLoadingContext } from '../../Contexts/isLoading';
 
 export const FormLogin = () => {
 
@@ -19,6 +20,8 @@ export const FormLogin = () => {
   const [resetPasswordDisplay, setResetPasswordDisplay] = useState('none') // estado para controle do dialog de update de email
 
   const [apiMessage, setApiMessage] = useState('');   // Estado para feedback da API (sucesso ou erro)
+
+  const { setIsLoading } = useContext(IsLoadingContext);
 
   const [rememberSession, setRememberSession] = useState(false); // Estado para checkBox rememberSession
 
@@ -49,7 +52,7 @@ export const FormLogin = () => {
   return (
     <>
       <div className='form-login'>
-        <form className='form' onSubmit={(e) => handleSubmit(e, emailRef, passwordRef, setApiMessage, rememberSession, triggerApiMessageShake, triggerErrorMessageShake)}>
+        <form className='form' onSubmit={(e) => handleSubmit(e, emailRef, passwordRef, setApiMessage, rememberSession, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>
           {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
           <h1>Faça seu login</h1>
           <div className='email'>
