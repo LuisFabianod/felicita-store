@@ -2,7 +2,7 @@ import './styles.css'
 import React, { useContext } from "react";
 import { AccountSettings } from '../../components/AccountSettings';
 
-import { IsLoadingContext } from '../../Contexts/isLoading';
+import { IsLoadingContext } from '../../Contexts/IsLoading'
 import { LoadingSpinner } from '../../components/Loading';
 
 export const Account = () => {

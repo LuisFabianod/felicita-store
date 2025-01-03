@@ -1,7 +1,7 @@
 import { shouldSubmit } from '../utils/validation';
 
 // Função para tratar o envio do formulário
-export const handleSubmit = async (e, token, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
+export const handleSubmit = async (e, token, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão
     try{
       // Validação do formulário
@@ -11,6 +11,7 @@ export const handleSubmit = async (e, token, passwordRef, password2Ref, setApiMe
         token // token com id do usuário
       };
 
+        setIsLoading(true);
         const response = await fetch('http://localhost:5000/account/reset-password', { // acessa a rota de reset da senha da api, com os dados do form
           method: 'POST',
           headers: {
@@ -22,17 +23,20 @@ export const handleSubmit = async (e, token, passwordRef, password2Ref, setApiMe
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {
-            setApiMessage(data.message); // define o texto da div api-message 
+            setIsLoading(false);
+            setApiMessage(data.message); 
         } else {
-          setApiMessage(data.message); // define o texto da div api-message 
-          triggerApiMessageShake(); // ativação da animação de erro
+          setIsLoading(false);
+          setApiMessage(data.message); 
+          triggerApiMessageShake(); 
         }
       
     }else{
-      triggerErrorMessageShake(); // ativação da animação de erro
+      triggerErrorMessageShake(); 
     }
     }catch(error){
-      setApiMessage('Erro no servidor') // define o texto da div api-message 
+      setIsLoading(false);
+      setApiMessage('Erro no servidor')
     }
     
   }

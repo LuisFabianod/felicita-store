@@ -22,6 +22,7 @@ export const handleVerifyEmail = async (e, nomeRef, sobrenomeRef, emailRef, pass
         
       try {
         // Envia os dados para a API
+        setIsLoading(true);
         const response = await fetch('http://localhost:5000/account/verify-email', {
           method: 'POST',
           headers: {
@@ -30,8 +31,7 @@ export const handleVerifyEmail = async (e, nomeRef, sobrenomeRef, emailRef, pass
           body: JSON.stringify(formData),
           credentials: 'include'
         });
-        
-        setIsLoading(true);
+                
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {

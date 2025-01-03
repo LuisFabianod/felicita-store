@@ -1,7 +1,8 @@
-import React, { useRef, useState} from 'react'
+import React, { useContext, useRef, useState} from 'react'
 import { handleSubmit } from './api/handleSubmit'
 
-import closeIcon from '../../../../images/x.png'
+import closeIcon from '../../../../assets/images/x.png'
+import { IsLoadingContext } from '../../../../Contexts/IsLoading';
 
 export const ResetPasswordRequest = ({resetPasswordDisplay, setResetPasswordDisplay}) => {
 
@@ -13,6 +14,8 @@ export const ResetPasswordRequest = ({resetPasswordDisplay, setResetPasswordDisp
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false);
 
   const [isApiMessageShaking, setApiMessageIsShaking] = useState(false);
+
+  const { setIsLoading } = useContext(IsLoadingContext);
 
   const triggerErrorMessageShake = () => { // ativa a animação de erro nos inputs 
     setIsErrorMessageShaking(true);
@@ -28,7 +31,7 @@ export const ResetPasswordRequest = ({resetPasswordDisplay, setResetPasswordDisp
     <dialog className='secure-update-form'style={{display: resetPasswordDisplay}}>
      <div className='form-update'>
     
-      <form  className='form' onSubmit={(e) => handleSubmit(e , emailRef,setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
+      <form  className='form' onSubmit={(e) => handleSubmit(e , emailRef,setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>
       {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
         <div className='div-close-icon'>
         <img src={closeIcon} alt="close-icon" className='close-form-icon' onClick={() => setResetPasswordDisplay('none')}/>

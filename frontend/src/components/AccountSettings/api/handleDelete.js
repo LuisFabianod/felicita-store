@@ -3,6 +3,7 @@ export const handleDelete = async ( setApiMessage, triggerApiMessageShake, setIs
   try{
         const userEmail = localStorage.getItem('userEmail')
 
+        setIsLoading(true);
         const response = await fetch('http://localhost:5000/account/delete', { // acessa a rota de delete da api com os dados do form
           method: 'DELETE',
           headers: {
@@ -10,7 +11,7 @@ export const handleDelete = async ( setApiMessage, triggerApiMessageShake, setIs
           },
           body: JSON.stringify({userEmail}) 
         });
-        setIsLoading(true);
+
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {

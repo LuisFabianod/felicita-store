@@ -1,12 +1,12 @@
 import './styles.css'
 import React, { useContext, useRef, useState} from 'react'
 import { handleSubmit } from './api/handleSubmit'
-import { PasswordChecks } from '../../../form-cadastro/sub-components/password-check';
+import { PasswordChecks } from '../../../AccountRegisterForm/sub-components/password-check';
 
-import closeIcon from '../../../../images/x.png'
-import showPasswordIcon from '../../../../images/open-eye.png'
-import hidePasswordIcon from '../../../../images/closed-eye.png'
-import { IsLoadingContext } from '../../../../Contexts/isLoading';
+import closeIcon from '../../../../assets/images/x.png'
+import showPasswordIcon from '../../../../assets/images/open-eye.png'
+import hidePasswordIcon from '../../../../assets/images/closed-eye.png'
+import { IsLoadingContext } from '../../../../Contexts/IsLoading';
 
 
 export const PasswordUpdateForm = ({passwordUpdateFormDisplay, setPasswordUpdateFormDisplay}) => {
@@ -53,7 +53,7 @@ export const PasswordUpdateForm = ({passwordUpdateFormDisplay, setPasswordUpdate
     <dialog className='secure-update-form'style={{display: passwordUpdateFormDisplay}}>
      <div className='form-update'>
     
-      <form  className='form' onSubmit={(e) => handleSubmit(e, newPasswordRef, newPassword2Ref, passwordRef,setApiMessage, triggerApiMessageShake, triggerErrorMessageShake)}>
+      <form  className='form' onSubmit={(e) => handleSubmit(e, newPasswordRef, newPassword2Ref, passwordRef,setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>
       {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
         <div className='div-close-icon'>
         <img src={closeIcon} alt="close-icon" className='close-form-icon' onClick={() => setPasswordUpdateFormDisplay('none')}/>

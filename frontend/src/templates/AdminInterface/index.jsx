@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { ProductRegister } from './sub-components/ProductRegister/index'
+import { ProductRegister } from '../../components/ProductRegister/index'
 import { IsAdminContext } from '../../Contexts/IsAdmin';
-import { IsLoadingContext } from '../../Contexts/isLoading';
-import { LoadingSpinner } from '../Loading';
+import { IsLoadingContext } from '../../Contexts/IsLoading';
+import { LoadingSpinner } from '../../components/Loading';
 
 export const AdminInterface = () => {
     const {isAdmin } = useContext(IsAdminContext);

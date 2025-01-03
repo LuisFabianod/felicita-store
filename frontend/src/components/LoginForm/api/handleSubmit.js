@@ -11,6 +11,7 @@ export const handleSubmit = async (e, emailRef, passwordRef, setApiMessage, reme
         password: passwordRef.current.value, // senha enviada pelo form
         rememberSession // valor da checkBox rememberSession (true | false)
       };
+
         setIsLoading(true); 
         const response = await fetch('http://localhost:5000/account/login-user', { // acessa a rota de login da api, com os dados do form
           method: 'POST',
@@ -39,7 +40,6 @@ export const handleSubmit = async (e, emailRef, passwordRef, setApiMessage, reme
         }
       
     }else{
-      setIsLoading(false);
       triggerErrorMessageShake(); // ativação da animação de erro
     }
     }catch(error){

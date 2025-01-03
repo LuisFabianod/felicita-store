@@ -1,6 +1,6 @@
 import { useEffect } from "react"; 
-import circleImage from '../../../images/circulo.png'; // imagem que indica que a restrição não foi cumprida
-import checkImage from '../../../images/marca-de-verificacao.png'; // imagem que indica que a restrição foi cumprida
+import circleImage from '../assets/images/circulo.png'; // imagem que indica que a restrição não foi cumprida
+import checkImage from '../assets/images/marca-de-verificacao.png'; // imagem que indica que a restrição foi cumprida
 
 export const usePasswordRestrictsEffect = (passwordRef, setLowerCaseSrc, setUpperCaseSrc, setNumberSrc, setMinDigitsSrc) => {
     useEffect(() => {

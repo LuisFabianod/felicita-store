@@ -11,6 +11,7 @@ export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageS
         newName: nomeRef.current.value // nome enviado pelo form
       };
       
+        setIsLoading(true);
         const response = await fetch('http://localhost:5000/account/update', { // acessa a rota de update da api com os dados do form
           method: 'PUT',
           headers: {
@@ -19,7 +20,6 @@ export const handleSubmit = async (e, nomeRef, setApiMessage, triggerApiMessageS
           body: JSON.stringify(formData) 
         });
         
-        setIsLoading(true);
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {

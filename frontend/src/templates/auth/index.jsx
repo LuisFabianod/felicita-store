@@ -1,9 +1,9 @@
 import './styles.css'
 import React, { useContext } from "react";
-import { FormCadastro } from '../../components/form-cadastro';
-import { FormLogin } from '../../components/form-login';
+import { AccountRegisterForm } from '../../components/AccountRegisterForm';
+import { LoginForm } from '../../components/LoginForm';
 
-import { IsLoadingContext } from '../../Contexts/isLoading';
+import { IsLoadingContext } from '../../Contexts/IsLoading/';
 import { LoadingSpinner } from '../../components/Loading';
 
 
@@ -18,8 +18,8 @@ export const Auth = () => {
        }  
 
         <div className={'auth' }>    
-            <FormLogin/>
-            <FormCadastro/>
+            <LoginForm />
+            <AccountRegisterForm/>
 
         </div>
           

@@ -2,10 +2,10 @@ import './styles.css'
 import React, { useRef, useState, useContext} from 'react'
 import { handleSubmit } from './api/handleSubmit'
 
-import closeIcon from '../../../../images/x.png'
-import showPasswordIcon from '../../../../images/open-eye.png'
-import hidePasswordIcon from '../../../../images/closed-eye.png'
-import { IsLoadingContext } from '../../../../Contexts/isLoading'
+import closeIcon from '../../../../assets/images/x.png'
+import showPasswordIcon from '../../../../assets/images/open-eye.png'
+import hidePasswordIcon from '../../../../assets/images/closed-eye.png'
+import { IsLoadingContext } from '../../../../Contexts/IsLoading'
 
 export const EmailUpdateForm = ({emailUpdateFormDisplay, setEmailUpdateFormDisplay}) => {
 

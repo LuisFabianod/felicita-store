@@ -4,13 +4,13 @@ import { Home } from './templates/home';
 import { Auth } from './templates/auth';
 import { Account } from './templates/account';
 import { ResetPassword } from './components/ResetPassword';
-import { Terms } from './components/terms-and-privacyPolitcs/terms';
-import { Privacy } from './components/terms-and-privacyPolitcs/privacy';
-import { AdminInterface } from './components/AdminInterface';
+import { Terms } from './components/TermsAndPrivacyPolitics/terms';
+import { Privacy } from './components/TermsAndPrivacyPolitics/privacy';
+import { AdminInterface } from './templates/AdminInterface';
 import { Header } from './components/Header';
 
 import { IsAdminContext } from './Contexts/IsAdmin';
-import { IsLoadingContext } from './Contexts/isLoading';
+import { IsLoadingContext } from './Contexts/IsLoading';
 
 function App() {
 

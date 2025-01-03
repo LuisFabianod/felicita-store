@@ -2,11 +2,11 @@ import './styles.css'
 import React, { useContext, useRef, useState} from 'react'
 import { handleSubmit } from './api/handleSubmit'
 import { handleDelete } from './api/handleDelete'
-import { usePutInputValuesEffect } from './hooks/usePutInputValuesEffect'
+import { usePutInputValuesEffect } from '../../hooks/usePutInputValuesEffect'
 
 import { EmailUpdateForm } from './sub-components/EmailUpdateForm'
 import { PasswordUpdateForm } from './sub-components/PasswordUpdateForm'
-import { IsLoadingContext } from '../../Contexts/isLoading'
+import { IsLoadingContext } from '../../Contexts/IsLoading'
 
 export const AccountSettings = () => {
 

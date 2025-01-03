@@ -2,13 +2,13 @@
 export const handleSubmit = async (e, verificationCodeRef, setApiMessage, triggerApiMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão
     
-      // Coleta o código de verificação de e-mail
       const formData = {
         userVerificationCode: verificationCodeRef.current.value
       }
         
       try {
         // Envia os dados para a API (código de verificação de e-mail)
+        setIsLoading(true);
         const response = await fetch('http://localhost:5000/account/register-user', {
           method: 'POST',
           headers: {
@@ -18,7 +18,6 @@ export const handleSubmit = async (e, verificationCodeRef, setApiMessage, trigge
           credentials: 'include'
         });
 
-        setIsLoading(true);
         const data = await response.json(); // Processa a resposta da API
 
         if (response.ok) {

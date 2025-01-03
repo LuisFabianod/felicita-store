@@ -2,11 +2,11 @@ import './styles.css'
 import React, { useContext, useRef, useState } from "react";
 import { handleSubmit } from './api/handleSubmit';
 import { ResetPasswordRequest } from './sub-component/ResetPasswordRequest';
-import showPasswordIcon from '../../images/open-eye.png'
-import hidePasswordIcon from '../../images/closed-eye.png'
-import { IsLoadingContext } from '../../Contexts/isLoading';
+import showPasswordIcon from '../../assets/images/open-eye.png'
+import hidePasswordIcon from '../../assets/images/closed-eye.png'
+import { IsLoadingContext } from '../../Contexts/IsLoading';
 
-export const FormLogin = () => {
+export const LoginForm = () => {
 
   // DECLARAÇÃO DOS FIELDS(INPUTS) 
   const emailRef = useRef(null);

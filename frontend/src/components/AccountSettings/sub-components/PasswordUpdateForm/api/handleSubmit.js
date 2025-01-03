@@ -1,17 +1,19 @@
 import { shouldSubmit } from '../utils/validation';
 
 // Função para tratar o envio do formulário
-export const handleSubmit = async (e, newPasswordRef, newPassword2Ref, passwordRef,setApiMessage, triggerApiMessageShake, triggerErrorMessageShake) => {
+export const handleSubmit = async (e, newPasswordRef, newPassword2Ref, passwordRef,setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão
     try{
-      // Validação do formulário
-    if (shouldSubmit(newPasswordRef, newPassword2Ref)) {
-      const formData = { // objeto que será passado no body da requisição
-        actualEmail: localStorage.getItem('userEmail'), // email associado ao usuário atualmente
-        newPassword: newPasswordRef.current.value, // senha nova enviada pelo form
-        actualPassword: passwordRef.current.value, // senha associada ao usuário enviada pelo form
+     
+    if (shouldSubmit(newPasswordRef, newPassword2Ref)) {  // Validação do formulário
+
+      const formData = { 
+        actualEmail: localStorage.getItem('userEmail'), 
+        newPassword: newPasswordRef.current.value, 
+        actualPassword: passwordRef.current.value, 
       };
 
+        setIsLoading(true);
         const response = await fetch('http://localhost:5000/account/update', { // acessa a rota de update da api, com os dados do form
           method: 'PUT',
           headers: {
@@ -20,16 +22,19 @@ export const handleSubmit = async (e, newPasswordRef, newPassword2Ref, passwordR
           body: JSON.stringify(formData) 
         });
 
-        const data = await response.json(); // Processa a resposta da API
+        const data = await response.json(); 
 
         if (response.ok) {
+            setIsLoading(false);
             setApiMessage(data.message); // define o texto da div api-message 
             
         } else {
+          setIsLoading(false);
           setApiMessage(data.message); // define o texto da div api-message 
           triggerApiMessageShake(); // ativação da animação de erro
         }
     }else{
+      setIsLoading(false);
       triggerErrorMessageShake(); // ativação da animação de erro
     }
     }catch(error){

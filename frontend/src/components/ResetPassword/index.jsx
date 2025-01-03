@@ -1,11 +1,12 @@
 import './styles.css'
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { handleSubmit } from './api/handleSubmit';
 
-import { PasswordChecks } from '../form-cadastro/sub-components/password-check';
+import { PasswordChecks } from '../AccountRegisterForm/sub-components/password-check';
 
-import showPasswordIcon from '../../images/open-eye.png'
-import hidePasswordIcon from '../../images/closed-eye.png'
+import showPasswordIcon from '../../assets/images/open-eye.png'
+import hidePasswordIcon from '../../assets/images/closed-eye.png'
+import { IsLoadingContext } from '../../Contexts/IsLoading';
 
 const params = new URLSearchParams(window.location.search);
 export const ResetPassword = () => {
@@ -26,6 +27,8 @@ export const ResetPassword = () => {
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // Estado para animação de erro mensagem dos inputs
 
   const [isApiMessageShaking, setIsApiMessageShaking] = useState(false); // Estado para animação de erro da div api-message
+
+  const { setIsLoading } = useContext(IsLoadingContext);
 
   const handleShowPasswordClick = () => {
     if(showPassword === 'password'){
@@ -51,7 +54,7 @@ export const ResetPassword = () => {
     <>
     <div className='reset-password-div'>
       <div className='form-cadastro'>
-        <form className='form' onSubmit={(e) => handleSubmit(e, token , passwordRef, password2Ref, setApiMessage,  triggerApiMessageShake, triggerErrorMessageShake)}>
+        <form className='form' onSubmit={(e) => handleSubmit(e, token , passwordRef, password2Ref, setApiMessage,  triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>
        {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
         <h1>Restaurar senha</h1>
         <div className='password'>

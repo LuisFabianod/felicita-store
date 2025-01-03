@@ -1,7 +1,7 @@
 import './styles.css'
 import React, { useState, useRef, useContext } from 'react'
 import { handleSubmit } from './api/handleSubmit.js';
-import { IsLoadingContext } from '../../../../Contexts/isLoading.jsx';
+import { IsLoadingContext } from '../../Contexts/IsLoading'
 
 export const ProductRegister = () => {
 

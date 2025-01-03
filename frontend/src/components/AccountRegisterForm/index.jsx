@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { handleSubmit } from './api/handleSubmit';
 import { PasswordChecks } from './sub-components/password-check';
 import { handleVerifyEmail } from './api/handleVerifyEmail';
-import showPasswordIcon from '../../images/open-eye.png'
-import hidePasswordIcon from '../../images/closed-eye.png'
-import { IsLoadingContext } from '../../Contexts/isLoading';
+import showPasswordIcon from '../../assets/images/open-eye.png'
+import hidePasswordIcon from '../../assets/images/closed-eye.png'
+import { IsLoadingContext } from '../../Contexts/IsLoading';
 
-export const FormCadastro = () => {
+export const AccountRegisterForm = () => {
 
   // DECLARAÇÃO DOS FIELDS(INPUTS) 
   const nomeRef = useRef(null);

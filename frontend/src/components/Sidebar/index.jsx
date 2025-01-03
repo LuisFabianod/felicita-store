@@ -1,14 +1,17 @@
 import './styles.css'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
-import closeIcon from '../../images/x.png'
+import closeIcon from '../../assets/images/x.png'
 import { handleExit } from './api/handleExit'
+import { IsLoadingContext } from '../../Contexts/IsLoading';
 
 export const Sidebar = ({display, setDisplay, isAdmin}) => {
 
     const [apiMessage, setApiMessage] = useState(''); // Estado para mensagem da API (sucesso ou erro)
 
     const [isApiMessageShaking, setIsApiMessageShaking] = useState(false); // Estado para animação de erro mensagem da API
+
+    const { setIsLoading } = useContext(IsLoadingContext);
 
     const triggerApiMessageShake = () => { // ativa a animação de erro na div api-message 
     setIsApiMessageShaking(true);
@@ -34,7 +37,7 @@ export const Sidebar = ({display, setDisplay, isAdmin}) => {
             
             <footer className='sidebar-footer'>
             {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`}>{apiMessage}</div>}
-                <button className='exit-account' onClick={() => handleExit(setApiMessage, triggerApiMessageShake)}>
+                <button className='exit-account' onClick={() => handleExit(setApiMessage, triggerApiMessageShake, setIsLoading)}>
                     SAIR
                 </button>
             </footer>
