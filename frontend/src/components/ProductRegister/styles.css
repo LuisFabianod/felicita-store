@@ -53,3 +53,23 @@
     display: flex;
     justify-content: space-between;
 }
+
+.add-images{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+
+.imagem-input > img{
+    margin: auto;
+    padding: 10px;
+    max-width: 80%;
+    max-height: 200px;
+
+}
+
+.imagem-input > img:not([src]) {
+    display: none; 
+}

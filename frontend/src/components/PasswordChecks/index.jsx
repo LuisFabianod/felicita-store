@@ -1,7 +1,7 @@
 import './styles.css'
 import React, { useState } from "react";
-import { usePasswordRestrictsEffect } from '../../../../hooks/usePasswordRestrictsEffect';
-import circleImage from '../../../../assets/images/circulo.png'
+import { usePasswordRestrictsEffect } from '../../hooks/usePasswordRestrictsEffect';
+import circleImage from '../../assets/images/circulo.png'
 
 
 export const PasswordChecks = ({passwordRef}) => {

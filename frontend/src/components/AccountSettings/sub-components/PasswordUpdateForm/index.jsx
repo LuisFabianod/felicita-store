@@ -1,7 +1,7 @@
 import './styles.css'
 import React, { useContext, useRef, useState} from 'react'
 import { handleSubmit } from './api/handleSubmit'
-import { PasswordChecks } from '../../../AccountRegisterForm/sub-components/password-check';
+import { PasswordChecks } from '../../../PasswordChecks';
 
 import closeIcon from '../../../../assets/images/x.png'
 import showPasswordIcon from '../../../../assets/images/open-eye.png'

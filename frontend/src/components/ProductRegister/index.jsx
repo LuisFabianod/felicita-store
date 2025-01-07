@@ -1,7 +1,8 @@
 import './styles.css'
-import React, { useState, useRef, useContext } from 'react'
+import React, { useState, useRef, useContext, } from 'react'
 import { handleSubmit } from './api/handleSubmit.js';
 import { IsLoadingContext } from '../../Contexts/IsLoading'
+import { ImageInput } from './sub-components/ImageInput/index.jsx';
 
 export const ProductRegister = () => {
 
@@ -12,9 +13,12 @@ export const ProductRegister = () => {
   const precoProdutoRef = useRef(null);
   const precoCustoProdutoRef = useRef(null);
   const estoqueProdutoRef = useRef(null);
-  const imagem1ProdutoRef = useRef(null);
+  const imagemProdutoRef = useRef(null);
+  const imagesDiv = useRef(null)
 
-  const [ margemLucro, setMargemLucro ] = useState(null)
+  const [totalImages, setTotalImages] = useState([1])
+
+  const [margemLucro, setMargemLucro] = useState(null)
 
   const [apiMessage, setApiMessage] = useState(''); // estado para mensagem de feedback do servidor
 
@@ -37,7 +41,6 @@ export const ProductRegister = () => {
   const handlePrecoProdutoChange = () => {
     setMargemLucro('Margem de lucro = ' + ((precoProdutoRef.current.value - precoCustoProdutoRef.current.value) / precoProdutoRef.current.value) * 100 + '%')
   }
-  
 
   return (
     <>
@@ -84,7 +87,7 @@ export const ProductRegister = () => {
               </div>
 
               <div className='nome'>
-                <input type='number' placeholder={margemLucro? margemLucro : 'Margem de Lucro'} name='preco' ></input>
+                <input type='number' placeholder={margemLucro ? margemLucro : 'Margem de Lucro'} name='preco' ></input>
                 <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
               </div>
             </div>
@@ -94,15 +97,28 @@ export const ProductRegister = () => {
               <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
             </div>
 
-            <div className='nome'>
-              <label htmlFor="imagem1">*Imagem 1</label>
-              <input type='file' name='imagem1' ref={imagem1ProdutoRef}></input>
-              <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+            <div className='add-images' ref={imagesDiv}>
+              <h2>Imagens</h2>
+
+              {
+                totalImages.map((_, index) => {
+                  return (
+                      <ImageInput key={index}
+                        imagemProdutoRef={imagemProdutoRef}
+                        isErrorMessageShaking={isErrorMessageShaking}
+                        setTotalImages={setTotalImages}
+                        totalImages={totalImages}
+                        index={index}
+                      />
+                  )
+                })
+              }
             </div>
+
 
           </div>
 
-          <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, imagem1ProdutoRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>Registrar novo produto</button>
+          <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, imagemProdutoRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>Registrar novo produto</button>
 
         </form>
 

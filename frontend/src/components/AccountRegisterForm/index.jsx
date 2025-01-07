@@ -2,7 +2,7 @@ import './styles.css'
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from 'react-router-dom';
 import { handleSubmit } from './api/handleSubmit';
-import { PasswordChecks } from './sub-components/password-check';
+import { PasswordChecks } from '../PasswordChecks'
 import { handleVerifyEmail } from './api/handleVerifyEmail';
 import showPasswordIcon from '../../assets/images/open-eye.png'
 import hidePasswordIcon from '../../assets/images/closed-eye.png'
