@@ -11,7 +11,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.changeColumn('produtos', 'descricao', {
+    await queryInterface.changeColumn('products', 'descricao', {
       type: Sequelize.STRING,
       allowNull: false,
       unique: true  // Restaurar a restrição UNIQUE, caso necessário
