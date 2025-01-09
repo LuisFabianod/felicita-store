@@ -5,23 +5,23 @@ const path = require('path');
 const Product = require('../models/Product');
 const getFormattedDate = require('../utils/getFormattedDate');
 
-// Diretório para armazenar as imagens com base no formato da data e segredo
-const imagesDirectory = getFormattedDate() + '_' + process.env.IMG_SECRET;
+// Diretório para armazenar todas as imagens
+const imagesDirectory = getFormattedDate() + '_' + process.env.IMG_SECRET;  // Diretório único para todas as imagens
 
 // Configuração do multer para o upload de arquivos
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '..', 'images', imagesDirectory)); // Diretório onde as imagens serão salvas
+        // Diretório único para todas as imagens
+        cb(null, path.join(__dirname, '..', 'images', imagesDirectory)); 
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname); // Usar o nome original do arquivo
+        // Usar o nome original do arquivo para garantir a unicidade
+        cb(null, Date.now() + '_' + file.originalname); // Adiciona um timestamp para evitar sobrescrição
     }
 });
 
-const upload = multer({ storage: storage }).fields([
-    { name: 'imagem1Produto', maxCount: 1 },
-    { name: 'imagem2Produto', maxCount: 1 }
-]);
+// Usando `multer.any()` para permitir múltiplos arquivos com qualquer nome de campo
+const upload = multer({ storage: storage }).any(); 
 
 exports.productRegister = async (req, res) => {
     // Caminho completo do diretório de imagens
@@ -41,14 +41,22 @@ exports.productRegister = async (req, res) => {
 
         // Extrair os dados do corpo da requisição
         const { nomeProduto, descricaoProduto, secaoProduto, precoProduto, estoqueProduto } = req.body;
-
+        
         // Verificar se todos os campos obrigatórios estão presentes
-        if (!nomeProduto || !descricaoProduto || !secaoProduto || !precoProduto || !estoqueProduto || !req.files) {
+        if (!nomeProduto || !descricaoProduto || !secaoProduto || !precoProduto || !estoqueProduto) {
             return res.status(400).json({ message: 'Atenção aos campos obrigatórios (marcados com *)' });
         }
 
-        try {
+        // Obter o array de imagens enviadas
+        const imagens = req.files;
 
+        if (!imagens || imagens.length === 0) {
+            return res.status(400).json({ message: 'Nenhuma imagem foi enviada' });
+        }
+
+        // Criar o produto na base de dados
+        try {
+            
             // Criar o produto na base de dados
             await Product.create({
                 nome: nomeProduto,
@@ -57,7 +65,9 @@ exports.productRegister = async (req, res) => {
                 preco: precoProduto,
                 estoque: estoqueProduto,
                 status: estoqueProduto > 0 ? 1 : 0,
-                imagens: imagesDirectory, // Armazenar o diretório das imagens
+                variacoesTamanho: 1, // TEMPORARIO
+                tabelaMedidas: {"oi": "oi"}, // TEMPORARIO
+                imagens: imagesDirectory, // Armazenar os caminhos das imagens
             });
 
             return res.status(200).json({ message: 'Produto adicionado na base de dados' });
@@ -68,4 +78,3 @@ exports.productRegister = async (req, res) => {
         }
     });
 };
-
