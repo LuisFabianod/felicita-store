@@ -1,5 +1,6 @@
+import './styles.css'
 import React, { useContext } from 'react';
-import { ProductRegister } from '../../components/ProductRegister/index'
+import { Link } from 'react-router-dom';
 import { IsAdminContext } from '../../Contexts/IsAdmin';
 import { IsLoadingContext } from '../../Contexts/IsLoading';
 import { LoadingSpinner } from '../../components/Loading';
@@ -18,7 +19,10 @@ export const AdminInterface = () => {
         {isAdmin &&
         
         <>
-        <ProductRegister/>
+        <div className='admin-interface'>
+            <h1>Interface Administradora</h1>
+            <Link to={'register-product'}>Registrar novo produto</Link>
+        </div>
         </>
         
         }

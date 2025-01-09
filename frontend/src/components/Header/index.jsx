@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { verifySession } from './api/verifySession';
 import { SearchBar } from '../SearchBar';
 import { Sidebar } from '../Sidebar';
-import { AdBar } from '../AdBar';
 import menuIcon from '../../assets/images/menu-aberto.png';
 import logo from '../../assets/images/logo-1664432756-1710783691-e7c9f15949d0fb60bd64eba7c0a25daf1710783691-320-0.webp'
 
@@ -30,8 +29,12 @@ export const Header = () => {
     return (
         <>
             <Sidebar display={display} setDisplay={setDisplay} isAdmin={isAdmin} />
-            <AdBar />
             <header className='header'>
+                <div className='ad-bar'>
+                    <div className='container-fluid'>
+                        <p className='add-bar-message'>USE O CUPOM "BEMVINDA" E GANHE 10% OFF EM SUA PRIMEIRA COMPRA</p>
+                    </div>
+                </div>
                 <nav className='nav'>
                     <div className='logo-and-searchbar'>
 
@@ -44,7 +47,7 @@ export const Header = () => {
 
                     </div>
 
-                    <SearchBar placeholder={'Oque você está buscando?'}/>
+                    <SearchBar placeholder={'Oque você está buscando?'} />
 
                     <Link to={'/'} className='logo'><img src={logo} alt="logo-felicita" className='logo-img' /></Link>
 

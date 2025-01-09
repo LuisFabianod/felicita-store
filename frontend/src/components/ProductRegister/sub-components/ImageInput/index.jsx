@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
-export const ImageInput = ({ imagemProdutoRef, isErrorMessageShaking, setTotalImages, totalImages, index }) => {
+export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages, index }) => {
+
+    const imagemProdutoRef = useRef(null)
 
     const [image, setImage] = useState(null);
 
@@ -23,15 +25,13 @@ export const ImageInput = ({ imagemProdutoRef, isErrorMessageShaking, setTotalIm
     }
 
     return (
-        <>
-            <div className='nome imagem-input'>
-                <label htmlFor="imagem1">*Imagem {index + 1}</label>
+            <div className='nome image-input'>
+                <label htmlFor={`imagem${index + 1}`}>*Imagem {index + 1}</label>
                 <img src={image} alt='img-preview' />
                 <input type='file' name='imagem1' ref={imagemProdutoRef} onInput={handleInput}></input>
                 
                 <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
                 
             </div>
-        </>
     )
 }

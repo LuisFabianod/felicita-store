@@ -1,9 +1,22 @@
+.ad-bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--adbar-background);
+    padding: .5rem;
+    width: 100%;
+}
+
+.ad-bar p{
+    font-size: 1rem;
+    color: var(--adbar-foreground);
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
 header.header{
     background-color: var(--header-background);
-    height: 8.4rem;
     width: 100%;
     position: sticky;
-    top: 26px;
     z-index: 99;
 }
 

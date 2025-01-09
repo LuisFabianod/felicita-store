@@ -13,7 +13,7 @@ export const Home = () => {
        {isLoading && 
         <LoadingSpinner/>
        }  
-        <div>oi <div>oi</div></div>
+       
         </>
     )
 }

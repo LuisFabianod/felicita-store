@@ -13,8 +13,8 @@ export const ProductRegister = () => {
   const precoProdutoRef = useRef(null);
   const precoCustoProdutoRef = useRef(null);
   const estoqueProdutoRef = useRef(null);
-  const imagemProdutoRef = useRef(null);
-  const imagesDiv = useRef(null)
+
+  const imagesDivRef = useRef(null);
 
   const [totalImages, setTotalImages] = useState([1])
 
@@ -47,7 +47,7 @@ export const ProductRegister = () => {
       <div className='register-product-form'>
 
         <form className='form'>
-          {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`} >{apiMessage}</div>}
+          {apiMessage && <div className={`api-message ${isApiMessageShaking ? 'shake' : ''}`}>{apiMessage}</div>}
           <h1>Registrar Novo Produto</h1>
           <div>
 
@@ -97,14 +97,13 @@ export const ProductRegister = () => {
               <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
             </div>
 
-            <div className='add-images' ref={imagesDiv}>
+            <div className='add-images' ref={imagesDivRef}>
               <h2>Imagens</h2>
 
               {
                 totalImages.map((_, index) => {
                   return (
                       <ImageInput key={index}
-                        imagemProdutoRef={imagemProdutoRef}
                         isErrorMessageShaking={isErrorMessageShaking}
                         setTotalImages={setTotalImages}
                         totalImages={totalImages}
@@ -118,12 +117,12 @@ export const ProductRegister = () => {
 
           </div>
 
-          <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, imagemProdutoRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>Registrar novo produto</button>
+          <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>Registrar novo produto</button>
 
         </form>
 
       </div>
-
+      
     </>
   )
 }
