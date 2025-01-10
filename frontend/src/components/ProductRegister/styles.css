@@ -55,6 +55,17 @@
     justify-content: space-between;
 }
 
+.estoque{
+    display: flex;
+    justify-content: space-between;
+}
+
+.estoque-infinito{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .add-images{
     width: 100%;
     padding: 15px;
@@ -82,4 +93,10 @@
 
 .image-input > img:not([src]) {
     display: none; 
+}
+
+.margem-de-lucro-p{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
 }

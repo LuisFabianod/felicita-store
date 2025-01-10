@@ -1,4 +1,4 @@
-export const handleSubmit = async (e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, setIsLoading) => {
+export const handleSubmit = async (e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, estoqueInfinito,imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão
 
     const formData = new FormData();
@@ -7,7 +7,7 @@ export const handleSubmit = async (e, nomeProdutoRef, descricaoProdutoRef, secao
     formData.append('descricaoProduto',  descricaoProdutoRef.current.value);
     formData.append('secaoProduto',  secaoProdutoRef.current.value);
     formData.append('precoProduto',  precoProdutoRef.current.value);
-    formData.append('estoqueProduto',  estoqueProdutoRef.current.value);
+    formData.append('estoqueProduto',  estoqueInfinito? -1: estoqueProdutoRef.current.value);
     
     // Percorre os inputs de imagens e adiciona os arquivos ao FormData
     totalImages.forEach((_, index) => {

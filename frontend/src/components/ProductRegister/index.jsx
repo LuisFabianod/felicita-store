@@ -14,6 +14,8 @@ export const ProductRegister = () => {
   const precoCustoProdutoRef = useRef(null);
   const estoqueProdutoRef = useRef(null);
 
+  const [estoqueInfinito, setEstoqueInfinito] = useState(false);
+
   const imagesDivRef = useRef(null);
 
   const [totalImages, setTotalImages] = useState([1])
@@ -39,7 +41,7 @@ export const ProductRegister = () => {
   };
 
   const handlePrecoProdutoChange = () => {
-    setMargemLucro('Margem de lucro = ' + ((precoProdutoRef.current.value - precoCustoProdutoRef.current.value) / precoProdutoRef.current.value) * 100 + '%')
+    setMargemLucro('Margem de lucro = ' + (((precoProdutoRef.current.value - precoCustoProdutoRef.current.value) / precoProdutoRef.current.value) * 100).toFixed(1) + '%')
   }
 
   return (
@@ -70,7 +72,7 @@ export const ProductRegister = () => {
             </div>
 
             <div className='nome'>
-              <input type='number' placeholder='*Preço (Ex: 100,00)' name='preco' ref={precoProdutoRef} ></input>
+              <input type='number' placeholder='*Preço (Ex: 100,00)' name='preco' ref={precoProdutoRef} onBlur={handlePrecoProdutoChange}></input>
               <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
             </div>
 
@@ -80,21 +82,27 @@ export const ProductRegister = () => {
             </div>
 
             <div className='margem-de-lucro'>
-
               <div className='nome'>
                 <input type='number' placeholder='Preço de Custo' name='preco' ref={precoCustoProdutoRef} onBlur={handlePrecoProdutoChange}></input>
                 <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
               </div>
 
               <div className='nome'>
-                <input type='number' placeholder={margemLucro ? margemLucro : 'Margem de Lucro'} name='preco' ></input>
+                <p className='margem-de-lucro-p'>{margemLucro ? margemLucro : 'Margem de Lucro'}</p>
                 <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
               </div>
             </div>
 
-            <div className='nome'>
-              <input type='number' placeholder='*Estoque' name='descricao' ref={estoqueProdutoRef}></input>
-              <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+            <div className='estoque'>
+              <div className='nome'>
+                <input type='number' placeholder={estoqueInfinito? 'Infinito' : '*Estoque'} name='descricao' ref={estoqueProdutoRef} disabled={estoqueInfinito}></input>
+                <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
+              </div>
+
+              <div className='estoque-infinito'>
+                <label htmlFor="estoque-infinito">Estoque infinito</label>
+                <input type="checkbox" name='estoque-infinito' onChange={() => setEstoqueInfinito(!estoqueInfinito)}/>
+              </div>
             </div>
 
             <div className='add-images' ref={imagesDivRef}>
@@ -103,12 +111,12 @@ export const ProductRegister = () => {
               {
                 totalImages.map((_, index) => {
                   return (
-                      <ImageInput key={index}
-                        isErrorMessageShaking={isErrorMessageShaking}
-                        setTotalImages={setTotalImages}
-                        totalImages={totalImages}
-                        index={index}
-                      />
+                    <ImageInput key={index}
+                      isErrorMessageShaking={isErrorMessageShaking}
+                      setTotalImages={setTotalImages}
+                      totalImages={totalImages}
+                      index={index}
+                    />
                   )
                 })
               }
@@ -117,12 +125,12 @@ export const ProductRegister = () => {
 
           </div>
 
-          <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>Registrar novo produto</button>
+          <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, estoqueInfinito,imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>Registrar novo produto</button>
 
         </form>
 
       </div>
-      
+
     </>
   )
 }
