@@ -19,9 +19,10 @@ export const AdminInterface = () => {
         {isAdmin &&
         
         <>
-        <div className='admin-interface'>
+        <div className='admin-interface' style={{display: 'flex', flexDirection: 'column'}}> 
             <h1>Interface Administradora</h1>
-            <Link to={'register-product'}>Registrar novo produto</Link>
+            <Link to={'register-product'}>Adicionar produto</Link>
+            <Link to={'products'}>Meus produtos</Link>
         </div>
         </>
         

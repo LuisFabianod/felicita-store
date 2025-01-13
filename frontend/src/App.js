@@ -12,6 +12,7 @@ import { Header } from './components/Header';
 import { IsAdminContext } from './Contexts/IsAdmin';
 import { IsLoadingContext } from './Contexts/IsLoading';
 import { ProductRegister } from './components/ProductRegister';
+import { Products } from './components/Products';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
               <Route path="/privacy-politics" element={<Privacy />} />
               <Route path="/admin-interface" element={<AdminInterface />} />
               <Route path="/admin-interface/register-product" element={<ProductRegister />} />
+              <Route path="/admin-interface/products" element={<Products />} />
             </Routes>
           </IsLoadingContext.Provider>
         </IsAdminContext.Provider>

@@ -68,3 +68,11 @@ exports.productRegister = async (req, res) => {
         }
     });
 };
+
+
+exports.loadProducts = async (req, res) => {
+
+    const products = await Product.findAll();
+
+    return res.status(200).json({products, message: 'Olá'});
+}

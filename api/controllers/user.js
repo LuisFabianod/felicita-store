@@ -117,6 +117,8 @@ exports.userLogin = async (req, res) => {
 exports.userLogout = async (req, res) => {
   try {
 
+    req.session.isAdmin = undefined;
+
     return res.status(200).json({
       // no frontend, quando a resposta do servidor for ok, o cookie será apagado
       cookieName: 'felicitaToken', // nome do cookie que vai ser retirado
