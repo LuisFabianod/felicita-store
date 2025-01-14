@@ -28,6 +28,10 @@ const Product = sequelize.define('Product', {
         type: DataTypes.FLOAT,
         allowNull: false
     },
+    precoPromocional: {
+        type: DataTypes.FLOAT,
+        allowNull: true
+    },
     estoque: {
         type: DataTypes.INTEGER,
         allowNull: false

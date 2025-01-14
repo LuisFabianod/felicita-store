@@ -6,4 +6,6 @@ router.post('/register-product', productController.productRegister);
 
 router.get('/read-products', productController.loadProducts);
 
+router.get('/images/:imagesDirectory', productController.loadImages);
+
 module.exports = router; // exporta as rotas do arquivo

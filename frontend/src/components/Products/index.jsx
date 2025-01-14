@@ -2,10 +2,11 @@ import './styles.css';
 import React, { useState, useContext, useEffect } from 'react';
 import { IsLoadingContext } from '../../Contexts/IsLoading';
 import { loadProducts } from './api/loadProducts';
+import { Product } from '../Product';
 
 export const Products = () => {
-    const [apiMessage, setApiMessage] = useState(''); // estado para mensagem de feedback do servidor
-    const [products, setProducts] = useState([]); // estado para os produtos
+    const [apiMessage, setApiMessage] = useState('');
+    const [products, setProducts] = useState([]);
 
     const { setIsLoading } = useContext(IsLoadingContext);
 
@@ -16,26 +17,19 @@ export const Products = () => {
             await loadProducts(setIsLoading, setApiMessage, setProducts);
         };
 
-        fetchProducts(); // Chama a função para buscar os produtos
+        fetchProducts();
     }, [setIsLoading]);
 
     return (
-        <>
-            <div className='register-product-form'>
-                <h1>{apiMessage}</h1>
-                {/* Exibindo os produtos */}
-                {products && products.length > 0 ? (
-                    <ul>
-                        {products.map(product => (
-                            <li key={product.id}>
-                                <strong>{product.nome}</strong> - ${product.preco}
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>Nenhum produto encontrado</p>
-                )}
-            </div>
-        </>
+        <div className='products-container'>
+            {products.length > 0 ? (
+                products.map((product) => (
+                    <Product key={product.id} product={product} />
+                ))
+            ) : (
+                <p>{apiMessage}</p>
+            )}
+        </div>
     );
 };
+

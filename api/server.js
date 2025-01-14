@@ -1,19 +1,21 @@
-const express = require('express'); // declaração do express
+const express = require('express'); 
 const session = require('express-session');
-const cors = require('cors'); // inicialização da biblioteca cors
-const cookieParser = require('cookie-parser'); // declaração da biblioteca cookie-parser 
+const cors = require('cors'); 
+const cookieParser = require('cookie-parser'); 
+const path = require('path');
 
-const app = express(); // inicialização do express
-const port = 5000; // porta que o servidor vai escutar
+const app = express(); 
+const port = 5000; 
 
 const { sequelize, connectDatabase } = require('./database/sequelize'); // declaração da conexão e da função que conecta à db
 
 connectDatabase(); // conectar à db
 
-// libera à chegada de requisições http vindas do front-end
 const corsOptions = {
     origin: 'http://localhost:3000', 
-    credentials: true, // possibilta os cookies ?
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'], 
+    credentials: true 
   };
 
   const sessionOptions = {
@@ -22,6 +24,9 @@ const corsOptions = {
     saveUninitialized: true, // Força a criação de sessões, mesmo sem dados
     cookie: { secure: false, maxAge: 3600000 } // cookie com expiração de 1 hora
 };
+
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
  
 app.use(session(sessionOptions)); // habilita o uso de req.session que será útil na verificação de e-mail
 app.use(cors(corsOptions)); // habilita o uso de cors com as configs declaradas

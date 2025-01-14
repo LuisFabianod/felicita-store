@@ -36,9 +36,9 @@ exports.productRegister = async (req, res) => {
             return res.status(500).json({ message: 'Erro ao processar os arquivos' });
         }
 
-        const { nomeProduto, descricaoProduto, secaoProduto, precoProduto, estoqueProduto } = req.body;
+        const { nomeProduto, descricaoProduto, secaoProduto, precoProduto, precoPromocional,estoqueProduto } = req.body;
 
-        if (!nomeProduto || !descricaoProduto || !secaoProduto || !precoProduto || !estoqueProduto) {
+        if (!nomeProduto || !descricaoProduto || !secaoProduto || !precoProduto || !precoPromocional || !estoqueProduto) {
             return res.status(400).json({ message: 'Atenção aos campos obrigatórios (marcados com *)' });
         }
 
@@ -54,6 +54,7 @@ exports.productRegister = async (req, res) => {
                 descricao: descricaoProduto,
                 secao: secaoProduto,
                 preco: precoProduto,
+                precoPromocional,
                 estoque: estoqueProduto,
                 status: estoqueProduto > 0 ? 1 : 0,
                 variacoesTamanho: 1, // TEMPORÁRIO
@@ -76,3 +77,27 @@ exports.loadProducts = async (req, res) => {
 
     return res.status(200).json({products, message: 'Olá'});
 }
+
+exports.loadImages = async (req, res) => {
+    
+    const imagesDirectory = path.resolve(__dirname, '../images', req.params.imagesDirectory);
+
+    const imageTypes = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
+
+    let imageNames = [];
+
+    try {
+        const files = fs.readdirSync(imagesDirectory);
+
+        imageNames = files.filter(file => {
+            const ext = path.extname(file).toLowerCase();
+            return imageTypes.includes(ext);
+        });
+
+        return res.status(200).json({ imageNames });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Erro ao carregar imagens', error: error.message });
+    }
+};

@@ -11,6 +11,7 @@ export const ProductRegister = () => {
   const descricaoProdutoRef = useRef(null);
   const secaoProdutoRef = useRef(null);
   const precoProdutoRef = useRef(null);
+  const precoPromocionalRef = useRef(null);
   const precoCustoProdutoRef = useRef(null);
   const estoqueProdutoRef = useRef(null);
 
@@ -77,7 +78,7 @@ export const ProductRegister = () => {
             </div>
 
             <div className='nome'>
-              <input type='number' placeholder='Preço Promocional' name='preco' ></input>
+              <input type='number' placeholder='Preço Promocional' name='preco'ref={precoPromocionalRef} ></input>
               <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
             </div>
 
@@ -121,11 +122,10 @@ export const ProductRegister = () => {
                 })
               }
             </div>
-
-
+            
           </div>
 
-          <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, estoqueProdutoRef, estoqueInfinito,imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>Registrar novo produto</button>
+          <button type='button' onClick={(e) => handleSubmit(e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, precoPromocionalRef,estoqueProdutoRef, estoqueInfinito,imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading)}>Registrar novo produto</button>
 
         </form>
 
