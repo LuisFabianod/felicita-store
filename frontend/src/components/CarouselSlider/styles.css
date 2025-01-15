@@ -1,0 +1,16 @@
+.carousel-container > .carousel > img{
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.carousel-btn{
+    cursor: pointer;
+}
+
+.carousel-dot{
+    cursor: pointer;
+}
+
+.active{
+    background-color: black;
+}
