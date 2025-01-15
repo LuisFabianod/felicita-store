@@ -3,6 +3,7 @@ import React, { useState, useRef, useContext, } from 'react'
 import { handleSubmit } from './api/handleSubmit.js';
 import { IsLoadingContext } from '../../Contexts/IsLoading'
 import { ImageInput } from './sub-components/ImageInput/index.jsx';
+import { LoadingSpinner } from '../Loading/index.jsx';
 
 export const ProductRegister = () => {
 
@@ -25,7 +26,7 @@ export const ProductRegister = () => {
 
   const [apiMessage, setApiMessage] = useState(''); // estado para mensagem de feedback do servidor
 
-  const { setIsLoading } = useContext(IsLoadingContext)
+  const { isLoading ,setIsLoading } = useContext(IsLoadingContext)
 
   const [isErrorMessageShaking, setIsErrorMessageShaking] = useState(false); // estado para controle da animação de erro da span erro
 
@@ -47,6 +48,10 @@ export const ProductRegister = () => {
 
   return (
     <>
+    {isLoading && 
+        <LoadingSpinner/>
+       }  
+
       <div className='register-product-form'>
 
         <form className='form'>
