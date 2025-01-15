@@ -8,7 +8,7 @@ export const Products = () => {
     const [apiMessage, setApiMessage] = useState('');
     const [products, setProducts] = useState([]);
 
-    const { setIsLoading } = useContext(IsLoadingContext);
+    const { isLoading ,setIsLoading } = useContext(IsLoadingContext);
 
     useEffect(() => {
         // Função assíncrona para carregar produtos
