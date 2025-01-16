@@ -2,7 +2,7 @@ import './styles.css'
 import React, { useState, useRef, useContext, } from 'react'
 import { handleSubmit } from './api/handleSubmit.js';
 import { IsLoadingContext } from '../../Contexts/IsLoading'
-import { ImageInput } from './sub-components/ImageInput/index.jsx';
+import { ImageInput } from '../ImageInput/index.jsx';
 import { LoadingSpinner } from '../Loading/index.jsx';
 
 export const ProductRegister = () => {

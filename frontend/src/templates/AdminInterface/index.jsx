@@ -23,6 +23,7 @@ export const AdminInterface = () => {
             <h1>Interface Administradora</h1>
             <Link to={'register-product'}>Adicionar produto</Link>
             <Link to={'products'}>Meus produtos</Link>
+            <Link to={'layout-config'}>Configurações visuais</Link>
         </div>
         </>
         

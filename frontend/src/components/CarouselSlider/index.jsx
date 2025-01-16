@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles.css';  // Para aplicar o estilo (pode criar esse arquivo)
+import './styles.css';  
 
 export const CarouselSlider = ({images, product}) => {
 
@@ -21,8 +21,11 @@ export const CarouselSlider = ({images, product}) => {
     <>
     <div className="carousel-container">
       <div className="carousel">
-    
-        <img src={`http://localhost:5000/images/${product.imagens}/${images[currentIndex]}`} alt={`Slide ${currentIndex + 1}`} className="carrossel-image" />
+
+        {product &&
+          <img src={`http://localhost:5000/images/products/${product.imagens}/${images[currentIndex]}`} alt={`Slide ${currentIndex + 1}`} className="carrossel-image" />
+        }
+        
         
        
         <button onClick={prevSlide} className="carousel-btn prev-btn">&lt;</button>

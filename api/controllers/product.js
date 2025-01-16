@@ -80,7 +80,7 @@ exports.loadProducts = async (req, res) => {
 
 exports.loadImages = async (req, res) => {
     
-    const imagesDirectory = path.resolve(__dirname, '../images', req.params.imagesDirectory);
+    const imagesDirectory = path.resolve(__dirname, '../images', 'products',req.params.imagesDirectory);
 
     const imageTypes = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
 

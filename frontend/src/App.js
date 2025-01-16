@@ -13,6 +13,7 @@ import { IsAdminContext } from './Contexts/IsAdmin';
 import { IsLoadingContext } from './Contexts/IsLoading';
 import { ProductRegister } from './components/ProductRegister';
 import { Products } from './components/Products';
+import { LayoutConfig } from './components/LayoutConfig';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
               <Route path="/admin-interface" element={<AdminInterface />} />
               <Route path="/admin-interface/register-product" element={<ProductRegister />} />
               <Route path="/admin-interface/products" element={<Products />} />
+              <Route path="/admin-interface/layout-config" element={<LayoutConfig />} />
             </Routes>
           </IsLoadingContext.Provider>
         </IsAdminContext.Provider>
