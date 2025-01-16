@@ -10,7 +10,7 @@ exports.productRegister = async (req, res) => {
     const uniqueDirectory = getFormattedDate() + '_' + process.env.IMG_SECRET;
 
     // Caminho completo do diretório de imagens
-    const uploadDirectory = path.join(__dirname, '..', 'images', uniqueDirectory);
+    const uploadDirectory = path.join(__dirname, '..', 'images', 'products', uniqueDirectory);
 
     // Verificar se o diretório existe, se não, criar
     if (!fs.existsSync(uploadDirectory)) {
@@ -42,9 +42,9 @@ exports.productRegister = async (req, res) => {
             return res.status(400).json({ message: 'Atenção aos campos obrigatórios (marcados com *)' });
         }
 
-        const imagens = req.files;
+        const images = req.files;
 
-        if (!imagens || imagens.length === 0) {
+        if (!images || images.length === 0) {
             return res.status(400).json({ message: 'Nenhuma imagem foi enviada' });
         }
 
@@ -75,7 +75,7 @@ exports.loadProducts = async (req, res) => {
 
     const products = await Product.findAll();
 
-    return res.status(200).json({products, message: 'Olá'});
+    return res.status(200).json({products});
 }
 
 exports.loadImages = async (req, res) => {

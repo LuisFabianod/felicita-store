@@ -7,6 +7,7 @@ export const Product = ({ product }) => {
 
     useEffect(() => {
         const fetchImages = async () => {
+            
             const response = await fetch(`http://localhost:5000/product/images/${product.imagens}`, {
                 method: 'GET',
                
@@ -25,7 +26,7 @@ export const Product = ({ product }) => {
 
     return (
         <>
-        <CarouselSlider images={images} product={product}/>
+        <CarouselSlider images={images} url={`http://localhost:5000/images/products/${product.imagens}`}/>
         <div className='product-container'>
             <h2>{product.nome}</h2>
             <p className='description'>Descrição: {product.descricao}</p>

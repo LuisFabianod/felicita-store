@@ -1,12 +1,43 @@
+import './styles.css'
+import React, { useContext, useState, useEffect } from "react";
+import { CarouselSlider } from '../../components/CarouselSlider';
 import { LoadingSpinner } from '../../components/Loading';
 import { IsLoadingContext } from '../../Contexts/IsLoading';
-import './styles.css'
-import React, { useContext } from "react";
-
+import { getImagesDirectory } from './api/getImagesDirectory';
 
 export const Home = () => {
 
-    const { isLoading } = useContext(IsLoadingContext);
+    const { isLoading, setIsLoading } = useContext(IsLoadingContext);
+
+    const [ apiMessage, setApiMessage ] = useState('');
+
+    const [ layoutConfig, setLayoutConfig ] = useState({});
+
+    const [ images, setImages ] = useState([]); 
+
+    useEffect( () => {
+
+            const fetchImages = async () => {
+                    
+                await getImagesDirectory(setApiMessage, setIsLoading, setLayoutConfig);
+                
+                const response = await fetch(`http://localhost:5000/layout-config/images/${layoutConfig.imagens}`, {
+                    method: 'GET',
+                   
+                });
+    
+                if (response.ok) {
+                    const data = await response.json(); 
+                    setImages(data.imageNames)
+                    console.log(data.imageNames)
+                } else {
+                    console.error('Erro ao carregar as imagens', response);
+                }
+            };
+            
+            fetchImages();
+        }, [layoutConfig.imagens, setIsLoading]);
+    
 
     return(
         <>
@@ -14,6 +45,7 @@ export const Home = () => {
         <LoadingSpinner/>
        }  
        
+       <CarouselSlider images={images} url={`http://localhost:5000/images/home/${layoutConfig.imagens}`}/>
         </>
     )
 }

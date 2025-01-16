@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './styles.css';  
 
-export const CarouselSlider = ({images, product}) => {
+export const CarouselSlider = ({images, url}) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -22,12 +22,8 @@ export const CarouselSlider = ({images, product}) => {
     <div className="carousel-container">
       <div className="carousel">
 
-        {product &&
-          <img src={`http://localhost:5000/images/products/${product.imagens}/${images[currentIndex]}`} alt={`Slide ${currentIndex + 1}`} className="carrossel-image" />
-        }
+        <img src={`${url}/${images[currentIndex]}`} alt={`Slide ${currentIndex + 1}`} className="carrossel-image" />
         
-        
-       
         <button onClick={prevSlide} className="carousel-btn prev-btn">&lt;</button>
         <button onClick={nextSlide} className="carousel-btn next-btn">&gt;</button>
       </div>

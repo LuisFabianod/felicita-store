@@ -60,7 +60,7 @@ export const LayoutConfig = () => {
             
           </div>
 
-          <button type='button' onClick={(e) => handleSubmit(e, totalImages, setApiMessage, triggerApiMessageShake, setIsLoading)}>Mudar configurações</button>
+          <button type='button' onClick={(e) => handleSubmit(e,imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, setIsLoading)}>Mudar configurações</button>
 
         </form>
 

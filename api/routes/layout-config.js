@@ -1,7 +1,11 @@
-const express = require('express'); // declaração do express
-const router = express.Router(); // declaração do router (redireciona o código com base no caminho rota da url)
+const express = require('express'); 
+const router = express.Router(); 
 const layoutConfigController = require('../controllers/layout-config');
 
-router.put('/update', layoutConfigController.layoutUpdate)
+router.put('/update', layoutConfigController.layoutUpdate);
 
-module.exports = router; // exporta as rotas do arquivo
+router.get('/read-layout', layoutConfigController.loadLayout);
+
+router.get('/images/:imagesDirectory', layoutConfigController.loadImages);
+
+module.exports = router; 
