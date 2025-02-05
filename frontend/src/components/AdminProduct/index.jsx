@@ -2,7 +2,7 @@ import { CarouselSlider } from '../CarouselSlider';
 import './styles.css';
 import React, { useState, useEffect } from 'react';
 
-export const Product = ({ product }) => {
+export const AdminProduct = ({ product }) => {
     const [images, setImages] = useState([]);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export const Product = ({ product }) => {
 
     return (
         <>
-        <CarouselSlider images={images} url={`http://localhost:5000/images/products/${product.imagens}`}/>
+        <CarouselSlider images={images} url={`http://localhost:5000/images/products/${product.imagens}`} width={'300px'} maxHeight={'200px'}/>
         <div className='product-container'>
             <h2>{product.nome}</h2>
             <p className='description'>Descrição: {product.descricao}</p>

@@ -4,6 +4,7 @@ import { CarouselSlider } from '../../components/CarouselSlider';
 import { LoadingSpinner } from '../../components/Loading';
 import { IsLoadingContext } from '../../Contexts/IsLoading';
 import { getImagesDirectory } from './api/getImagesDirectory';
+import { ClientProducts } from '../../components/ClientProducts';
 
 export const Home = () => {
 
@@ -20,7 +21,7 @@ export const Home = () => {
             const fetchImages = async () => {
                     
                 await getImagesDirectory(setApiMessage, setIsLoading, setLayoutConfig);
-                
+                if(!layoutConfig.imagens) return 
                 const response = await fetch(`http://localhost:5000/layout-config/images/${layoutConfig.imagens}`, {
                     method: 'GET',
                    
@@ -29,7 +30,6 @@ export const Home = () => {
                 if (response.ok) {
                     const data = await response.json(); 
                     setImages(data.imageNames)
-                    console.log(data.imageNames)
                 } else {
                     console.error('Erro ao carregar as imagens', response);
                 }
@@ -45,7 +45,8 @@ export const Home = () => {
         <LoadingSpinner/>
        }  
        
-       <CarouselSlider images={images} url={`http://localhost:5000/images/home/${layoutConfig.imagens}`}/>
+       <CarouselSlider images={images} url={`http://localhost:5000/images/home/${layoutConfig.imagens}`} width={'100vw'} maxHeight={'500px'}/>
+       <ClientProducts/>
         </>
     )
 }

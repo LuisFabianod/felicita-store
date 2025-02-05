@@ -1,6 +1,6 @@
 // Função para tratar o envio do formulário
 export const handleSubmit = async (e,imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, setIsLoading) => {
-    e.preventDefault(); // Impede o envio padrão
+    e.preventDefault(); 
     try{
         
         const formData = new FormData();

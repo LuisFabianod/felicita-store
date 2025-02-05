@@ -1,0 +1,24 @@
+.product-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.product-container:hover{
+    transform: scale(1.05);
+    transition: transform 1s;
+    cursor: pointer;
+}
+
+.product-name{
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.product-description{
+    display: none;
+}
+
+.product-normal-price{
+    font-size: 14px;
+}
+

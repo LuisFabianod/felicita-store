@@ -2,9 +2,9 @@ import './styles.css';
 import React, { useState, useContext, useEffect } from 'react';
 import { IsLoadingContext } from '../../Contexts/IsLoading';
 import { loadProducts } from './api/loadProducts';
-import { AdminProduct } from '../AdminProduct';
+import { ClientProduct } from '../ClientProduct';
 
-export const Products = () => {
+export const ClientProducts = () => {
     const [apiMessage, setApiMessage] = useState('');
     const [products, setProducts] = useState([]);
 
@@ -21,10 +21,10 @@ export const Products = () => {
     }, [setIsLoading]);
 
     return (
-        <div className='products-container'>
+        <div className='client-products-container'>
             {products.length > 0 ? (
                 products.map((product) => (
-                    <AdminProduct key={product.id} product={product} />
+                    <ClientProduct key={product.id} product={product} />
                 ))
             ) : (
                 <p>{apiMessage}</p>

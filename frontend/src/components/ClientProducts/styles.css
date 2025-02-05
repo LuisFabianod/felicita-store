@@ -1,0 +1,8 @@
+.client-products-container{
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    width: 100%;
+    padding: 20px;
+    gap: 40px;
+}

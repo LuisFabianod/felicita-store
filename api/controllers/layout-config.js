@@ -44,11 +44,11 @@ exports.layoutUpdate = async (req, res) => {
       }
 
       const images = req.files;
-
+      
       if (!images || images.length === 0) {
         return res.status(400).json({ message: `imagens: ${images}` });
       }
-
+     
       await LayoutConfig.update(
         { imagens: uniqueDirectory },
         { where: { id: 1 } }  
@@ -67,15 +67,15 @@ exports.layoutUpdate = async (req, res) => {
 
 exports.loadImages = async (req, res) => {
     
-    const imagesDirectory = path.resolve(__dirname, '../images', 'home',req.params.imagesDirectory);
-
-    const imageTypes = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
+    const imagesDirectory = path.resolve(__dirname, '../images', 'home', req.params.imagesDirectory);
+  
+    const imageTypes = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
 
     let imageNames = [];
 
     try {
         const files = fs.readdirSync(imagesDirectory);
-
+        
         imageNames = files.filter(file => {
             const ext = path.extname(file).toLowerCase();
             return imageTypes.includes(ext);
