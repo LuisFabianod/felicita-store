@@ -45,7 +45,7 @@ export const Home = () => {
         <LoadingSpinner/>
        }  
        
-       <CarouselSlider images={images} url={`http://localhost:5000/images/home/${layoutConfig.imagens}`} width={'100vw'} maxHeight={'500px'}/>
+       <CarouselSlider images={images} url={`http://localhost:5000/images/home/${layoutConfig.imagens}`} width={'100vw'} maxHeight={'600px'}/>
        <ClientProducts/>
         </>
     )

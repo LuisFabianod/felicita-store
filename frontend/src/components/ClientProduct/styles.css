@@ -1,6 +1,9 @@
 .product-container{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: black;
 }
 
 .product-container:hover{
@@ -10,8 +13,11 @@
 }
 
 .product-name{
-    font-size: 20px;
+    display: block;
+    line-height: 20px;
+    font-size: 16px;
     font-weight: 200;
+    max-width: 300px;
 }
 
 .product-description{

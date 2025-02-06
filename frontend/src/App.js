@@ -8,6 +8,7 @@ import { Terms } from './components/TermsAndPrivacyPolitics/terms';
 import { Privacy } from './components/TermsAndPrivacyPolitics/privacy';
 import { AdminInterface } from './templates/AdminInterface';
 import { Header } from './components/Header';
+import { ProductPage } from './components/ProductPage';
 
 import { IsAdminContext } from './Contexts/IsAdmin';
 import { IsLoadingContext } from './Contexts/IsLoading';
@@ -38,6 +39,7 @@ function App() {
               <Route path="/admin-interface/register-product" element={<ProductRegister />} />
               <Route path="/admin-interface/products" element={<Products />} />
               <Route path="/admin-interface/layout-config" element={<LayoutConfig />} />
+              <Route path="/product" element={<ProductPage/>}/>
             </Routes>
           </IsLoadingContext.Provider>
         </IsAdminContext.Provider>
