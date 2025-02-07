@@ -46,6 +46,9 @@ export const Home = () => {
        }  
        
        <CarouselSlider images={images} url={`http://localhost:5000/images/home/${layoutConfig.imagens}`} width={'100vw'} maxHeight={'600px'}/>
+       <div className='section-title'>
+        <h1>MAIS VENDIDOS</h1>
+       </div>
        <ClientProducts/>
         </>
     )

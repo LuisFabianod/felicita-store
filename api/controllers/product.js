@@ -101,3 +101,15 @@ exports.loadImages = async (req, res) => {
         return res.status(500).json({ message: 'Erro ao carregar imagens', error: error.message });
     }
 };
+
+exports.excludeProduct = async (req, res) => {
+    const { productId } = req.body;
+
+    Product.destroy({
+        where: {
+            id: productId
+        }
+    })
+
+    res.json({message: "Produto excluído com sucesso"});
+}

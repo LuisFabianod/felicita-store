@@ -8,4 +8,6 @@ router.get('/read-products', productController.loadProducts);
 
 router.get('/images/:imagesDirectory', productController.loadImages);
 
+router.delete('/exclude-product', productController.excludeProduct);
+
 module.exports = router; // exporta as rotas do arquivo

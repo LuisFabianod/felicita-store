@@ -1,9 +1,21 @@
-import { CarouselSlider } from '../CarouselSlider';
 import './styles.css';
-import React, { useState, useEffect } from 'react';
+import { CarouselSlider } from '../CarouselSlider';
+import React, { useState, useEffect, useContext } from 'react';
+import { handleExclude } from './api/handleExclude';
+import { IsLoadingContext } from '../../Contexts/IsLoading';
 
 export const AdminProduct = ({ product }) => {
     const [images, setImages] = useState([]);
+
+    const { setIsLoading } = useContext(IsLoadingContext);
+
+    const handleClick = () => {
+        const userWantsToDelete = window.confirm('Tem certeza que quer excluir o produto?');
+   
+         if(!userWantsToDelete) return
+
+        handleExclude( product.id, setIsLoading)
+    }
 
     useEffect(() => {
         const fetchImages = async () => {
@@ -37,8 +49,8 @@ export const AdminProduct = ({ product }) => {
             <p className='storage'>
                 Estoque: {product.estoque !== -1 ? product.estoque : 'Infinito'}
             </p>
-
             
+            <button onClick={handleClick}>Excluir produto</button>
         </div>
         </>
     );

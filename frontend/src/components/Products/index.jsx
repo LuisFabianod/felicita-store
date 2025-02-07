@@ -21,6 +21,8 @@ export const Products = () => {
     }, [setIsLoading]);
 
     return (
+        <>
+        {products.length === 0 && <h1 style={{textAlign: 'center'}}>Você não tem  produtos cadastrados</h1>}
         <div className='products-container'>
             {products.length > 0 ? (
                 products.map((product) => (
@@ -30,6 +32,7 @@ export const Products = () => {
                 <p>{apiMessage}</p>
             )}
         </div>
+        </>
     );
 };
 

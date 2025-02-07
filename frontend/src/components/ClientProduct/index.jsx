@@ -1,4 +1,4 @@
-import { CarouselSlider } from '../CarouselSlider';
+import { ProductPresentation } from '../ProductPresentation';
 import './styles.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -28,7 +28,7 @@ export const ClientProduct = ({ product }) => {
     return (
         <>
         <Link to={`/product`} state={{product}} className='product-container'>
-        <CarouselSlider images={images} url={`http://localhost:5000/images/products/${product.imagens}`} width={'300px'} maxHeight={'60vh'}/>
+        <ProductPresentation images={images} url={`http://localhost:5000/images/products/${product.imagens}`} width={'450px'} maxHeight={'80vh'}/>
         
             <h2 className='product-name'>{product.nome}</h2>
             <p className='product-description'>Descrição: {product.descricao}</p>

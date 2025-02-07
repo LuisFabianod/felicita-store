@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 
 export const CarouselSlider = ({ images, url, width, maxHeight }) => {
@@ -16,9 +16,7 @@ export const CarouselSlider = ({ images, url, width, maxHeight }) => {
     setCurrentIndex(index);
   };
 
-  useEffect(() => {
-    
-  }, [currentIndex])
+  
 
   return (
     <>
