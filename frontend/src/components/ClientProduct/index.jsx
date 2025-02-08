@@ -8,14 +8,14 @@ export const ClientProduct = ({ product }) => {
 
     useEffect(() => {
         const fetchImages = async () => {
-            
+
             const response = await fetch(`http://localhost:5000/product/images/${product.imagens}`, {
                 method: 'GET',
-               
+
             });
 
             if (response.ok) {
-                const data = await response.json(); 
+                const data = await response.json();
                 setImages(data.imageNames)
             } else {
                 console.error('Erro ao carregar as imagens', response);
@@ -27,21 +27,24 @@ export const ClientProduct = ({ product }) => {
 
     return (
         <>
-        <Link to={`/product`} state={{product}} className='product-container'>
-        <ProductPresentation images={images} url={`http://localhost:5000/images/products/${product.imagens}`} width={'450px'} maxHeight={'80vh'}/>
-        
-            <h2 className='product-name'>{product.nome}</h2>
-            <p className='product-description'>Descrição: {product.descricao}</p>
-            <p className='product-normal-price'>Preço: {product.preco}</p>
-            {product.precoPromocional !== 0 && (
-                <p className='product-promo-price'>Preço promocional: {product.precoPromocional}</p>
-            )}
-            <p className='product-storage'>
-                Estoque: {product.estoque !== -1 ? product.estoque : 'Infinito'}
-            </p>
+            <Link to={`/product`} state={{ product }} className='product-container'>
+                <ProductPresentation
+                    images={images}
+                    url={`http://localhost:5000/images/products/${product.imagens}`}
+                    maxWidth={'610px'}
+                    maxHeight={'80vh'}
+                    isAvailable={product.estoque !== 0} // If the product is available it sends true
+                />
 
-            
-        </Link>
+                <h2 className='product-name'>{product.nome}</h2>
+                <p className='product-normal-price'>R${product.preco}</p>
+                {product.precoPromocional !== 0 && (
+                    <p className='product-promo-price'>R${product.precoPromocional} com Pix</p>
+                )}
+
+
+
+            </Link>
         </>
     );
 };

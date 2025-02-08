@@ -1,3 +1,28 @@
+.unavailable{
+  pointer-events: none;
+}
+
+.unavailable-presentation {
+  filter:  opacity(.5) grayscale(80%);
+}
+
+.p-unavailable {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 70px;
+  height: 20px;
+  background-color: black;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  filter: opacity(1) grayscale(0);
+  z-index: 99;
+}
+
 .product-card-container {
     position: relative;
     display: flex;
@@ -26,7 +51,4 @@
     border: 1px solid var(--accent-color);
     transition: border .5s;
   }
- 
-
-  
   

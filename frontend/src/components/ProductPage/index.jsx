@@ -27,7 +27,7 @@ export const ProductPage = () => {
         };
 
         fetchImages();
-    }, [product?.imagens]);
+    }, [product?.imagens, product]);
 
     if (!product) {
         return <div>Produto não encontrado.</div>;
