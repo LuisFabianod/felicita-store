@@ -8,7 +8,7 @@ import { Terms } from './components/TermsAndPrivacyPolitics/terms';
 import { Privacy } from './components/TermsAndPrivacyPolitics/privacy';
 import { AdminInterface } from './templates/AdminInterface';
 import { Header } from './components/Header';
-import { ProductPage } from './components/ProductPage';
+import { ProductPage } from './templates/ProductPage';
 
 import { IsAdminContext } from './Contexts/IsAdmin';
 import { IsLoadingContext } from './Contexts/IsLoading';

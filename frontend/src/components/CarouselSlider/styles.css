@@ -24,8 +24,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
+    background: rgb(252, 252, 252);
+    color: rgb(209, 191, 191);
     border: none;
     font-size: 2rem;
     padding: 10px;
