@@ -1,0 +1,18 @@
+.image-input{
+    margin-bottom: 20px;
+}
+
+.img-input-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50%;
+    width: 100%;
+    
+}
+
+.delete-img-icon{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
