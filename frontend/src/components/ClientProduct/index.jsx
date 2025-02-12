@@ -1,29 +1,13 @@
+import { useFetchImagesEffect } from '../../hooks/useFetchImagesEffect';
 import { ProductPresentation } from '../ProductPresentation';
 import './styles.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const ClientProduct = ({ product }) => {
     const [images, setImages] = useState([]);
 
-    useEffect(() => {
-        const fetchImages = async () => {
-
-            const response = await fetch(`http://localhost:5000/product/images/${product.imagens}`, {
-                method: 'GET',
-
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setImages(data.imageNames)
-            } else {
-                console.error('Erro ao carregar as imagens', response);
-            }
-        };
-
-        fetchImages();
-    }, [product.imagens]);
+    useFetchImagesEffect(product, setImages);
 
     const handleClick = (e) => {
         const isAvailable = product.estoque !== 0;

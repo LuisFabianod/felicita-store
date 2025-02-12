@@ -58,6 +58,7 @@
     color: white;
     font-size: 10px;
     letter-spacing: 2px;
+    cursor: pointer;
 }
 
 .purchase-info{

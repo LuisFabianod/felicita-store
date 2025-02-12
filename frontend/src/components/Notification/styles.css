@@ -1,0 +1,90 @@
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 16px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    animation: slide-in 0.3s ease-out;
+  }
+  
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  .notification-header {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .close-notification-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  .notification-header img {
+    filter: brightness(0.5);
+    transition: filter 0.2s;
+  }
+  
+  .notification-header img:hover {
+    filter: brightness(1);
+  }
+  
+  .notification-body {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+  }
+  
+  .notification-body img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+  
+  .notification-descript {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+    word-wrap: break-word;
+    flex: 1;
+  }
+  
+  h1 {
+    font-size: 18px;
+    color: #000;
+    margin: 0 0 8px;
+  }
+
+  .counter-bar {
+    height: 4px;
+    background-color: black;
+    animation: progress-bar linear var(--duration, 3s);
+    border-radius: 4px 4px 0 0;
+  }
+  
+  @keyframes progress-bar {
+    from {
+      width: 100%;
+    }
+    to {
+      width: 0;
+    }
+  }
