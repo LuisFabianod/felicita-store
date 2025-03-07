@@ -39,7 +39,7 @@ export const ProductPage = () => {
             <div className='product-page-main'>
 
                 <div className='product-page-images'>
-                    <CarouselSlider images={images} url={`http://localhost:5000/images/products/${product.imagens}`} width={'1000px'} maxHeight={'1300px'} />
+                    <CarouselSlider images={images} url={`http://localhost:5000/images/products/${product.imagens}`} width={'50vw'} maxHeight={'100%'} />
                     <p className='product-page-description'>{product.descricao}</p>
                 </div>
 
