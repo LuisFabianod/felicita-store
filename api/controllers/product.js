@@ -103,13 +103,32 @@ exports.loadImages = async (req, res) => {
 };
 
 exports.excludeProduct = async (req, res) => {
-    const { productId } = req.body;
+    try {
+        const { productId } = req.body;
+        
+        const product = await Product.findOne({ where: { id: productId } });
 
-    Product.destroy({
-        where: {
-            id: productId
+        if (!product) {
+            return res.status(404).json({ message: "Produto não encontrado" });
         }
-    })
 
-    res.json({message: "Produto excluído com sucesso"});
-}
+        if (product.imagens) {
+            const diretorioAntigo = path.join(__dirname, "..", "images", "products", product.imagens);
+
+            try {
+                await fs.promises.rm(diretorioAntigo, { recursive: true, force: true });
+                console.log("Diretório de imagens excluído com sucesso!");
+            } catch (erro) {
+                console.error("Erro ao excluir o diretório de imagens:", erro);
+            }
+        }
+
+        await product.destroy();
+
+        return res.json({ message: "Produto excluído com sucesso" });
+
+    } catch (error) {
+        console.error("Erro ao excluir produto:", error);
+        return res.status(500).json({ message: "Erro interno do servidor" });
+    }
+};
