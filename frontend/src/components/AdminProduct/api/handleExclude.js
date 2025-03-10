@@ -1,6 +1,6 @@
 
 
-export const handleExclude = async ( productId, setIsLoading) => {
+export const handleExclude = async ( productId, setIsLoading, setNotificationTitle) => {
     try{
         setIsLoading(true); 
         const response = await fetch('http://localhost:5000/product/exclude-product', { 
@@ -10,21 +10,19 @@ export const handleExclude = async ( productId, setIsLoading) => {
           },
           body: JSON.stringify({ productId })
         });
-
+        
         if (response.ok) {
             setIsLoading(false);
-            window.alert('O produto foi excluído.');
-            window.location.reload();
-            
+            setNotificationTitle('Produto Excluído com sucesso')
         } else {
-            window.alert('Ocorreu um erro ao excluir o produto.');
             setIsLoading(false);
+            setNotificationTitle('Ocorreu um erro ao excluir o produto')
           
         }
       
     }catch(error){
-        window.alert('Erro no servidor ao excluir o produto.');
         setIsLoading(false);
+        setNotificationTitle('Erro no servidor ao excluir o produto')
     }
     
   }

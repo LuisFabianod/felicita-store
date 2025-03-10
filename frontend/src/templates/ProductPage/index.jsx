@@ -1,7 +1,9 @@
 import { CarouselSlider } from '../../components/CarouselSlider';
+import { useFetchImagesEffect } from '../../hooks/useFetchImagesEffect';
 import './styles.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Notification } from '../../components/Notification';
 
 export const ProductPage = () => {
 
@@ -10,35 +12,34 @@ export const ProductPage = () => {
 
     const [images, setImages] = useState([]);
 
-    useEffect(() => {
-        if (!product || !product.imagens) return; // Verifica se product e product.imagens existem
+    const [showNotification, setShowNotification] = useState(false);
+    const [notificationImg, setNotificationImg] = useState(null);
+    const [notificationDescript, setNotificationDescript] = useState(null);
 
-        const fetchImages = async () => {
-            const response = await fetch(`http://localhost:5000/product/images/${product.imagens}`, {
-                method: 'GET',
-            });
 
-            if (response.ok) {
-                const data = await response.json();
-                setImages(data.imageNames);
-            } else {
-                console.error('Erro ao carregar as imagens', response);
-            }
-        };
+    const handleClick = () => {
+        setShowNotification(true);
+        setNotificationDescript(product.nome);
+        setNotificationImg(`http://localhost:5000/images/products/${product.imagens}/${images[0]}`);
+    }
 
-        fetchImages();
-    }, [product?.imagens, product]);
+    useFetchImagesEffect(product, setImages);
+
 
     if (!product) {
         return <div>Produto não encontrado.</div>;
     }
 
     return (
-        <>
+        <>  
+            {showNotification && 
+                <Notification title={'Produto adicionado ao carrinho'} src={notificationImg} descript={notificationDescript} onClose={() => setShowNotification(false)}/>
+            }
+            
             <div className='product-page-main'>
 
                 <div className='product-page-images'>
-                    <CarouselSlider images={images} url={`http://localhost:5000/images/products/${product.imagens}`} width={'1000px'} maxHeight={'1300px'} />
+                    <CarouselSlider images={images} url={`http://localhost:5000/images/products/${product.imagens}`} width={'50vw'} maxHeight={'100%'} />
                     <p className='product-page-description'>{product.descricao}</p>
                 </div>
 
@@ -56,8 +57,8 @@ export const ProductPage = () => {
                     <hr />
                     <div className='purchase-section'>
                         <span>GUIA DE MEDIDAS</span>
-                        
-                        <div className='add-to-cart-container'>
+
+                        <div className='add-to-cart-container' onClick={handleClick}>
                             <button className='add-to-cart-button'>COMPRAR</button>
                         </div>
 
