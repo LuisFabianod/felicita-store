@@ -28,8 +28,7 @@ export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages,
         if (imagemProdutoRef.current) {
             imagemProdutoRef.current.value = ""; 
         }
-
-        // Removendo do total de imagens
+        
         const updatedImages = [...totalImages];
         updatedImages.splice(index, 1);
         setTotalImages(updatedImages);
