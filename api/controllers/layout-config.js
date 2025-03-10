@@ -13,9 +13,22 @@ exports.loadLayout = async (req, res) => {
 }
 
 // PUT
-exports.layoutUpdate = async (req, res) => {
 
+
+exports.layoutUpdate = async (req, res) => {
   try {
+    const layoutConfig = await LayoutConfig.findOne({ where: { id: 1 } });
+
+    if (layoutConfig && layoutConfig.imagens) {
+      const diretorioAntigo = path.join(__dirname, "..", "images", "home", layoutConfig.imagens);
+
+      try {
+        await fs.promises.rm(diretorioAntigo, { recursive: true, force: true });
+        console.log("Diretório antigo excluído com sucesso!");
+      } catch (erro) {
+        console.error("Erro ao excluir o diretório antigo:", erro);
+      }
+    }
 
     const uniqueDirectory = getFormattedDate() + '_' + process.env.LAYOUT_IMG_SECRET;
 
@@ -57,13 +70,12 @@ exports.layoutUpdate = async (req, res) => {
       return res.status(200).json({ message: 'Configurações atualizadas com sucesso.' }); // caso seja atualizado com sucesso
 
     });
-
-
   } catch (error) {
-    res.status(500).json({ message: 'Erro ao atualizar configurações' }); // caso dê algum erro na requisição
+    console.error("Erro geral:", error);
+    res.status(500).json({ message: "Erro ao atualizar configurações" });
   }
-
 };
+
 
 exports.loadImages = async (req, res) => {
     
