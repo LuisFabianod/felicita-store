@@ -5,6 +5,7 @@ import { verifySession } from './api/verifySession';
 import { SearchBar } from '../SearchBar';
 import { Sidebar } from '../Sidebar';
 import menuIcon from '../../assets/images/menu-aberto.png';
+import userIcon from '../../assets/images/user.png';
 import logo from '../../assets/images/logo-1664432756-1710783691-e7c9f15949d0fb60bd64eba7c0a25daf1710783691-320-0.webp'
 
 import { IsAdminContext } from '../../Contexts/IsAdmin';
@@ -39,9 +40,9 @@ export const Header = () => {
                     <div className='logo-and-searchbar'>
 
                         {isLoggedIn ? (
-                            <img src={menuIcon} alt="menu-icon" className='menu-icon' onClick={handleMenu} />
+                            <img src={menuIcon} alt="menu-icon" className='icon' onClick={handleMenu} />
                         ) : (
-                            <Link to="/auth">Fazer login</Link>
+                            <Link to="/auth"><img src={userIcon} alt="user-icon" className='icon' /></Link>
                         )}
 
 

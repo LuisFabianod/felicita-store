@@ -6,10 +6,13 @@ export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages,
     const imagemProdutoRef = useRef(null)
     const [image, setImage] = useState(null);
     const [isFirstTime, setIsFirstTime] = useState(true);
+    const [switched, setSwitched] = useState(false);
+    
 
     useEffect(() => {
         if (loadedImage) {
             setImage(loadedImage);
+            setIsFirstTime(false)
 
             const handleFillInput = async () => {
                 try {
@@ -39,11 +42,12 @@ export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages,
     }, [loadedImage, url]); 
 
     const handleInput = (event) => {
+        setSwitched(true);
         if (isFirstTime) {
             setTotalImages([...totalImages, 0])
             setIsFirstTime(false);
         }
-
+   
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
@@ -63,7 +67,8 @@ export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages,
         const updatedImages = [...totalImages];
         updatedImages.splice(index, 1);
         setTotalImages(updatedImages);
-        setIsFirstTime(true); 
+        setIsFirstTime(true);
+
     }
 
     return (
@@ -80,8 +85,8 @@ export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages,
                 )}
             </header>
             
-            {image && <img src={loadedImage? `${url}/${image}`: image} alt='img-preview' />}
-            <input type='file' name={`imagem${index + 1}`} ref={imagemProdutoRef} onInput={handleInput} />
+            {image && <img src={!switched ? `${url}/${image}`: image} alt='img-preview' />}
+            <input type='file' name={`imagem${index + 1}`} ref={imagemProdutoRef} onInput={handleInput} className='image-input'/>
 
             <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
         </div>
