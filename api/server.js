@@ -14,7 +14,8 @@ connectDatabase(); // conectar à db
 const corsOptions = {
     origin: 'http://localhost:3000', 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'], 
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'User-Agent'], 
+    exposedHeaders: ['Content-Length', 'Content-Type'],
     credentials: true 
   };
 
@@ -26,7 +27,12 @@ const corsOptions = {
 };
 
 
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images'), {
+    setHeaders: (res, path) => {
+        res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+    }
+}));
  
 app.use(session(sessionOptions)); // habilita o uso de req.session que será útil na verificação de e-mail
 app.use(cors(corsOptions)); // habilita o uso de cors com as configs declaradas

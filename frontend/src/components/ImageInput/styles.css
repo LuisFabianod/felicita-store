@@ -1,5 +1,5 @@
 .image-input{
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .img-input-header{
@@ -8,7 +8,7 @@
     justify-content: center;
     gap: 50%;
     width: 100%;
-    
+    margin-bottom: 10px;
 }
 
 .delete-img-icon{
