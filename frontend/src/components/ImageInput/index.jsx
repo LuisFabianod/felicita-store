@@ -3,11 +3,12 @@ import React, { useState, useRef, useEffect } from 'react'
 import closeIcon from '../../assets/images/x.png'
 
 export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages, index, loadedImage, url }) => {
-    const imagemProdutoRef = useRef(null)
+    const imagemRef = useRef(null)
     const [image, setImage] = useState(null);
     const [isFirstTime, setIsFirstTime] = useState(true);
     const [switched, setSwitched] = useState(false);
     
+
 
     useEffect(() => {
         if (loadedImage) {
@@ -26,11 +27,11 @@ export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages,
                     const dataTransfer = new DataTransfer();
                     dataTransfer.items.add(file);
             
-                    if (imagemProdutoRef.current) {
-                        imagemProdutoRef.current.files = dataTransfer.files;
+                    if (imagemRef.current) {
+                        imagemRef.current.files = dataTransfer.files;
             
                         const event = new Event('change', { bubbles: true });
-                        imagemProdutoRef.current.dispatchEvent(event);
+                        imagemRef.current.dispatchEvent(event);
                     }
                 } catch (error) {
                     console.error("Erro ao carregar a imagem:", error);
@@ -59,9 +60,10 @@ export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages,
     }
 
     const handleClick = () => {
+        setSwitched(false);
         setImage(null); 
-        if (imagemProdutoRef.current) {
-            imagemProdutoRef.current.value = ""; 
+        if (imagemRef.current) {
+            imagemRef.current.value = ""; 
         }
         
         const updatedImages = [...totalImages];
@@ -84,9 +86,9 @@ export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages,
                     />
                 )}
             </header>
-            
+            {console.log(totalImages)}
             {image && <img src={!switched ? `${url}/${image}`: image} alt='img-preview' />}
-            <input type='file' name={`imagem${index + 1}`} ref={imagemProdutoRef} onInput={handleInput} className='image-input'/>
+            <input type='file' name={`imagem${index + 1}`} ref={imagemRef} onInput={handleInput} className='image-input'/>
 
             <span className={`error-message ${isErrorMessageShaking ? 'shake' : ''}`}></span>
         </div>

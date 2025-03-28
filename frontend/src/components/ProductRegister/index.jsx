@@ -20,7 +20,7 @@ export const ProductRegister = () => {
 
   const imagesDivRef = useRef(null);
 
-  const [totalImages, setTotalImages] = useState([1])
+  const [totalImages, setTotalImages] = useState([0])
 
   const [margemLucro, setMargemLucro] = useState(null)
 
