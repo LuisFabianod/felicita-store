@@ -4,7 +4,9 @@ import { CarouselSlider } from '../../components/CarouselSlider';
 import { LoadingSpinner } from '../../components/Loading';
 import { IsLoadingContext } from '../../Contexts/IsLoading';
 import { getImagesDirectory } from './api/getImagesDirectory';
-import { ClientProducts } from '../../components/ClientProducts';
+import { ProductScroller } from '../../components/ProductScroller';
+import { useFetchProductsEffect } from '../../hooks/useFetchProductsEffect';
+import { loadProducts } from './api/loadProducts';
 
 export const Home = () => {
 
@@ -13,6 +15,8 @@ export const Home = () => {
     const [ apiMessage, setApiMessage ] = useState('');
 
     const [ layoutConfig, setLayoutConfig ] = useState({});
+
+    const [ products, setProducts ] = useState([]);
 
     const [ images, setImages ] = useState([]); 
 
@@ -37,6 +41,8 @@ export const Home = () => {
             
             fetchImages();
         }, [layoutConfig.imagens, setIsLoading]);
+
+        useFetchProductsEffect(setIsLoading, loadProducts, setApiMessage, setProducts)
     
 
     return(
@@ -47,9 +53,10 @@ export const Home = () => {
        
        <CarouselSlider images={images} url={`http://localhost:5000/images/home/${layoutConfig.imagens}`} width={'100vw'} maxHeight={'700px'}/>
        <div className='section-title'>
-        <h1>MAIS VENDIDOS</h1>
+        <h1>PRODUTOS</h1>
        </div>
-       <ClientProducts/>
+        <ProductScroller products={products}/>
+
         </>
     )
 }

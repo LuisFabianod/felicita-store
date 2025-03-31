@@ -1,13 +1,9 @@
-import { useFetchImagesEffect } from '../../hooks/useFetchImagesEffect';
 import { ProductPresentation } from '../ProductPresentation';
 import './styles.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const ClientProduct = ({ product }) => {
-    const [images, setImages] = useState([]);
-
-    useFetchImagesEffect(product, setImages);
 
     const handleClick = (e) => {
         const isAvailable = product.estoque !== 0;
@@ -19,7 +15,7 @@ export const ClientProduct = ({ product }) => {
         <>
             <Link to={`/product`} state={{ product }} onClick={handleClick} className='product-container'>
                 <ProductPresentation
-                    images={images}
+                    product={product}
                     url={`http://localhost:5000/images/products/${product.imagens}`}
                     maxWidth={'610px'}
                     maxHeight={'80vh'}

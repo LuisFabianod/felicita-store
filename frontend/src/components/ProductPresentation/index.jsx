@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import './styles.css';
+import { useFetchImagesEffect } from '../../hooks/useFetchImagesEffect';
 
-export const ProductPresentation = ({ images, url, maxWidth, maxHeight, isAvailable, productName }) => {
+export const ProductPresentation = ({ product, url, maxWidth, maxHeight, isAvailable, productName }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const [ images, setImages] = useState([])
+
+  useFetchImagesEffect(product, setImages)
 
   const handleMouseEnter= () => {
 

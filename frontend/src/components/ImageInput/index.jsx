@@ -65,9 +65,11 @@ export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages,
         if (imagemRef.current) {
             imagemRef.current.value = ""; 
         }
-        
+
         const updatedImages = [...totalImages];
+        console.log(updatedImages)
         updatedImages.splice(index, 1);
+        console.log(updatedImages, 'o')
         setTotalImages(updatedImages);
         setIsFirstTime(true);
 
@@ -86,7 +88,6 @@ export const ImageInput = ({ isErrorMessageShaking, setTotalImages, totalImages,
                     />
                 )}
             </header>
-            {console.log(totalImages)}
             {image && <img src={!switched ? `${url}/${image}`: image} alt='img-preview' />}
             <input type='file' name={`imagem${index + 1}`} ref={imagemRef} onInput={handleInput} className='image-input'/>
 

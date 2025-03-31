@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, } from 'react';
 import { IsLoadingContext } from '../../Contexts/IsLoading';
 import { loadProducts } from './api/loadProducts';
 import { ClientProduct } from '../ClientProduct';
@@ -25,4 +25,3 @@ export const ClientProducts = () => {
         </div>
     );
 };
-

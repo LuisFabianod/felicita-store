@@ -48,7 +48,15 @@
   }
 
   .product-card-image:hover{
-    border: 1px solid var(--accent-color);
-    transition: border .5s;
+    animation: opacity .1s ;
+  }
+
+  @keyframes opacity {
+    from{
+      opacity: 1;
+    }
+    to{
+      opacity: .9;
+    }
   }
   
