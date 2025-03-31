@@ -8,6 +8,7 @@ import { Notification } from '../../components/Notification';
 export const ProductPage = () => {
 
     const { state } = useLocation();
+    console.log(state)
     const { product } = state || {}; // Desestruturação para garantir que 'product' seja acessível
 
     const [images, setImages] = useState([]);
