@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 
 register();
 
@@ -19,6 +20,12 @@ export const CarouselSlider = ({ images, url, width, maxHeight }) => {
       navigation={true}
       style={{width, maxHeight}}
       loop={true}
+      autoplay={{
+        delay: 2500, 
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      }}
+      modules={[Autoplay, Pagination, Navigation]}
     >
       {images.map((img, index) => (
         <SwiperSlide key={index}>

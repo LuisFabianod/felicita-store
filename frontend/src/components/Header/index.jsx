@@ -10,18 +10,19 @@ import logo from '../../assets/images/logo-1664432756-1710783691-e7c9f15949d0fb6
 
 import { IsAdminContext } from '../../Contexts/IsAdmin';
 import { IsLoadingContext } from '../../Contexts/IsLoading';
+import { IsLoggedInContext } from '../../Contexts/IsLoggedIn';
 
 export const Header = () => {
 
-    const { isAdmin, setIsAdmin } = useContext(IsAdminContext);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { setIsAdmin } = useContext(IsAdminContext);
+    const { setIsLoggedIn } = useContext(IsLoggedInContext)
     const [display, setDisplay] = useState('none');
 
     const { setIsLoading } = useContext(IsLoadingContext)
 
     useEffect(() => {
         verifySession(setIsLoggedIn, setIsAdmin, setIsLoading);
-    }, [setIsAdmin, setIsLoading]);
+    }, [setIsAdmin, setIsLoading, setIsLoggedIn]);
 
     const handleMenu = () => {
         setDisplay('flex');
@@ -29,7 +30,7 @@ export const Header = () => {
 
     return (
         <>
-            <Sidebar display={display} setDisplay={setDisplay} isAdmin={isAdmin} />
+            <Sidebar display={display} setDisplay={setDisplay}  />
             <header className='header'>
                 <div className='ad-bar'>
                     <div className='container-fluid'>
@@ -37,14 +38,9 @@ export const Header = () => {
                     </div>
                 </div>
                 <nav className='nav'>
-                    <div className='logo-and-searchbar'>
-
-                        {isLoggedIn ? (
-                            <img src={menuIcon} alt="menu-icon" className='icon' onClick={handleMenu} />
-                        ) : (
-                            <Link to="/auth"><img src={userIcon} alt="user-icon" className='icon' /></Link>
-                        )}
-
+                    <div className='nav'>
+                        <img src={menuIcon} alt="menu-icon" className='icon' onClick={handleMenu} />
+                        <Link to="/auth"><img src={userIcon} alt="user-icon" className='icon' /></Link>
 
                     </div>
 

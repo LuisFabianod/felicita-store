@@ -9,16 +9,18 @@ import { Privacy } from './components/TermsAndPrivacyPolitics/privacy';
 import { AdminInterface } from './templates/AdminInterface';
 import { Header } from './components/Header';
 import { ProductPage } from './templates/ProductPage';
-
-import { IsAdminContext } from './Contexts/IsAdmin';
-import { IsLoadingContext } from './Contexts/IsLoading';
 import { ProductRegister } from './components/ProductRegister';
 import { Products } from './components/Products';
 import { LayoutConfig } from './components/LayoutConfig';
 
+import { IsAdminContext } from './Contexts/IsAdmin';
+import { IsLoadingContext } from './Contexts/IsLoading';
+import { IsLoggedInContext } from './Contexts/IsLoggedIn';
+
 function App() {
 
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   return (
@@ -26,6 +28,7 @@ function App() {
 
       <Router>
         <IsAdminContext.Provider value={{ isAdmin, setIsAdmin }}>
+        <IsLoggedInContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
           <IsLoadingContext.Provider value={{ isLoading, setIsLoading }}>
           <Header />
             <Routes>
@@ -42,6 +45,7 @@ function App() {
               <Route path="/product" element={<ProductPage/>}/>
             </Routes>
           </IsLoadingContext.Provider>
+          </IsLoggedInContext.Provider>
         </IsAdminContext.Provider>
       </Router>
 

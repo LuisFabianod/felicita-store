@@ -8,9 +8,9 @@
     --button-foreground: #000000;
     --label-background: #8c8a78;
     --label-foreground: #333333;
-    --adbar-background: #8c8a78;
-    --adbar-foreground: #f4e4e1;
-    --header-background: #f6f0f1;
+    --adbar-background: #eeeeee;
+    --adbar-foreground: #000000;
+    --header-background: #ffffff;
     --header-foreground: #747C6C;
     --header-transparent-foreground: ;
     --footer-background: #ffffff;
@@ -46,6 +46,7 @@
     --heading-font: "Plus Jakarta Sans", sans-serif;
     --body-font: "Lato", sans-serif;
 }
+
 
 *{
     margin: 0;

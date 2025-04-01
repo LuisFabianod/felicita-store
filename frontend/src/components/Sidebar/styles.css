@@ -7,6 +7,7 @@
     border: none;
     padding: 20px;
     z-index: 9999;
+    font-family: var(--heading-font);
 }
 
 .sidebar-header{
@@ -15,6 +16,11 @@
     justify-content: space-between;
     height: 5%;
     gap: 20px;
+    margin-bottom: 10px;
+}
+
+.sidebar-header p{
+    font-size: 16px;
 }
 
 .close-modal-icon{
@@ -30,11 +36,38 @@
     
 }
 
+.sidebar-section-div{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+    align-items: center;
+    
+}
+
+.sidebar-section-link{
+    text-decoration: none;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.mini-icon{
+    height: 18px;
+    width: 18px;
+}
+
+
 .sidebar-footer{
     height: 10%;
 }
 
 .exit-account{
+    height: 48px;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.log-in-button{
     height: 48px;
     width: 80%;
     margin-bottom: 20px;
