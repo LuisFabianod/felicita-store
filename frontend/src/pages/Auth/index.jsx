@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { AccountRegisterForm } from '../../components/AccountRegisterForm';
 import { LoginForm } from '../../components/LoginForm';
 
-import { IsLoadingContext } from '../../Contexts/IsLoading/';
+import { IsLoadingContext } from '../../Contexts/IsLoading';
 import { LoadingSpinner } from '../../components/Loading';
 
 

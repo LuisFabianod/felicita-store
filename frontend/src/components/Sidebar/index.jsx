@@ -11,6 +11,7 @@ import userIcon from '../../assets/images/user.png';
 import configIcon from '../../assets/images/config.png'
 import closeIcon from '../../assets/images/x.png'
 import bagIcon from '../../assets/images/bag.png'
+import heartIcon from '../../assets/images/heart.png'
 
 export const Sidebar = ({display, setDisplay}) => {
 
@@ -56,8 +57,12 @@ export const Sidebar = ({display, setDisplay}) => {
                 </div>
                 }
                 <div className='sidebar-section-div'>
-                     <Link to={'/admin-interface'}><img className='mini-icon' src={bagIcon} alt='config-icon'></img></Link>
-                    <Link to={'/admin-interface'} className='sidebar-section-link'>CARRINHO</Link>
+                     <Link to={'/shopping-cart'}><img className='mini-icon' src={bagIcon} alt='config-icon'></img></Link>
+                    <Link to={'/shopping-cart'} className='sidebar-section-link'>CARRINHO</Link>
+                </div>
+                <div className='sidebar-section-div'>
+                     <Link to={'/favorite-products'}><img className='mini-icon' src={heartIcon} alt='config-icon'></img></Link>
+                    <Link to={'/favorite-products'} className='sidebar-section-link'>FAVORITOS</Link>
                 </div>
                 
             </section>
