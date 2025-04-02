@@ -43,6 +43,7 @@ const accountRoutes = require('./routes/account');
 const productRoutes = require('./routes/product')
 const homeRoutes = require('./routes/home');
 const layoutConfigRoutes = require('./routes/layout-config');
+const favoriteRoutes = require('./routes/favorite');
 
 app.use(express.json()); // habilita a compreenssão das reqs como json pelo express
 app.use(express.urlencoded({ extended: true })); // receber as informações de form via req.body
@@ -52,6 +53,7 @@ app.use('/', homeRoutes)
 app.use('/product', productRoutes);
 app.use('/account', accountRoutes);
 app.use('/layout-config', layoutConfigRoutes);
+app.use('/favorite', favoriteRoutes);
 
 // sincronizar tabelas da db com os modelos do sequelize
 sequelize.sync()

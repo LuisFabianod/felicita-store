@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Home } from './templates/home';
-import { Auth } from './templates/auth';
-import { Account } from './templates/account';
 import { ResetPassword } from './components/ResetPassword';
 import { Terms } from './components/TermsAndPrivacyPolitics/terms';
 import { Privacy } from './components/TermsAndPrivacyPolitics/privacy';
-import { AdminInterface } from './templates/AdminInterface';
 import { Header } from './components/Header';
-import { ProductPage } from './templates/ProductPage';
 import { ProductRegister } from './components/ProductRegister';
 import { Products } from './components/Products';
 import { LayoutConfig } from './components/LayoutConfig';
+import { ProductPage } from './pages/ProductPage';
+import { FavoriteProducts } from './pages/FavoriteProducts';
+import { Cart } from './pages/Cart';
+import { AdminInterface } from './pages/AdminInterface';
+import { Home } from './pages/home';
+import { Auth } from './pages/Auth';
+import { Account } from './pages/Account';
 
 import { IsAdminContext } from './Contexts/IsAdmin';
 import { IsLoadingContext } from './Contexts/IsLoading';
@@ -43,6 +45,8 @@ function App() {
               <Route path="/admin-interface/products" element={<Products />} />
               <Route path="/admin-interface/layout-config" element={<LayoutConfig />} />
               <Route path="/product" element={<ProductPage/>}/>
+              <Route path="/favorite-products" element={<FavoriteProducts/>}/>
+              <Route path="/shopping-cart" element={<Cart/>}/>
             </Routes>
           </IsLoadingContext.Provider>
           </IsLoggedInContext.Provider>
