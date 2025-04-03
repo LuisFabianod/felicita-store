@@ -28,7 +28,7 @@ export const LayoutConfig = () => {
 
   useEffect(() => {
     const fetchImages = async () => {
-      if (!layoutConfig.imagens ) return; // Garantir que as imagens sejam carregadas apenas uma vez
+      if (!layoutConfig.imagens) return; // Garantir que as imagens sejam carregadas apenas uma vez
       const response = await fetch(`http://localhost:5000/layout-config/images/${layoutConfig.imagens}`, {
         method: 'GET',
       });
@@ -43,7 +43,7 @@ export const LayoutConfig = () => {
     };
 
     fetchImages();
-  }, [layoutConfig, images.length]); 
+  }, [layoutConfig, images.length]);
 
   return (
     <>

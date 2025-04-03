@@ -1,53 +1,63 @@
-const Favorite = require('../models/Favorite');
-const Product = require('../models/Product');
+const { User, Product, Favorite } = require('../models');
 
 exports.addFavoriteProduct = async (req, res) => {
     try {
-        const { userId, productId } = req.body;
+        const { productId, userEmail } = req.body;
 
-        const userExists = await User.findByPk(userId);
-        if (!userExists) {
+        if (!productId || !userEmail) {
+            return res.status(400).json({ message: 'Erro ao adicioar produto aos favoritos. 1' });
+        }
+
+        const user = await User.findOne({ where: { email: userEmail}});
+        if (!user) {
             return res.status(404).json({ message: 'Usuário não encontrado' });
         }
 
-        const productExists = await Product.findByPk(productId);
-        if (!productExists) {
+        const product = await Product.findByPk(productId);
+        if (!product) {
             return res.status(404).json({ message: 'Produto não encontrado' });
         }
 
-        const alreadyFavorited = await Favorite.findOne({ where: { userId, productId } });
+        const alreadyFavorited = await Favorite.findOne({ where: { userId: user.id, productId } });
         if (alreadyFavorited) {
             return res.status(400).json({ message: 'Produto já está nos favoritos' });
         }
         
-        await Favorite.create({ userId, productId });
+        await Favorite.create({ userId: user.id, productId });
 
-        return res.status(200).json({ message: 'Produto adicionado aos favoritos'});
+        return res.status(201).json({ message: 'Produto adicionado aos favoritos. 2'});
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: 'Erro ao adicionar produto aos favoritos', error: error.message });
+        return res.status(500).json({ message: 'Erro ao adicionar produto aos favoritos. 3', error: error.message });
     }
 };
 
 
-// GET - Carregar produtos favoritos do usuário
+// POST - Carregar produtos favoritos do usuário
 exports.loadFavoriteProducts = async (req, res) => {
     try {
-        const { userId } = req.body;
+        const { userEmail } = req.body;
 
-        const favoriteProducts = await Favorite.findAll({
-            where: { userId },
+        const user = await User.findOne({ where: { email: userEmail } });
+
+        if (!user) {
+            return res.status(404).json({ message: 'Usuário não encontrado' });
+        }
+
+        const userWithFavorites = await User.findOne({
+            where: { email: userEmail },
             include: {
-                model: Product,  
-                attributes: ['id', 'nome', 'descricao', 'preco', 'imagens'] 
+                model: Product,
+                through: { attributes: [] }, 
+                attributes: ['id', 'nome', 'descricao', 'preco', 'imagens']
             }
         });
 
-        if (favoriteProducts.length === 0) {
+        if (!userWithFavorites || userWithFavorites.Products.length === 0) {
             return res.status(400).json({ message: 'Você não tem produtos favoritos', favoriteProducts: [] });
         }
 
-        return res.status(200).json({ favoriteProducts });
+        return res.status(200).json({ favoriteProducts: userWithFavorites.Products });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Erro ao carregar favoritos', error: error.message });

@@ -1,6 +1,5 @@
 import './styles.css';
 import React, { useContext, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useFetchImagesEffect } from '../../hooks/useFetchImagesEffect';
 
 import heartIcon from '../../assets/images/heart.png'
@@ -8,6 +7,7 @@ import { IsLoggedInContext } from '../../Contexts/IsLoggedIn';
 import { IsLoadingContext } from '../../Contexts/IsLoading';
 import { Notification } from '../Notification';
 import { addFavorite } from './api/addFavorite';
+import { Link } from 'react-router-dom';
 
 
 export const ProductPresentation = ({ product, url, maxWidth, maxHeight, isAvailable, productName }) => {
@@ -25,7 +25,9 @@ export const ProductPresentation = ({ product, url, maxWidth, maxHeight, isAvail
   const { isLoggedIn } = useContext(IsLoggedInContext);
   const { setIsLoading } = useContext(IsLoadingContext);
 
-  useFetchImagesEffect(product, setImages)
+  const userEmail = localStorage.getItem('userEmail');
+
+  useFetchImagesEffect(product, setImages);
 
   const handleMouseEnter = () => {
 
@@ -47,10 +49,21 @@ export const ProductPresentation = ({ product, url, maxWidth, maxHeight, isAvail
     return
   }
 
-  const handleClick = (e, productId, isLoggedIn, setIsLoading, setNotificationTitle) => {
+  const handleClick = (e, productId) => {
     e.preventDefault();
-    addFavorite(productId, setIsLoading, setNotificationTitle);
 
+    if(!isLoggedIn){
+      setNotificationTitle('Para favoritar um produto, entre em sua conta.')
+      setNotificationDescript(<><Link to={'/auth'}>Clique aqui para entrar em sua conta</Link></>);
+      setNotificationImg(`http://localhost:5000/images/products/${product.imagens}/${images[0]}`);
+      setShowNotification(true);
+      return;
+    }
+
+    addFavorite(productId, userEmail,setIsLoading, setNotificationTitle);
+    setNotificationDescript('');
+    setNotificationImg(`http://localhost:5000/images/products/${product.imagens}/${images[0]}`);
+    setShowNotification(true);
   }
 
   return (
@@ -62,7 +75,7 @@ export const ProductPresentation = ({ product, url, maxWidth, maxHeight, isAvail
       <div className={`product-card-image ${isAvailable ? '' : 'unavailable'}`} style={{ maxWidth: maxWidth, }}>
         <div className="product-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
 
-          <div className='favorite-icon-wrapper' onClick={(e) => handleClick(e, product.id, isLoggedIn, setIsLoading, setNotificationTitle)}>
+          <div className='favorite-icon-wrapper' onClick={(e) => handleClick(e, product.id)}>
             <img className="mini-icon favorite-icon" alt="heart-icon" src={heartIcon} ref={favoriteIconRef} />
           </div>
 

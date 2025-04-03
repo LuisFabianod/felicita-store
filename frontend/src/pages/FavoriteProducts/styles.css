@@ -1,0 +1,10 @@
+.favorite-products-container{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-card-image{
+    align-self: center;
+}

@@ -17,7 +17,7 @@ export const ClientProducts = () => {
         <div className='client-products-container'>
             {products.length > 0 ? (
                 products.map((product) => (
-                    <ClientProduct key={product.id} product={product} />
+                    <ClientProduct key={product.id} product={product} maxWidth={'610px'} maxHeight={'80vh'} />
                 ))
             ) : (
                 <p>{apiMessage}</p>

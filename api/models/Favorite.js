@@ -1,7 +1,5 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../database/sequelize');
-const User = require('./User');
-const Product = require('./Product');
 
 const Favorite = sequelize.define('Favorite', {
     id: {
@@ -14,7 +12,7 @@ const Favorite = sequelize.define('Favorite', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: User,
+            model: 'Users', 
             key: 'id'
         },
         onDelete: 'CASCADE'
@@ -23,14 +21,11 @@ const Favorite = sequelize.define('Favorite', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: Product,
+            model: 'Products', 
             key: 'id'
         },
         onDelete: 'CASCADE'
     }
 });
-
-User.belongsToMany(Product, { through: Favorite, foreignKey: 'userId' });
-Product.belongsToMany(User, { through: Favorite, foreignKey: 'productId' });
 
 module.exports = Favorite;

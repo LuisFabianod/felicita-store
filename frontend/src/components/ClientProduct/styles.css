@@ -4,6 +4,7 @@
     align-items: left;
     text-decoration: none;
     color: black;
+    font-family: var(--heading-font);
 }
 
 .product-container:hover{
