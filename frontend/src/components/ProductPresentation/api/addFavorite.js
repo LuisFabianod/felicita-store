@@ -1,8 +1,9 @@
-export const handleExclude = async ( productId, setIsLoading, setNotificationTitle) => {
+export const addFavorite = async ( productId, setIsLoading, setNotificationTitle) => {
     try{
         setIsLoading(true); 
-        const response = await fetch('http://localhost:5000/product/exclude-product', { 
-          method: 'DELETE',
+
+        const response = await fetch(`http://localhost:5000/favorite/add`, { 
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },

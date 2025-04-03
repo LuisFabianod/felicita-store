@@ -47,6 +47,32 @@
     
   }
 
+  .favorite-icon-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(128, 128, 128, 0);
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    z-index: 999;
+    transition: background-color .3s;
+    border: 1px solid rgba(255, 255, 255, 0);
+  }
+
+  .favorite-icon-wrapper:hover{
+    background-color: rgba(128, 128, 128, 0.438);
+    border: 1px solid rgba(255, 255, 255, 0.993);
+  }
+
+  .favorite-icon{
+    display: none;
+    z-index: 1000;
+  }
+
   .product-card-image:hover{
     animation: opacity .1s ;
   }

@@ -33,7 +33,7 @@ exports.addFavoriteProduct = async (req, res) => {
 // GET - Carregar produtos favoritos do usuário
 exports.loadFavoriteProducts = async (req, res) => {
     try {
-        const { userId } = req.params.userId ;
+        const { userId } = req.body;
 
         const favoriteProducts = await Favorite.findAll({
             where: { userId },
