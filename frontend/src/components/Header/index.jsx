@@ -34,7 +34,7 @@ export const Header = () => {
             <header className='header'>
                 <div className='ad-bar'>
                     <div className='container-fluid'>
-                        <p className='add-bar-message'>USE O CUPOM "BEMVINDA" E GANHE 10% OFF EM SUA PRIMEIRA COMPRA</p>
+                        <p className='add-bar-message'>USE O CUPOM "PRIMEIRADEMUITAS" E GANHE 10% OFF EM SUA PRIMEIRA COMPRA</p>
                     </div>
                 </div>
                 <nav className='nav'>
