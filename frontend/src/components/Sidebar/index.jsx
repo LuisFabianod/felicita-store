@@ -60,10 +60,12 @@ export const Sidebar = ({display, setDisplay}) => {
                      <Link to={'/shopping-cart'}><img className='mini-icon' src={bagIcon} alt='config-icon'></img></Link>
                     <Link to={'/shopping-cart'} className='sidebar-section-link'>CARRINHO</Link>
                 </div>
+                {isLoggedIn && 
                 <div className='sidebar-section-div'>
                      <Link to={'/favorite-products'}><img className='mini-icon' src={heartIcon} alt='config-icon'></img></Link>
                     <Link to={'/favorite-products'} className='sidebar-section-link'>FAVORITOS</Link>
                 </div>
+                }
                 
             </section>
             

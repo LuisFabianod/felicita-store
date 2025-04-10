@@ -27,7 +27,7 @@ export const FavoriteProducts = () => {
             }     
 
         <div className='favorite-products-container'>
-            <h1>{apiMessage? apiMessage: 'Meus Favoritos'}</h1>
+            <h1>{'Meus Favoritos'}</h1>
                 <hr style={{width: '80%', margin: '30px 0px'}}/>
                     {favorites.length > 0 ? (
                         favorites.map((favoriteProduct) => (
