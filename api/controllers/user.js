@@ -66,7 +66,7 @@ exports.verifyEmail = async (req, res, next) => {
 
   await sendEmail(email, subject, content);
 
-  return res.status(200).json({ message: `Você está a um passo de criar sua conta! Enviamos um código para ${email}` });
+  return res.status(200).json({ message: `Você está a um passo de criar sua conta! Enviamos um código para ${email} (Válido por 1 hora)` });
 }
 
 // POST 
@@ -94,7 +94,7 @@ exports.userLogin = async (req, res) => {
     }
 
     // se a checkbox rememberSession estiver marcada, a sessão dura 30 dias, se não, dura 1 hora
-    const expiresIn = rememberSession ? '30d' : '1h';
+    const expiresIn = rememberSession ? '30d' : '1d';
 
     // declaração do token com a codificação do userId, chave secreta e tempo de expiração
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn });
@@ -109,6 +109,7 @@ exports.userLogin = async (req, res) => {
       userEmail: user.email // envia o email do usuário que entrou, será salvo no localStorage
     });
   } catch (error) {
+    console.error(error)
     return res.status(500).json({ message: 'Erro no servidor' }); // caso algo de errado retorna o erro
   }
 };

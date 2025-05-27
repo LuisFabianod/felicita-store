@@ -1,0 +1,16 @@
+.cart-container{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: fit-content;
+}
+
+.product-card-image{
+    align-self: center;
+}
+
+.exclude-product-cart{
+    align-self: flex-end;
+}

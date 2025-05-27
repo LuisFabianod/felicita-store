@@ -3,7 +3,7 @@ export const loadProducts = async (setIsLoading, setApiMessage, setProducts) => 
     try {
         setIsLoading(true);
         // Envia os dados para a API
-        const response = await fetch('http://localhost:5000/product/read-products', {
+        const response = await fetch('http://localhost:5000/product/load-products', {
             method: 'GET',
             credentials: 'include'
         });
@@ -12,15 +12,15 @@ export const loadProducts = async (setIsLoading, setApiMessage, setProducts) => 
 
         if (response.ok) {
             setIsLoading(false);
-            setApiMessage(data.message); // define o texto da div api-message
+            setApiMessage(data.message); 
             setProducts(data.products); 
         } else {
             setIsLoading(false);
-            setApiMessage(data.message); // define o texto da div api-message 
+            setApiMessage(data.message); 
         }
     } catch (error) {
         setIsLoading(false);
         console.error(error);
-        setApiMessage('Erro ao enviar dados. Verifique sua conexão.'); // define o texto da div api-message 
+        setApiMessage('Erro ao enviar dados. Verifique sua conexão.');
     }
 };

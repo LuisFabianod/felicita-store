@@ -24,6 +24,7 @@ export const AdminInterface = () => {
             <Link to={'register-product'}>Adicionar produto</Link>
             <Link to={'products'}>Meus produtos</Link>
             <Link to={'layout-config'}>Configurações visuais</Link>
+            <Link to={'section-config'}>Seções</Link>
         </div>
         </>
         

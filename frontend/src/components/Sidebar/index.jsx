@@ -58,12 +58,12 @@ export const Sidebar = ({display, setDisplay}) => {
                 }
                 <div className='sidebar-section-div'>
                      <Link to={'/shopping-cart'}><img className='mini-icon' src={bagIcon} alt='config-icon'></img></Link>
-                    <Link to={'/shopping-cart'} className='sidebar-section-link'>CARRINHO</Link>
+                    <Link to={'/shopping-cart'} className='sidebar-section-link'>Carrinho</Link>
                 </div>
                 {isLoggedIn && 
                 <div className='sidebar-section-div'>
                      <Link to={'/favorite-products'}><img className='mini-icon' src={heartIcon} alt='config-icon'></img></Link>
-                    <Link to={'/favorite-products'} className='sidebar-section-link'>FAVORITOS</Link>
+                    <Link to={'/favorite-products'} className='sidebar-section-link'>Favoritos</Link>
                 </div>
                 }
                 

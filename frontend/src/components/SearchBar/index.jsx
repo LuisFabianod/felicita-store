@@ -1,11 +1,32 @@
-import './styles.css'
-import React from "react"
+import './styles.css';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const SearchBar = ({placeholder}) => {
-    return(
+export const SearchBar = ({ placeholder}) => {
+    const [value, setValue] = useState('');
+
+    const navigate = useNavigate();
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); 
+            if (value.trim() !== '') {
+                navigate(`/search/?searchValue=${encodeURIComponent(value)}`);
+            }
+        }
+    };
+
+    return (
         <div className="search-bar-div">
-            <input type="text" name="search-bar" className="search-bar" placeholder={placeholder}/>
-            
+            <input
+                type="text"
+                name="search-bar"
+                className="search-bar"
+                placeholder={placeholder}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+            />
         </div>
-    )
-}
+    );
+};

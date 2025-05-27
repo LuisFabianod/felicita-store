@@ -1,9 +1,10 @@
 import { CarouselSlider } from '../../components/CarouselSlider';
 import { useFetchImagesEffect } from '../../hooks/useFetchImagesEffect';
 import './styles.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Notification } from '../../components/Notification';
+import { CartContext } from "../../Contexts/Cart";
 
 export const ProductPage = () => {
 
@@ -13,11 +14,16 @@ export const ProductPage = () => {
     const [images, setImages] = useState([]);
 
     const [showNotification, setShowNotification] = useState(false);
+    const [notificationTitle, setNotificationTitle] = useState(null);
     const [notificationImg, setNotificationImg] = useState(null);
     const [notificationDescript, setNotificationDescript] = useState(null);
 
+    const { addToCart } = useContext(CartContext);
+    
 
-    const handleClick = () => {
+    const handleBuy = async () => {
+        addToCart(product);
+        setNotificationTitle('Produto adicionado ao carrinho');
         setShowNotification(true);
         setNotificationDescript(product.nome);
         setNotificationImg(`http://localhost:5000/images/products/${product.imagens}/${images[0]}`);
@@ -33,33 +39,31 @@ export const ProductPage = () => {
     return (
         <>  
             {showNotification && 
-                <Notification title={'Produto adicionado ao carrinho'} src={notificationImg} descript={notificationDescript} onClose={() => setShowNotification(false)}/>
+                <Notification title={notificationTitle} src={notificationImg} descript={notificationDescript} onClose={() => setShowNotification(false)}/>
             }
             
             <div className='product-page-main'>
 
                 <div className='product-page-images'>
                     <CarouselSlider images={images} url={`http://localhost:5000/images/products/${product.imagens}`} width={'50vw'} maxHeight={'100%'} />
-                    <p className='product-page-description'>{product.descricao}</p>
                 </div>
 
                 <div className='product-page-info'>
                     <h2 className='product-page-name'>{product.nome}</h2>
                     <div className='product-page-price'>
                         <p className='product-page-normal-price'>R${product.preco}</p>
-                        <p>Provisório 4x R$25,00 sem juros</p>
-
-                    </div>
-                    {product.precoPromocional !== 0 && (
+                        {product.precoPromocional !== 0 && (
                         <p className='product-page-promo-price'>R${product.precoPromocional} com Pix</p>
                     )}
+                    </div>
+                    
 
                     <hr />
                     <div className='purchase-section'>
                         <span>GUIA DE MEDIDAS</span>
 
-                        <div className='add-to-cart-container' onClick={handleClick}>
-                            <button className='add-to-cart-button'>COMPRAR</button>
+                        <div className='add-to-cart-container'>
+                            <button className='add-to-cart-button' onClick={handleBuy}>COMPRAR</button>
                         </div>
 
                         <div className='purchase-info'>

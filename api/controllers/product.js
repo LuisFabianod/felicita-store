@@ -1,6 +1,7 @@
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const Fuse = require('fuse.js');
 const Product = require('../models/Product');
 const getFormattedDate = require('../utils/getFormattedDate');
 
@@ -77,6 +78,34 @@ exports.loadProducts = async (req, res) => {
     return res.status(200).json({products});
 }
 
+exports.searchProducts = async (req, res) => {
+    const { searchValue } = req.body;
+  
+    try {
+      const allProducts = await Product.findAll();
+  
+      if (!searchValue || searchValue.trim() === '') {
+        return res.status(200).json({ products: allProducts });
+      }
+  
+      const fuse = new Fuse(allProducts, {
+        keys: ['nome'],       // campos a serem buscados
+        threshold: 0.4,       // sensibilidade (0 = muito preciso, 1 = muito permissivo)
+        distance: 100         // distância máxima entre os caracteres
+      });
+  
+      const results = fuse.search(searchValue);
+      const matchedProducts = results.map(result => result.item);
+  
+      return res.status(200).json({ matchedProducts });
+  
+    } catch (error) {
+      console.error('Erro na busca inteligente:', error);
+      return res.status(500).json({ message: 'Erro ao buscar produtos' });
+    }
+  };
+
+
 exports.loadImages = async (req, res) => {
     
     const imagesDirectory = path.resolve(__dirname, '../images', 'products',req.params.imagesDirectory);
@@ -131,3 +160,5 @@ exports.excludeProduct = async (req, res) => {
         return res.status(500).json({ message: "Erro interno do servidor" });
     }
 };
+
+

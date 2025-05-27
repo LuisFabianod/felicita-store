@@ -22,7 +22,7 @@ const corsOptions = {
   const sessionOptions = {
     secret: 'segredo', // Chave para criptografar a sessão
     resave: false, // Não salva sessões não modificadas
-    saveUninitialized: true, // Força a criação de sessões, mesmo sem dados
+    saveUninitialized: false, // Não salva sessões até que algo seja atribuído
     cookie: { secure: false, maxAge: 3600000 } // cookie com expiração de 1 hora
 };
 
@@ -44,6 +44,7 @@ const productRoutes = require('./routes/product')
 const homeRoutes = require('./routes/home');
 const layoutConfigRoutes = require('./routes/layout-config');
 const favoriteRoutes = require('./routes/favorite');
+const sectionRoutes = require('./routes/section');
 
 app.use(express.json()); // habilita a compreenssão das reqs como json pelo express
 app.use(express.urlencoded({ extended: true })); // receber as informações de form via req.body
@@ -54,6 +55,7 @@ app.use('/product', productRoutes);
 app.use('/account', accountRoutes);
 app.use('/layout-config', layoutConfigRoutes);
 app.use('/favorite', favoriteRoutes);
+app.use('/section', sectionRoutes );
 
 // sincronizar tabelas da db com os modelos do sequelize
 sequelize.sync()

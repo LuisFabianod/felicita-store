@@ -18,6 +18,9 @@ import { Account } from './pages/Account';
 import { IsAdminContext } from './Contexts/IsAdmin';
 import { IsLoadingContext } from './Contexts/IsLoading';
 import { IsLoggedInContext } from './Contexts/IsLoggedIn';
+import { CartProvider } from './Contexts/Cart';
+import { SearchProducts } from './pages/SearchProducts';
+import { SectionConfig } from './components/SectionConfig';
 
 function App() {
 
@@ -29,6 +32,7 @@ function App() {
     <>
 
       <Router>
+        <CartProvider>
         <IsAdminContext.Provider value={{ isAdmin, setIsAdmin }}>
         <IsLoggedInContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
           <IsLoadingContext.Provider value={{ isLoading, setIsLoading }}>
@@ -44,13 +48,16 @@ function App() {
               <Route path="/admin-interface/register-product" element={<ProductRegister />} />
               <Route path="/admin-interface/products" element={<Products />} />
               <Route path="/admin-interface/layout-config" element={<LayoutConfig />} />
+              <Route path="/admin-interface/section-config" element={<SectionConfig />} />
               <Route path="/product" element={<ProductPage/>}/>
               <Route path="/favorite-products" element={<FavoriteProducts/>}/>
               <Route path="/shopping-cart" element={<Cart/>}/>
+              <Route path="/search" element={<SearchProducts />}/>
             </Routes>
           </IsLoadingContext.Provider>
           </IsLoggedInContext.Provider>
         </IsAdminContext.Provider>
+        </CartProvider>
       </Router>
 
     </>

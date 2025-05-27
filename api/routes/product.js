@@ -4,7 +4,9 @@ const productController = require('../controllers/product'); // declaração do 
 
 router.post('/register-product', productController.productRegister);
 
-router.get('/read-products', productController.loadProducts);
+router.get('/load-products', productController.loadProducts);
+
+router.post('/search-products', productController.searchProducts);
 
 router.get('/images/:imagesDirectory', productController.loadImages);
 

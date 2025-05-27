@@ -9,6 +9,8 @@ exports.loadLayout = async (req, res) => {
 
   const layoutConfig = await LayoutConfig.findOne({ where: { id: 1 } });
 
+  if(!layoutConfig) await LayoutConfig.create({imagens: ''})
+
   return res.status(200).json({ layoutConfig });
 }
 
