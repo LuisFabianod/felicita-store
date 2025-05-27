@@ -8,7 +8,7 @@ const sequelize = new Sequelize(
     process.env.PASSWORD, // senha do usuário
     { 
         port: process.env.PORT,
-        host: process.env.HOST_NAME, // host da db
+        host: process.env.HOST_NAME || '127.0.0.1', // host da db
         dialect: 'mysql' // define a sintax dos comandos para mysql
     }
 );
