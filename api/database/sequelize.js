@@ -2,6 +2,7 @@ require('dotenv').config(); // habilita o uso das variáveis de ambiente do .env
 const { Sequelize } = require('sequelize'); // declaração do sequelize
 
 // definição da conexão com a db, usando as variáveis do .env
+console.log('AQUI: ' + process.env.PASSWORD)
 const sequelize = new Sequelize(    
     process.env.DATABASE, // nome da db
     process.env.USER_NAME, // usuário que tem acesso à db
