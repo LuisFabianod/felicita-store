@@ -48,7 +48,7 @@ export const shouldSubmit = ( emailRef, ) => {
 
     removeErrorClass( emailRef ); // antes das validações, as classes de erro são removidas
 
-    checkEmail(emailRef); // checa se email é válido
+   // checkEmail(emailRef); // checa se email é válido
     checkForEmpty( emailRef ); // checa se existe algum campo vazio
 
     let submit = true; // variável que retornará um boolean que dirá se o form será enviado ou não
