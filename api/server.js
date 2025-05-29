@@ -12,7 +12,7 @@ const { sequelize, connectDatabase } = require('./database/sequelize'); // decla
 connectDatabase(); // conectar à db
 
 const corsOptions = {
-    origin: ['http://localhost:3000', 'https://felicitapijamaria-95zuvipes.vercel.app'], 
+    origin: ['http://localhost:3000', 'https://felicitapijamaria.vercel.app'], 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'User-Agent'], 
     exposedHeaders: ['Content-Length', 'Content-Type'],
@@ -31,7 +31,7 @@ app.use(cors(corsOptions)); // habilita o uso de cors com as configs declaradas
 
 app.use('/images', express.static(path.join(__dirname, 'images'), {
     setHeaders: (res, path) => {
-        const allowedOrigins = ['http://localhost:3000', 'https://felicitapijamaria-95zuvipes.vercel.app'];
+        const allowedOrigins = ['http://localhost:3000', 'https://felicitapijamaria.vercel.app'];
         const origin = res.req.headers.origin;
         if (allowedOrigins.includes(origin)) {
             res.setHeader('Access-Control-Allow-Origin', origin);
