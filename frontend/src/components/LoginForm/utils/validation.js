@@ -1,4 +1,4 @@
-const validator = require('validator')
+// const validator = require('validator')
 
 // SPAN CLASSNAME
 const SHOW_ERROR_MESSAGE = 'show-error-message'
@@ -26,13 +26,13 @@ export const removeErrorClass = (...inputs) => {
 };
 
 // CHECA SE O EMAIL É VÁLIDO COM O VALIDATOR
-export const checkEmail = (email) => {
+// export const checkEmail = (email) => {
     // usa a biblioteca validator para verificar se a estrutura do email é válida
-    if(!validator.isEmail(email.current.value)){
-        email.current.classList.add(SHOW_ERROR_MESSAGE);
-        showErrorMessage(email, 'Email inválido.'); // se não for válida, adiciona mensagem e classe de erro
-    }
-}
+   // if(!validator.isEmail(email.current.value)){
+     //   email.current.classList.add(SHOW_ERROR_MESSAGE);
+       // showErrorMessage(email, 'Email inválido.'); // se não for válida, adiciona mensagem e classe de erro
+//    }
+//}
 
 // ADICIONA O TEXTO PARA A SPAN DO CAMPO SOLICITADO
 const showErrorMessage = (input, msg) => {
@@ -47,7 +47,7 @@ export const shouldSubmit = (emailRef, passwordRef) => {
 
     // CHAMADA DAS FUNÇÕES DE VALIDAÇÃO DO ARQUIVO validation.js
     removeErrorClass( emailRef, passwordRef); // antes das validações, as classes de erro são removidas
-    checkEmail(emailRef); // checa se email é válido
+    // checkEmail(emailRef); // checa se email é válido
     checkForEmpty(emailRef, passwordRef); // checa se existe algum campo vazio
 
     
