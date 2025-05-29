@@ -1,4 +1,3 @@
-import validator from "validator";
 const SHOW_ERROR_MESSAGE = 'show-error-message' // SPAN CLASSNAME
 
 // REMOVE A CLASSE show-error-message NO COMEÇO DO SCRIPT
@@ -10,15 +9,6 @@ export const removeErrorClass = (...inputs) => {
         field.classList.remove(SHOW_ERROR_MESSAGE); // portanto ela é removida da div pai do campo também
     })
 };
-
-// CHECA SE O EMAIL É VÁLIDO COM O VALIDATOR
-export const checkEmail = (email) => {
-    // usa a biblioteca validator para verificar se a estrutura do email é válida
-    if(!validator.isEmail(email.current.value)){
-        email.current.classList.add(SHOW_ERROR_MESSAGE);
-        showErrorMessage(email, 'Email inválido.'); // se não for válida, adiciona mensagem e classe de erro
-    }
-}
 
 export const checkPassword = (password) => {
     const passwordValue = password.current.value; // declaração do valor do campo

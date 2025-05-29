@@ -1,4 +1,4 @@
-import validator from "validator";
+// import validator from "validator";
 const SHOW_ERROR_MESSAGE = 'show-error-message' // SPAN CLASSNAME
 
 // REMOVE A CLASSE show-error-message NO COMEÇO DO SCRIPT
@@ -12,13 +12,13 @@ export const removeErrorClass = (...inputs) => {
 };
 
 // CHECA SE O EMAIL É VÁLIDO COM O VALIDATOR
-export const checkEmail = (email) => {
+//export const checkEmail = (email) => {
     // usa a biblioteca validator para verificar se a estrutura do email é válida
-    if(!validator.isEmail(email.current.value)){
-        email.current.classList.add(SHOW_ERROR_MESSAGE);
-        showErrorMessage(email, 'Email inválido.'); // se não for válida, adiciona mensagem e classe de erro
-    }
-}
+//    if(!validator.isEmail(email.current.value)){
+//        email.current.classList.add(SHOW_ERROR_MESSAGE);
+//        showErrorMessage(email, 'Email inválido.'); // se não for válida, adiciona mensagem e classe de erro
+//    }
+//}
 
 // CHECA SE AS SENHAS SÃO IGUAIS
 export const checkEqualEmails = (email, email2) => {
@@ -56,7 +56,7 @@ export const shouldSubmit = (emailRef, email2Ref) => {
     removeErrorClass(emailRef, email2Ref); // antes das validações, as classes de erro são removidas
 
     checkEqualEmails(emailRef, email2Ref)
-    checkEmail(emailRef); // checa se existe algum campo vazio
+   // checkEmail(emailRef); // checa se existe algum campo vazio
     checkForEmpty(emailRef , email2Ref)
 
     let submit = true; // variável que retornará um boolean que dirá se o form será enviado ou não
