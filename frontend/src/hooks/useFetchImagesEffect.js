@@ -1,11 +1,13 @@
 import { useEffect } from "react"; 
+const BACK_END = process.env.REACT_APP_BACK_END;
 
 export const useFetchImagesEffect = (product, setImages) => {
+
     useEffect(() => {
         if (!product || !product.imagens) return; // Verifica se product e product.imagens existem
 
         const fetchImages = async () => {
-            const response = await fetch(`http://localhost:5000/product/images/${product.imagens}`, {
+            const response = await fetch(`${BACK_END}/product/images/${product.imagens}`, {
                 method: 'GET',
             });
 

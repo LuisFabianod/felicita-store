@@ -1,9 +1,11 @@
 export const loadProducts = async (setIsLoading, setApiMessage, setProducts) => {
     
+    const BACK_END = process.env.REACT_APP_BACK_END;
+
     try {
         setIsLoading(true);
         // Envia os dados para a API
-        const response = await fetch('http://localhost:5000/product/read-products', {
+        const response = await fetch(`${BACK_END}/product/load-products`, {
             method: 'GET',
             credentials: 'include'
         });

@@ -4,6 +4,7 @@ import { nameFormatation } from '../utils/nameFormatation';
 // Função para tratar o envio do formulário
 export const handleVerifyEmail = async (e, nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref,termsCheck, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão
+    const BACK_END = process.env.REACT_APP_BACK_END;
     
     // Validação do formulário
     if (shouldSubmit(nomeRef, sobrenomeRef, emailRef, passwordRef, password2Ref)) {
@@ -23,7 +24,7 @@ export const handleVerifyEmail = async (e, nomeRef, sobrenomeRef, emailRef, pass
       try {
         // Envia os dados para a API
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/account/verify-email', {
+        const response = await fetch(`${BACK_END}/account/verify-email`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

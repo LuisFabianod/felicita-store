@@ -3,6 +3,7 @@ import { shouldSubmit } from '../utils/validation';
 // Função para tratar o envio do formulário
 export const handleSubmit = async (e, emailRef, email2Ref, passwordRef,setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão
+    const BACK_END = process.env.REACT_APP_BACK_END;
     try{
     // Validação do formulário
     if (shouldSubmit(emailRef, email2Ref)) {
@@ -13,7 +14,7 @@ export const handleSubmit = async (e, emailRef, email2Ref, passwordRef,setApiMes
       };
 
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/account/update', { // acessa a rota de update da api, com os dados do form
+        const response = await fetch(`${BACK_END}/account/update`, { // acessa a rota de update da api, com os dados do form
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

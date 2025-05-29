@@ -12,6 +12,7 @@ import { ProductPresentation } from "../ProductPresentation";
 register();
 
 export const ProductScroller = ({ products, width, maxHeight }) => {
+    const BACK_END = process.env.REACT_APP_BACK_END;
 
     const handleClick = (e, product) => {
         const isAvailable = product.estoque !== 0;
@@ -33,7 +34,7 @@ export const ProductScroller = ({ products, width, maxHeight }) => {
                     <Link to={`/product`} state={{product}} onClick={(e) => handleClick(e, product)} className='product-container'>
                         <ProductPresentation
                             product={product}
-                            url={`http://localhost:5000/images/products/${product.imagens}`}
+                            url={`${BACK_END}/images/products/${product.imagens}`}
                             maxWidth={'610px'}
                             maxHeight={'80vh'}
                             isAvailable={product.estoque !== 0} 

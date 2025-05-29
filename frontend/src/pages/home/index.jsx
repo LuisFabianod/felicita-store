@@ -10,6 +10,8 @@ import { loadProducts } from './api/loadProducts';
 
 export const Home = () => {
 
+    const BACK_END = process.env.REACT_APP_BACK_END;
+
     const { isLoading, setIsLoading } = useContext(IsLoadingContext);
 
     const [ apiMessage, setApiMessage ] = useState('');
@@ -26,7 +28,7 @@ export const Home = () => {
                     
                 await getImagesDirectory(setApiMessage, setIsLoading, setLayoutConfig);
                 if(!layoutConfig.imagens) return 
-                const response = await fetch(`http://localhost:5000/layout-config/images/${layoutConfig.imagens}`, {
+                const response = await fetch(`${BACK_END}/layout-config/images/${layoutConfig.imagens}`, {
                     method: 'GET',
                    
                 });
@@ -40,9 +42,9 @@ export const Home = () => {
             };
             
             fetchImages();
-        }, [layoutConfig.imagens, setIsLoading]);
+        }, [layoutConfig.imagens, setIsLoading, BACK_END]);
 
-        useFetchProductsEffect(setIsLoading, loadProducts, setApiMessage, setProducts)
+        useFetchProductsEffect(setIsLoading, loadProducts, setApiMessage, setProducts)  
     
 
     return(

@@ -1,9 +1,10 @@
 // função para fazer o fetch e verificar se a sessão está ativa
 export const verifySession = async (setIsLoggedIn, setIsAdmin, setIsLoading) => {
-    try {
+    const BACK_END = process.env.REACT_APP_BACK_END;
+    try { 
 
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/verificar-login', { // acessa a rota de verificar login no back-end
+        const response = await fetch(`${BACK_END}/verificar-login`, { // acessa a rota de verificar login no back-end
             method: 'GET', 
             credentials: 'include', // inclui cookies na requisição
             headers: {

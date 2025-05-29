@@ -1,5 +1,6 @@
 export const handleSubmit = async (e, nomeProdutoRef, descricaoProdutoRef, secaoProdutoRef, precoProdutoRef, precoPromocionalRef,estoqueProdutoRef, estoqueInfinito,imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão
+    const BACK_END = process.env.REACT_APP_BACK_END;
 
     const formData = new FormData();
 
@@ -21,7 +22,7 @@ export const handleSubmit = async (e, nomeProdutoRef, descricaoProdutoRef, secao
     try {
         setIsLoading(true);
         // Envia os dados para a API
-        const response = await fetch('http://localhost:5000/product/register-product', {
+        const response = await fetch(`${BACK_END}/product/register-product`, {
             method: 'POST',
             body: formData,
             credentials: 'include'

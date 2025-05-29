@@ -1,8 +1,11 @@
 export const handleExit = async (setApiMessage, triggerApiMessageShake, setIsLoading) => {
+
+    const BACK_END = process.env.REACT_APP_BACK_END;
+
     try {
         // Faz a requisição para a rota de logout no backend
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/account/logout', {
+        const response = await fetch(`${BACK_END}/account/logout`, {
             method: 'POST', 
             credentials: 'include', // Inclui cookies na requisição
         });

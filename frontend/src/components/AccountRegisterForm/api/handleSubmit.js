@@ -1,6 +1,7 @@
 // Função para tratar o envio do formulário
 export const handleSubmit = async (e, verificationCodeRef, setApiMessage, triggerApiMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão
+    const BACK_END = process.env.REACT_APP_BACK_END;
     
       const formData = {
         userVerificationCode: verificationCodeRef.current.value
@@ -9,7 +10,7 @@ export const handleSubmit = async (e, verificationCodeRef, setApiMessage, trigge
       try {
         // Envia os dados para a API (código de verificação de e-mail)
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/account/register-user', {
+        const response = await fetch(`${BACK_END}/account/register-user`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 // Função para tratar o envio do formulário
 export const handleSubmit = async (e,imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, setIsLoading) => {
     e.preventDefault(); 
+    const BACK_END = process.env.REACT_APP_BACK_END;
     try{
         
         const formData = new FormData();
@@ -13,7 +14,7 @@ export const handleSubmit = async (e,imagesDivRef, totalImages, setApiMessage, t
         });
 
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/layout-config/update', { // acessa a rota de update da api, com os dados do form
+        const response = await fetch(`${BACK_END}/layout-config/update`, { // acessa a rota de update da api, com os dados do form
           method: 'PUT',
           body: formData,
           credentials: 'include'

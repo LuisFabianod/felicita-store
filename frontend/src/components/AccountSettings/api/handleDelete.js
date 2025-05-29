@@ -1,10 +1,11 @@
 // Função para tratar o envio do formulário
 export const handleDelete = async ( setApiMessage, triggerApiMessageShake, setIsLoading) => {
   try{
-        const userEmail = localStorage.getItem('userEmail')
+    const BACK_END = process.env.REACT_APP_BACK_END;    
+    const userEmail = localStorage.getItem('userEmail')        
 
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/account/delete', { // acessa a rota de delete da api com os dados do form
+        const response = await fetch(`${BACK_END}/account/delete`, { // acessa a rota de delete da api com os dados do form
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

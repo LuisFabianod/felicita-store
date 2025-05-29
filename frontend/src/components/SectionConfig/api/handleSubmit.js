@@ -4,7 +4,7 @@ export const handleSubmit = async (e,imagesDivRef, totalImages, setApiMessage, t
     try{
 
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000//update', { 
+        const response = await fetch(`${process.env.BACK_END}//update`, { 
           method: 'POST',
           body: formData,
           credentials: 'include'

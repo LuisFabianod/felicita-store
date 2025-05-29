@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 export const ClientProduct = ({ product, maxWidth, maxHeight, titleSize}) => {
 
+    const BACK_END = process.env.REACT_APP_BACK_END;
+
     const handleClick = (e) => {
         const isAvailable = product.estoque !== 0;
         
@@ -16,7 +18,7 @@ export const ClientProduct = ({ product, maxWidth, maxHeight, titleSize}) => {
             <Link to={`/product`} state={{ product }} onClick={handleClick} className='product-container'>
                 <ProductPresentation
                     product={product}
-                    url={`http://localhost:5000/images/products/${product.imagens}`}
+                    url={`${BACK_END}/images/products/${product.imagens}`}
                     maxWidth={maxWidth}
                     maxHeight={maxHeight}
                     isAvailable={product.estoque !== 0} // If the product is available it sends true

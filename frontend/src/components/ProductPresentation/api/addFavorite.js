@@ -1,8 +1,10 @@
 export const addFavorite = async ( productId, userEmail, setIsLoading, setNotificationTitle) => {
+
+    const BACK_END = process.env.REACT_APP_BACK_END;
     try{
         setIsLoading(true); 
 
-        const response = await fetch(`http://localhost:5000/favorite/add`, { 
+        const response = await fetch(`${BACK_END}/favorite/add`, { 
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 import { shouldSubmit } from '../utils/validation';
+const BACK_END = process.env.REACT_APP_BACK_END;
 
 // Função para tratar o envio do formulário
 export const handleSubmit = async (e, token, passwordRef, password2Ref, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading) => {
@@ -12,7 +13,7 @@ export const handleSubmit = async (e, token, passwordRef, password2Ref, setApiMe
       };
 
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/account/reset-password', { // acessa a rota de reset da senha da api, com os dados do form
+        const response = await fetch(`${BACK_END}/account/reset-password`, { // acessa a rota de reset da senha da api, com os dados do form
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

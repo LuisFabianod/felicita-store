@@ -3,6 +3,7 @@ import { shouldSubmit } from '../utils/validation';
 // Função para tratar o envio do formulário
 export const handleSubmit = async (e, emailRef, setApiMessage, triggerApiMessageShake, triggerErrorMessageShake, setIsLoading) => {
     e.preventDefault(); // Impede o envio padrão]
+    const BACK_END = process.env.REACT_APP_BACK_END;
     try{
     // Validação do formulário
     if (shouldSubmit(emailRef)) {
@@ -11,7 +12,7 @@ export const handleSubmit = async (e, emailRef, setApiMessage, triggerApiMessage
       };
 
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/account/forgot-password', { // acessa a rota de login da api, com os dados do form
+        const response = await fetch(`${BACK_END}/account/forgot-password`, { // acessa a rota de login da api, com os dados do form
           method: 'POST',   
           headers: {
             'Content-Type': 'application/json',
