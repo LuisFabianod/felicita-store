@@ -12,7 +12,7 @@ const { sequelize, connectDatabase } = require('./database/sequelize'); // decla
 connectDatabase(); // conectar à db
 
 const corsOptions = {
-    origin: 'http://localhost:3000', 
+    origin: ['http://localhost:3000', 'https://felicitapijamaria-95zuvipes.vercel.app'], 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'User-Agent'], 
     exposedHeaders: ['Content-Length', 'Content-Type'],
@@ -23,14 +23,18 @@ const corsOptions = {
     secret: 'segredo', // Chave para criptografar a sessão
     resave: false, // Não salva sessões não modificadas
     saveUninitialized: false, // Não salva sessões até que algo seja atribuído
-    cookie: { secure: false, maxAge: 3600000 } // cookie com expiração de 1 hora
+    cookie: { secure: true, maxAge: 3600000 } // cookie com expiração de 1 hora
 };
 
 
 app.use('/images', express.static(path.join(__dirname, 'images'), {
     setHeaders: (res, path) => {
-        res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-        res.setHeader("Access-Control-Allow-Credentials", "true");
+        const allowedOrigins = ['http://localhost:3000', 'https://felicitapijamaria-95zuvipes.vercel.app'];
+        const origin = res.req.headers.origin;
+        if (allowedOrigins.includes(origin)) {
+            res.setHeader('Access-Control-Allow-Origin', origin);
+            res.setHeader('Access-Control-Allow-Credentials', 'true');
+        }
     }
 }));
  
