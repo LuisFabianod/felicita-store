@@ -23,7 +23,7 @@ const corsOptions = {
     secret: 'segredo', // Chave para criptografar a sessão
     resave: false, // Não salva sessões não modificadas
     saveUninitialized: false, // Não salva sessões até que algo seja atribuído
-    cookie: { secure: true,   sameSite: 'none' ,maxAge: 3600000 } // cookie com expiração de 1 hora
+    cookie: { secure: process.env.PROD? true: false,   sameSite: process.env.PROD? 'none' : 'lax' ,maxAge: 3600000 } // cookie com expiração de 1 hora
 };
 
 app.use(cors(corsOptions)); // habilita o uso de cors com as configs declaradas
@@ -34,14 +34,15 @@ app.use(express.urlencoded({ extended: true })); // receber as informações de 
 app.use(session(sessionOptions)); // habilita o uso de req.session que será útil na verificação de e-mail
 
 app.use('/images', express.static(path.join(__dirname, 'images'), {
-    setHeaders: (res, path) => {
+    setHeaders: (res, filePath) => {
         const allowedOrigins = ['http://localhost:3000', 'https://felicitapijamaria.vercel.app'];
         const origin = res.req.headers.origin;
         if (allowedOrigins.includes(origin)) {
             res.setHeader('Access-Control-Allow-Origin', origin);
-            res.setHeader('Access-Control-Allow-Credentials', 'true');
         }
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
     }
+    
 }));
 
 
