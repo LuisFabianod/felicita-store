@@ -23,11 +23,15 @@ const corsOptions = {
     secret: 'segredo', // Chave para criptografar a sessão
     resave: false, // Não salva sessões não modificadas
     saveUninitialized: false, // Não salva sessões até que algo seja atribuído
-    sameSite: 'none',
-    cookie: { secure: true, maxAge: 3600000 } // cookie com expiração de 1 hora
+    cookie: { secure: true,   sameSite: 'none' ,maxAge: 3600000 } // cookie com expiração de 1 hora
 };
 
 app.use(cors(corsOptions)); // habilita o uso de cors com as configs declaradas
+app.options('*', cors(corsOptions));
+app.use(cookieParser()); // habilita o uso de cookie-parser
+app.use(express.json()); // habilita a compreenssão das reqs como json pelo express
+app.use(express.urlencoded({ extended: true })); // receber as informações de form via req.body
+app.use(session(sessionOptions)); // habilita o uso de req.session que será útil na verificação de e-mail
 
 app.use('/images', express.static(path.join(__dirname, 'images'), {
     setHeaders: (res, path) => {
@@ -39,9 +43,7 @@ app.use('/images', express.static(path.join(__dirname, 'images'), {
         }
     }
 }));
- 
-app.use(session(sessionOptions)); // habilita o uso de req.session que será útil na verificação de e-mail
-app.use(cookieParser()); // habilita o uso de cookie-parser
+
 
 // declaração das rotas definidas na pasta routes
 const accountRoutes = require('./routes/account'); 
@@ -50,9 +52,6 @@ const homeRoutes = require('./routes/home');
 const layoutConfigRoutes = require('./routes/layout-config');
 const favoriteRoutes = require('./routes/favorite');
 const sectionRoutes = require('./routes/section');
-
-app.use(express.json()); // habilita a compreenssão das reqs como json pelo express
-app.use(express.urlencoded({ extended: true })); // receber as informações de form via req.body
 
 // atribuição das rotas com base no caminho inicial
 app.use('/', homeRoutes)
