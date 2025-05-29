@@ -1,4 +1,4 @@
-const validator = require('validator') // declaração da biblioteca validator
+// const validator = require('validator') // declaração da biblioteca validator
 
 const SHOW_ERROR_MESSAGE = 'show-error-message' // SPAN CLASSNAME
 
@@ -24,13 +24,13 @@ export const removeErrorClass = (...inputs) => {
 };
 
 // CHECA SE O EMAIL É VÁLIDO COM O VALIDATOR
-export const checkEmail = (email) => {
+// export const checkEmail = (email) => {
     // usa a biblioteca validator para verificar se a estrutura do email é válida
-    if(!validator.isEmail(email.current.value)){
-        email.current.classList.add(SHOW_ERROR_MESSAGE);
-        showErrorMessage(email, 'Email inválido.'); // se não for válida, adiciona mensagem e classe de erro
-    }
-}
+//     if(!validator.isEmail(email.current.value)){
+//        email.current.classList.add(SHOW_ERROR_MESSAGE);
+//        showErrorMessage(email, 'Email inválido.'); // se não for válida, adiciona mensagem e classe de erro
+//    }
+// }
 
 
 // ADICIONA O TEXTO PARA A SPAN DO CAMPO SOLICITADO
