@@ -23,9 +23,11 @@ const corsOptions = {
     secret: 'segredo', // Chave para criptografar a sessão
     resave: false, // Não salva sessões não modificadas
     saveUninitialized: false, // Não salva sessões até que algo seja atribuído
+    sameSite: 'none',
     cookie: { secure: true, maxAge: 3600000 } // cookie com expiração de 1 hora
 };
 
+app.use(cors(corsOptions)); // habilita o uso de cors com as configs declaradas
 
 app.use('/images', express.static(path.join(__dirname, 'images'), {
     setHeaders: (res, path) => {
@@ -39,7 +41,6 @@ app.use('/images', express.static(path.join(__dirname, 'images'), {
 }));
  
 app.use(session(sessionOptions)); // habilita o uso de req.session que será útil na verificação de e-mail
-app.use(cors(corsOptions)); // habilita o uso de cors com as configs declaradas
 app.use(cookieParser()); // habilita o uso de cookie-parser
 
 // declaração das rotas definidas na pasta routes
