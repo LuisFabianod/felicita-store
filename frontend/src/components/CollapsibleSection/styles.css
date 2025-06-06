@@ -1,0 +1,15 @@
+.collapsible-title{
+    font-size: 14px;
+}
+.collapsible{
+    display: flex;
+    justify-content: space-between;
+}
+
+.collapsible-container{
+    margin-bottom: 5px;
+}
+
+.collapsible-children{
+    margin-top: 10px;
+}

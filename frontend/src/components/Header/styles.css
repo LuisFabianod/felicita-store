@@ -20,7 +20,7 @@ header.header{
     z-index: 99;
 }
 
-header > nav{
+.nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -29,7 +29,7 @@ header > nav{
     font-size: 1.3rem;
 }
 
-.nav{
+.nav-icons{
     display: flex;
     width: 100%;
     gap: 20px;
@@ -49,4 +49,31 @@ header > nav{
     max-width: 15rem;
     margin: 15px 0;
     padding-left: 0;
+}
+
+
+@media(max-width: 1550px){
+    .header-searchbar{
+        background-color: var(--header-background);
+    }
+}
+
+@media(max-width: 1100px){
+    .header-searchbar{
+        background-color: var(--header-background);
+    }
+}
+
+@media(max-width: 900px){
+    .header-searchbar{
+        background-color: var(--header-background);
+    }
+}
+
+
+@media (max-width: 670px) {
+    .header-searchbar{
+        display: none;
+    }
+    
 }

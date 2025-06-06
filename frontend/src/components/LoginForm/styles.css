@@ -53,6 +53,15 @@ input{
 .forgot-my-password{
   text-decoration: underline;
   cursor: pointer;
+  font-size: 12px;
+}
+
+.register-p{
+  font-size: 14px;
+}
+
+.register-link{
+  color: var(--accent-color);
 }
 
 @keyframes shake {

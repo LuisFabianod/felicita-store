@@ -38,13 +38,13 @@ export const Header = () => {
                     </div>
                 </div>
                 <nav className='nav'>
-                    <div className='nav'>
-                        <img src={menuIcon} alt="menu-icon" className='icon' onClick={handleMenu} />
-                        <Link to="/auth"><img src={userIcon} alt="user-icon" className='icon' /></Link>
+                    <div className='nav-icons'>
+                        <img src={menuIcon} alt="menu-icon" className='icon menu-icon' onClick={handleMenu} />
+                        <Link to="/login"><img src={userIcon} alt="user-icon" className='icon user-icon' /></Link>
 
                     </div>
 
-                    <SearchBar placeholder={'Oque você está buscando?'} />
+                    <SearchBar className={'header-searchbar'} placeholder={'Oque você está buscando?'} />
 
                     <Link to={'/'} className='logo'><img src={logo} alt="logo-felicita" className='logo-img' /></Link>
 

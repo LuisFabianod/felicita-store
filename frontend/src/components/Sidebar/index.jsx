@@ -2,6 +2,7 @@ import './styles.css'
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { handleExit } from './api/handleExit'
+import { SearchBar } from '../SearchBar';
 
 import { IsAdminContext } from '../../Contexts/IsAdmin';
 import { IsLoggedInContext } from '../../Contexts/IsLoggedIn';
@@ -39,9 +40,11 @@ export const Sidebar = ({display, setDisplay}) => {
         <dialog style={{display}} className='sidebar' open={display === 'none'? false : true}> 
             
             <header className='sidebar-header'>
-                <p>Olá, {userName? userName : 'Cliente'}</p>
+                <p>Olá, {userName? userName : <Link to={'login'}>Acesse sua conta</Link>}</p>
                 <img src={closeIcon} alt="close-modal-icon" className='close-modal-icon' onClick={handleMenu}/>
             </header>
+
+            <SearchBar className={'sidebar-searchbar'} placeholder={'Oque você está buscando?'} />
 
             <section className='sidebar-section'>
                 {isLoggedIn && 
@@ -74,8 +77,10 @@ export const Sidebar = ({display, setDisplay}) => {
                 {
                     isLoggedIn?
                     <button className='exit-account' onClick={() => handleExit(setApiMessage, triggerApiMessageShake, setIsLoading)}>SAIR</button>
-                    :
-                    <Link to={'/auth'}><button className='log-in-button'>ENTRAR</button></Link>
+                    :<>
+                    <Link to={'/login'}><button className='log-in-button'>ENTRAR</button></Link>
+                    <Link to={'/register'}><button className='log-in-button'>CADASTRE-SE</button></Link>
+                    </>
                 }
                 
             </footer>

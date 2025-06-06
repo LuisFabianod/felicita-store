@@ -5,6 +5,7 @@ import { ResetPasswordRequest } from './sub-component/ResetPasswordRequest';
 import showPasswordIcon from '../../assets/images/open-eye.png'
 import hidePasswordIcon from '../../assets/images/closed-eye.png'
 import { IsLoadingContext } from '../../Contexts/IsLoading';
+import { Link } from 'react-router-dom';
 
 export const LoginForm = () => {
 
@@ -70,6 +71,7 @@ export const LoginForm = () => {
             <label htmlFor="rememberSession">Lembre de mim</label>
           </div>
           <p className='forgot-my-password' onClick={() => setResetPasswordDisplay('flex')}>Esqueci minha senha</p>
+          <p className='register-p'>Novo na Felicita? <Link className='register-link' to={'/register'}>CADASTRE-SE</Link></p>
         </form>
       </div>
       <ResetPasswordRequest resetPasswordDisplay={resetPasswordDisplay} setResetPasswordDisplay={setResetPasswordDisplay} />

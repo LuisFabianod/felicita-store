@@ -2,7 +2,7 @@ import './styles.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const SearchBar = ({ placeholder}) => {
+export const SearchBar = ({ placeholder, className}) => {
     const [value, setValue] = useState('');
 
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ export const SearchBar = ({ placeholder}) => {
     };
 
     return (
-        <div className="search-bar-div">
+        <div className={`search-bar-div ${className}`}>
             <input
                 type="text"
                 name="search-bar"

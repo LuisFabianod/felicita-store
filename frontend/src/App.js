@@ -12,7 +12,8 @@ import { FavoriteProducts } from './pages/FavoriteProducts';
 import { Cart } from './pages/Cart';
 import { AdminInterface } from './pages/AdminInterface';
 import { Home } from './pages/home';
-import { Auth } from './pages/Auth';
+import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 import { Account } from './pages/Account';
 
 import { IsAdminContext } from './Contexts/IsAdmin';
@@ -39,7 +40,8 @@ function App() {
           <Header />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/auth" element={<Auth />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/account" element={<Account />} />
               <Route path="/auth/reset-password" element={<ResetPassword />} />
               <Route path="/terms" element={<Terms />} />

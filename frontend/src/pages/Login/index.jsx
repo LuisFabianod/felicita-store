@@ -1,13 +1,12 @@
 import './styles.css'
 import React, { useContext } from "react";
-import { AccountRegisterForm } from '../../components/AccountRegisterForm';
 import { LoginForm } from '../../components/LoginForm';
 
 import { IsLoadingContext } from '../../Contexts/IsLoading';
 import { LoadingSpinner } from '../../components/Loading';
 
 
-export const Auth = () => {
+export const Login = () => {
 
     const { isLoading } = useContext(IsLoadingContext)
 
@@ -17,9 +16,8 @@ export const Auth = () => {
         <LoadingSpinner/>
        }  
 
-        <div className={'auth' }>    
+        <div className={'login' }>    
             <LoginForm />
-            <AccountRegisterForm/>
 
         </div>
           

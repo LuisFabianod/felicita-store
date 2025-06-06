@@ -11,7 +11,7 @@ import { ProductPresentation } from "../ProductPresentation";
 
 register();
 
-export const ProductScroller = ({ products, width, maxHeight }) => {
+export const ProductScroller = ({ products }) => {
     const BACK_END = process.env.REACT_APP_BACK_END;
 
     const handleClick = (e, product) => {
@@ -27,7 +27,6 @@ export const ProductScroller = ({ products, width, maxHeight }) => {
             pagination={false}
             navigation={true}
             loop={true}
-            style={{ width, maxHeight }}
         >
             {products.map((product, index) => (
                 <SwiperSlide key={index}>
@@ -35,8 +34,6 @@ export const ProductScroller = ({ products, width, maxHeight }) => {
                         <ProductPresentation
                             product={product}
                             url={`${BACK_END}/images/products/${product.imagens}`}
-                            maxWidth={'610px'}
-                            maxHeight={'80vh'}
                             isAvailable={product.estoque !== 0} 
                             productName={product.nome}
                         />

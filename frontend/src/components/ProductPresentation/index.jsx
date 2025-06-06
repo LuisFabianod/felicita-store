@@ -10,7 +10,7 @@ import { addFavorite } from './api/addFavorite';
 import { Link } from 'react-router-dom';
 
 
-export const ProductPresentation = ({ product, url, maxWidth, maxHeight, isAvailable, productName }) => {
+export const ProductPresentation = ({ product, url, width, height, isAvailable, productName }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const [images, setImages] = useState([])
@@ -72,7 +72,7 @@ export const ProductPresentation = ({ product, url, maxWidth, maxHeight, isAvail
         <Notification title={notificationTitle} src={notificationImg} descript={notificationDescript} onClose={() => setShowNotification(false)} />
       }
 
-      <div className={`product-card-image ${isAvailable ? '' : 'unavailable'}`} style={{ maxWidth: maxWidth, }}>
+      <div className={`product-card-image ${isAvailable ? '' : 'unavailable'}`} style={{ width , }}>
         <div className="product-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
 
           <div className='favorite-icon-wrapper' onClick={(e) => handleClick(e, product.id)}>
@@ -80,7 +80,7 @@ export const ProductPresentation = ({ product, url, maxWidth, maxHeight, isAvail
           </div>
 
           {isAvailable === false && <p className='p-unavailable'>ESGOTADO</p>}
-          <img src={`${url}/${images[currentIndex]}`} alt={productName} title={productName} className={`product-card-image ${isAvailable ? '' : 'unavailable-presentation'}`} style={{ width: '100vw', maxHeight: maxHeight }} />
+          <img src={`${url}/${images[currentIndex]}`} alt={productName} title={productName} className={`product-card-image ${isAvailable ? '' : 'unavailable-presentation'}`}  />
         </div>
 
       </div>

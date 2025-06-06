@@ -5,3 +5,41 @@
     text-decoration: none;
     color: black;
 }
+
+  
+@media (max-width: 1260px) {
+    .product-name{
+      font-size: 16px;
+    }
+    .product-normal-price{
+        font-size: 12px;
+      }
+      .product-promo-price{
+        font-size: 12px;
+      }
+  }
+
+  @media (max-width: 700px), (max-height: 720px){
+    .product-name{
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .product-normal-price{
+          font-size: 11px;
+        }
+        .product-promo-price{
+          font-size: 11px;
+        }
+  }
+
+    @media (max-width: 615px){
+        .product-name{
+            font-size: 11px;
+            }
+        .product-normal-price{
+            font-size: 10px;
+            }
+        .product-promo-price{
+            font-size: 10px;
+        }
+  }

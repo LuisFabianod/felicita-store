@@ -1,10 +1,12 @@
-import { CarouselSlider } from '../../components/CarouselSlider';
-import { useFetchImagesEffect } from '../../hooks/useFetchImagesEffect';
 import './styles.css';
 import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
+import { CarouselSlider } from '../../components/CarouselSlider';
+import { CollapsibleSection } from '../../components/CollapsibleSection';
+import { FreightCalculator } from '../../components/FreightCalculator';
 import { Notification } from '../../components/Notification';
 import { CartContext } from "../../Contexts/Cart";
+import { useFetchImagesEffect } from '../../hooks/useFetchImagesEffect';
 
 export const ProductPage = () => {
 
@@ -30,7 +32,6 @@ export const ProductPage = () => {
     }
 
     useFetchImagesEffect(product, setImages);
-
 
     if (!product) {
         return <div>Produto não encontrado.</div>;
@@ -67,9 +68,8 @@ export const ProductPage = () => {
                         </div>
 
                         <div className='purchase-info'>
-                            <span>MEIOS DE PAGAMENTO</span>
-                            <span>MEIOS DE ENVIO</span>
-                            <span>NOSSA LOJA</span>
+                            <CollapsibleSection title={'MEIOS DE PAGAMENTO'}>{/* Aqui vem algo como: product.meiosDePagamento.map((meio) => <p>{meio}</p>) */}</CollapsibleSection> 
+                            <CollapsibleSection title={'MEIOS DE ENVIO'}><FreightCalculator/></CollapsibleSection>
                         </div>
 
                     </div>

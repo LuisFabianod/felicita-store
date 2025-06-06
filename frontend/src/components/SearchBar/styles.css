@@ -1,5 +1,6 @@
 .search-bar-div{
-    width: 40%;
+    width: 100%;
+    max-width: 400px;
     background-color: var(--header-background);
 }
 

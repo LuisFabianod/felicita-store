@@ -18,7 +18,7 @@ export const CarouselSlider = ({ images, url, width, maxHeight }) => {
       slidesPerView={1}
       pagination={{clickable: true}}
       navigation={true}
-      style={{ maxWidth: width, maxHeight}}
+      style={{  width ,maxHeight}}
       loop={true}
       autoplay={{
         delay: 2500, 

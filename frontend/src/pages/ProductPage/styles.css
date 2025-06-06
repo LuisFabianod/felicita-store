@@ -68,3 +68,15 @@
     flex-direction: column;
     gap: 10px;
 }
+
+@media (max-width: 806px) {
+    .product-page-main{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        font-family: var(--heading-font);
+    }
+
+}
