@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
 import { ResetPassword } from './components/ResetPassword';
 import { Terms } from './components/TermsAndPrivacyPolitics/terms';
 import { Privacy } from './components/TermsAndPrivacyPolitics/privacy';
-import { Header } from './components/Header';
 import { ProductRegister } from './components/ProductRegister';
 import { Products } from './components/Products';
 import { LayoutConfig } from './components/LayoutConfig';
@@ -15,6 +16,7 @@ import { Home } from './pages/home';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Account } from './pages/Account';
+import { Error } from './components/Error';
 
 import { IsAdminContext } from './Contexts/IsAdmin';
 import { IsLoadingContext } from './Contexts/IsLoading';
@@ -22,6 +24,7 @@ import { IsLoggedInContext } from './Contexts/IsLoggedIn';
 import { CartProvider } from './Contexts/Cart';
 import { SearchProducts } from './pages/SearchProducts';
 import { SectionConfig } from './components/SectionConfig';
+import { NotificationProvider } from './Contexts/Notification';
 
 function App() {
 
@@ -33,6 +36,7 @@ function App() {
     <>
 
       <Router>
+        <NotificationProvider>
         <CartProvider>
         <IsAdminContext.Provider value={{ isAdmin, setIsAdmin }}>
         <IsLoggedInContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
@@ -55,11 +59,14 @@ function App() {
               <Route path="/favorite-products" element={<FavoriteProducts/>}/>
               <Route path="/shopping-cart" element={<Cart/>}/>
               <Route path="/search" element={<SearchProducts />}/>
+              <Route path='/*' element={<Error/>}/>
             </Routes>
+            <Footer />
           </IsLoadingContext.Provider>
           </IsLoggedInContext.Provider>
         </IsAdminContext.Provider>
         </CartProvider>
+        </NotificationProvider>
       </Router>
 
     </>

@@ -59,6 +59,10 @@ html{
     font-size: 10px;
 }
 
+.home{
+    padding-bottom: 50px;
+}
+
 .section-title h1{
     font-family: "Plus Jakarta Sans";
     text-align: center;
