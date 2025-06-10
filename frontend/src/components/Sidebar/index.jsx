@@ -1,5 +1,5 @@
 import './styles.css'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { handleExit } from './api/handleExit'
 import { SearchBar } from '../SearchBar';
@@ -17,6 +17,8 @@ import heartIcon from '../../assets/images/heart.png'
 export const Sidebar = ({display, setDisplay}) => {
 
     const [apiMessage, setApiMessage] = useState(''); // Estado para mensagem da API (sucesso ou erro)
+
+    const sidebarRef = useRef(null)
 
     const [isApiMessageShaking, setIsApiMessageShaking] = useState(false); // Estado para animação de erro mensagem da API
 
@@ -37,7 +39,7 @@ export const Sidebar = ({display, setDisplay}) => {
     const userName = localStorage.getItem('userName');
 
     return (
-        <dialog style={{display}} className='sidebar' open={display === 'none'? false : true}> 
+        <dialog style={{display}} className='sidebar' open={display === 'none'? false : true} ref={sidebarRef}> 
             
             <header className='sidebar-header'>
                 <p>Olá, {userName? userName : <Link to={'login'}>Acesse sua conta</Link>}</p>

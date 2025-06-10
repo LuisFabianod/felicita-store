@@ -1,4 +1,4 @@
-export const addFavorite = async ( productId, userEmail, setIsLoading, setNotificationTitle) => {
+export const addFavorite = async ( productId, userEmail, setIsLoading) => {
 
     const BACK_END = process.env.REACT_APP_BACK_END;
     try{
@@ -16,16 +16,15 @@ export const addFavorite = async ( productId, userEmail, setIsLoading, setNotifi
         
         if (response.ok) {
             setIsLoading(false);
-            setNotificationTitle('Produto adicionado aos favoritos');
+            return 'Produto adicionado aos favoritos';
         } else {
             setIsLoading(false);
-            setNotificationTitle(data.message)
-          
+            return data.message;
         }
       
     }catch(error){
         setIsLoading(false);
-        setNotificationTitle('Erro no servidor ao favoritar o produto')
+        return 'Erro no servidor ao favoritar o produto';
     }
     
   }

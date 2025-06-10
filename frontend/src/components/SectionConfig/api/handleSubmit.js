@@ -1,12 +1,21 @@
 // Função para tratar o envio do formulário
-export const handleSubmit = async (e,imagesDivRef, totalImages, setApiMessage, triggerApiMessageShake, setIsLoading) => {
+export const handleSubmit = async (e, sectionNameRef, sectionOrderRef, setApiMessage, triggerApiMessageShake, setIsLoading) => {
     e.preventDefault(); 
+    
+    const BACK_END = process.env.REACT_APP_BACK_END;
+
     try{
 
         setIsLoading(true);
-        const response = await fetch(`${process.env.BACK_END}//update`, { 
+        const response = await fetch(`${BACK_END}/section/add-section`, { 
           method: 'POST',
-          body: formData,
+          headers: {
+            'Content-Type': 'application/json' // <-- ESSENCIAL
+          },
+          body: JSON.stringify({
+            sectionName: sectionNameRef.current.value,
+            sectionOrder: sectionOrderRef.current.value
+          }),
           credentials: 'include'
         });
 

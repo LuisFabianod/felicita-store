@@ -1,7 +1,7 @@
-import { ProductPresentation } from '../ProductPresentation';
 import './styles.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ProductPresentation } from '../ProductPresentation';
 
 export const ClientProduct = ({ product, maxWidth, maxHeight, titleSize}) => {
 

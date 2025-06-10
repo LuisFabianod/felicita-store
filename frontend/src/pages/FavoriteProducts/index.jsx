@@ -29,12 +29,15 @@ export const FavoriteProducts = () => {
         <div className='favorite-products-container'>
             <h1>{'Meus Favoritos'}</h1>
                 <hr style={{width: '80%', margin: '30px 0px'}}/>
+                <div className='favorite-products'>
+
+                </div>
                     {favorites.length > 0 ? (
                         favorites.map((favoriteProduct) => (
                             <ClientProduct key={favoriteProduct.id} 
                             product={favoriteProduct} 
-                            maxWidth={'235px'} 
-                            maxHeight={'310px'}
+                            maxWidth={'60px'} 
+                            maxHeight={'100px'}
                             titleSize={'14px'}
                             descriptSize={'10px'}
                             />

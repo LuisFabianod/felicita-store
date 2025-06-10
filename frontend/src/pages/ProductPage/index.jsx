@@ -4,31 +4,33 @@ import { useLocation } from 'react-router-dom';
 import { CarouselSlider } from '../../components/CarouselSlider';
 import { CollapsibleSection } from '../../components/CollapsibleSection';
 import { FreightCalculator } from '../../components/FreightCalculator';
-import { Notification } from '../../components/Notification';
 import { CartContext } from "../../Contexts/Cart";
+import { useNotification } from '../../Contexts/Notification';
 import { useFetchImagesEffect } from '../../hooks/useFetchImagesEffect';
 
 export const ProductPage = () => {
+
+    const BACK_END = process.env.REACT_APP_BACK_END;
+
 
     const { state } = useLocation();
     const { product } = state || {}; // Desestruturação para garantir que 'product' seja acessível
 
     const [images, setImages] = useState([]);
 
-    const [showNotification, setShowNotification] = useState(false);
-    const [notificationTitle, setNotificationTitle] = useState(null);
-    const [notificationImg, setNotificationImg] = useState(null);
-    const [notificationDescript, setNotificationDescript] = useState(null);
-
     const { addToCart } = useContext(CartContext);
     
+    const { showNotification } = useNotification();
 
     const handleBuy = async () => {
         addToCart(product);
-        setNotificationTitle('Produto adicionado ao carrinho');
-        setShowNotification(true);
-        setNotificationDescript(product.nome);
-        setNotificationImg(`http://localhost:5000/images/products/${product.imagens}/${images[0]}`);
+
+        showNotification({
+            title: 'Produto adicionado ao carrinho',
+            src: `${BACK_END}/images/products/${product.imagens}/${images[0]}`,
+            descript: product.nome
+
+        })
     }
 
     useFetchImagesEffect(product, setImages);
@@ -39,9 +41,6 @@ export const ProductPage = () => {
 
     return (
         <>  
-            {showNotification && 
-                <Notification title={notificationTitle} src={notificationImg} descript={notificationDescript} onClose={() => setShowNotification(false)}/>
-            }
             
             <div className='product-page-main'>
 

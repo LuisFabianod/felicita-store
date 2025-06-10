@@ -12,16 +12,16 @@ export const handleExclude = async ( productId, setIsLoading, setNotificationTit
         
         if (response.ok) {
             setIsLoading(false);
-            setNotificationTitle('Produto Excluído com sucesso')
+            return 'Produto Excluído com sucesso';
         } else {
             setIsLoading(false);
-            setNotificationTitle('Ocorreu um erro ao excluir o produto')
+            return 'Ocorreu um erro ao excluir o produto';
           
         }
       
     }catch(error){
         setIsLoading(false);
-        setNotificationTitle('Erro no servidor ao excluir o produto')
+        return 'Erro no servidor ao excluir o produto';
     }
     
   }

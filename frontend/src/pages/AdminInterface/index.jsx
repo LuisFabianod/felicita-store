@@ -6,29 +6,39 @@ import { IsLoadingContext } from '../../Contexts/IsLoading';
 import { LoadingSpinner } from '../../components/Loading';
 
 export const AdminInterface = () => {
-    const {isAdmin } = useContext(IsAdminContext);
+    const { isAdmin } = useContext(IsAdminContext);
     const { isLoading } = useContext(IsLoadingContext);
-    
+
     return (
-        
+
         <>
-         {isLoading && 
-        <LoadingSpinner/>
-       }  
-        {!isAdmin && null}
-        {isAdmin &&
-        
-        <>
-        <div className='admin-interface' style={{display: 'flex', flexDirection: 'column'}}> 
-            <h1>Interface Administradora</h1>
-            <Link to={'register-product'}>Adicionar produto</Link>
-            <Link to={'products'}>Meus produtos</Link>
-            <Link to={'layout-config'}>Configurações visuais</Link>
-            <Link to={'section-config'}>Seções</Link>
-        </div>
-        </>
-        
-        }
+            {isLoading &&
+                <LoadingSpinner />
+            }
+            {!isAdmin && null}
+            {isAdmin &&
+
+                <>
+                    <div className='admin-interface' style={{ display: 'flex', flexDirection: 'column' }}>
+                        <h1>Interface Administradora</h1>
+                        <div className='admin-menu'>
+                            <Link to={'register-product'} className='admin-link-container'>
+                                <p className='admin-link'>Adicionar produto</p>
+                            </Link>
+                            <Link to={'products'} className='admin-link-container'>
+                                <p className='admin-link'>Meus produtos</p>
+                            </Link>
+                            <Link to={'layout-config'} className='admin-link-container'>
+                                <p className='admin-link'>Configurações visuais</p>
+                            </Link>
+                            <Link to={'section-configuration'} className='admin-link-container'>
+                                <p className='admin-link'>Seções</p>
+                            </Link>
+                        </div>
+                    </div>
+                </>
+
+            }
 
         </>
     );

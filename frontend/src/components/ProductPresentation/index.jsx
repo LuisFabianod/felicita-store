@@ -5,22 +5,23 @@ import { useFetchImagesEffect } from '../../hooks/useFetchImagesEffect';
 import heartIcon from '../../assets/images/heart.png'
 import { IsLoggedInContext } from '../../Contexts/IsLoggedIn';
 import { IsLoadingContext } from '../../Contexts/IsLoading';
-import { Notification } from '../Notification';
 import { addFavorite } from './api/addFavorite';
 import { Link } from 'react-router-dom';
 
+import { useNotification } from '../../Contexts/Notification';
 
-export const ProductPresentation = ({ product, url, width, height, isAvailable, productName }) => {
+
+export const ProductPresentation = ({ product, url, width, isAvailable, productName }) => {
+
+  const BACK_END = process.env.REACT_APP_BACK_END;
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const [images, setImages] = useState([])
 
   const favoriteIconRef = useRef(null);
 
-  const [showNotification, setShowNotification] = useState(false);
-  const [notificationTitle, setNotificationTitle] = useState(null);
-  const [notificationImg, setNotificationImg] = useState(null);
-  const [notificationDescript, setNotificationDescript] = useState(null);
+  const { showNotification } = useNotification();
 
   const { isLoggedIn } = useContext(IsLoggedInContext);
   const { setIsLoading } = useContext(IsLoadingContext);
@@ -49,28 +50,30 @@ export const ProductPresentation = ({ product, url, width, height, isAvailable, 
     return
   }
 
-  const handleClick = (e, productId) => {
+  const handleClick = async (e, productId) => {
     e.preventDefault();
 
     if(!isLoggedIn){
-      setNotificationTitle('Para favoritar um produto, entre em sua conta.')
-      setNotificationDescript(<><Link to={'/auth'}>Clique aqui para entrar em sua conta</Link></>);
-      setNotificationImg(`http://localhost:5000/images/products/${product.imagens}/${images[0]}`);
-      setShowNotification(true);
+      showNotification({
+        title: 'Para favoritar um produto, entre em sua conta.',
+        src: `${BACK_END}/images/products/${product.imagens}/${images[0]}`,
+        descript: <><Link to={'/auth'}>Clique aqui para entrar em sua conta</Link></>,
+      })
       return;
     }
 
-    addFavorite(productId, userEmail,setIsLoading, setNotificationTitle);
-    setNotificationDescript('');
-    setNotificationImg(`http://localhost:5000/images/products/${product.imagens}/${images[0]}`);
-    setShowNotification(true);
+    const result = await addFavorite(productId, userEmail,setIsLoading);
+
+    showNotification({
+      title: result,
+      src: `${BACK_END}/images/products/${product.imagens}/${images[0]}`,
+      descript: 'Confira sua aba de favoritos.',
+    })
   }
 
   return (
     <>
-      {showNotification &&
-        <Notification title={notificationTitle} src={notificationImg} descript={notificationDescript} onClose={() => setShowNotification(false)} />
-      }
+
 
       <div className={`product-card-image ${isAvailable ? '' : 'unavailable'}`} style={{ width , }}>
         <div className="product-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

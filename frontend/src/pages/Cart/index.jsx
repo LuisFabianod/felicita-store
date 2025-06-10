@@ -36,8 +36,8 @@ export const Cart = () => {
             ) : (
                 <div className='cart-container'>
                     {cartProducts.map((product) => (
-                        <>
-                            <img className='icon exclude-product-cart' src={excludeIcon} onClick={() => handleExclude(product.id)} alt='product-img'></img>
+                        <div className='product-wrapper'>
+                            <img className='icon exclude-product-cart' src={excludeIcon} onClick={() => handleExclude(product.id)} alt='exclude icon'></img>
                             <ClientProduct
                                 key={product.id}
                                 product={product}
@@ -46,7 +46,7 @@ export const Cart = () => {
                                 titleSize={'12px'}
                                 descriptSize={'10px'}
                             />
-                        </>
+                        </div>
                     ))}
                 </div>
             )}

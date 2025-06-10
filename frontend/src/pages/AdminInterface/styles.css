@@ -2,5 +2,41 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100vw;
+}
 
+.admin-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    gap: 20px;
+    font-size: 14px;
+}
+
+.admin-link-container{
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    height: 50px;
+    width: 90%;
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.admin-link-container:hover{
+    cursor: pointer;
+    background-color: var(--accent-color);
+}
+
+.admin-link-container:hover > .admin-link{
+    color: white;
+}
+
+.admin-link{
+    text-decoration: none;
+    color: var(--accent-color);
 }
