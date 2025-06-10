@@ -4,36 +4,35 @@ import React, { useState, useContext } from 'react';
 import { handleExclude } from './api/handleExclude';
 import { IsLoadingContext } from '../../Contexts/IsLoading';
 import { useFetchImagesEffect } from '../../hooks/useFetchImagesEffect';
-import { Notification } from '../Notification';
+import { useNotification } from '../../Contexts/Notification';
 
 export const AdminProduct = ({ product }) => {
+    const BACK_END = process.env.REACT_APP_BACK_END;
+
     const [images, setImages] = useState([]);
 
     const { setIsLoading } = useContext(IsLoadingContext);
-    const [showNotification, setShowNotification] = useState(false);
-    const [notificationTitle, setNotificationTitle] = useState(null);
-    const [notificationImg, setNotificationImg] = useState(null);
-    const [notificationDescript, setNotificationDescript] = useState(null);
 
+      const { showNotification } = useNotification();
 
-    const handleClick = () => {
+    const handleClick = async () => {
         const userWantsToDelete = window.confirm('Tem certeza que quer excluir o produto?');
 
         if (!userWantsToDelete) return
 
-        handleExclude(product.id, setIsLoading, setNotificationTitle);
-        setShowNotification(true);
-        setNotificationDescript(product.nome);
-        setNotificationImg(`http://localhost:5000/images/products/${product.imagens}/${images[0]}`);
+        const result = await handleExclude(product.id, setIsLoading);
+
+         showNotification({
+                title: result,
+                src: `${BACK_END}/images/products/${product.imagens}/${images[0]}`,
+                descript: 'Recarregue a página.',
+              })
     }
 
     useFetchImagesEffect(product, setImages)
 
     return (
         <>
-        {showNotification && 
-        <Notification title={notificationTitle} src={notificationImg} descript={notificationDescript} onClose={() => setShowNotification(false)}/>
-        }
         <div className='admin-product-container'>
             <CarouselSlider images={images} url={`http://localhost:5000/images/products/${product.imagens}`} width={'300px'} maxHeight={'600px'} />
             <div className='admin-product-info'>

@@ -52,6 +52,7 @@ function App() {
               <Route path="/privacy-politics" element={<Privacy />} />
               <Route path="/admin-interface" element={<AdminInterface />} />
               <Route path="/admin-interface/register-product" element={<ProductRegister />} />
+              <Route path="/admin-interface/section-configuration" element={<SectionConfig />} />
               <Route path="/admin-interface/products" element={<Products />} />
               <Route path="/admin-interface/layout-config" element={<LayoutConfig />} />
               <Route path="/admin-interface/section-config" element={<SectionConfig />} />

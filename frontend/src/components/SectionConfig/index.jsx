@@ -1,10 +1,14 @@
 import './styles.css'
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useRef } from 'react'
 import { IsLoadingContext } from '../../Contexts/IsLoading/index.jsx'
 import { LoadingSpinner } from '../Loading/index.jsx';
 import { loadSections } from './api/loadSections.js';
+import { handleSubmit } from './api/handleSubmit.js';
 
 export const SectionConfig = () => {
+
+  const sectionNameRef = useRef(null);
+  const sectionOrderRef = useRef(null);
 
   const [apiMessage, setApiMessage] = useState(''); // estado para mensagem de feedback do servidor
   const { isLoading, setIsLoading } = useContext(IsLoadingContext);
@@ -17,13 +21,12 @@ export const SectionConfig = () => {
   };
 
   useEffect(() => {
-      loadSections(setIsLoading, setApiMessage, setSections)
+      loadSections(setIsLoading, setApiMessage, setSections);
   }, [setIsLoading])
 
   return (
     <>
       {isLoading && <LoadingSpinner />}
-      
       <div className='sections-container'> 
         {sections.map((section) => {
           return(
@@ -31,6 +34,12 @@ export const SectionConfig = () => {
           )
         })}
       </div>
+        <p>{apiMessage}</p>
+      <form>
+        <input type="text" placeholder='Nome da seção' ref={sectionNameRef}/>
+        <input type="number" placeholder='Ordem da seção' ref={sectionOrderRef}/>
+        <button onClick={(e) => handleSubmit(e, sectionNameRef, sectionOrderRef, setApiMessage, triggerApiMessageShake, setIsLoading)}>Adcionar seção</button>
+      </form>
     </>
   );
 };

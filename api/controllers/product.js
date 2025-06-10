@@ -79,7 +79,7 @@ exports.loadProducts = async (req, res) => {
 }
 
 exports.searchProducts = async (req, res) => {
-    const { searchValue } = req.body;
+    const { searchValue } = req.body;   
   
     try {
       const allProducts = await Product.findAll();
