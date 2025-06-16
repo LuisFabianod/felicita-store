@@ -1,4 +1,4 @@
-export const handleExclude = async ( productId, setIsLoading, setNotificationTitle) => {
+export const handleExclude = async ( productId, setIsLoading) => {
     const BACK_END = process.env.REACT_APP_BACK_END;
     try{
         setIsLoading(true); 

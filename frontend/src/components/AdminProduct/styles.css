@@ -7,3 +7,14 @@
     border-radius: 5px;
     margin-bottom: 20px;
 }
+
+.admin-product-edit{
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.edit-product-input{
+    display: flex;
+    justify-content: space-between;
+}
